@@ -1,0 +1,17 @@
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\QLKhoaHocONL.exe.config
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\QLKhoaHocONL.exe
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\QLKhoaHocONL.pdb
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Guna.UI2.dll
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.csproj.AssemblyReference.cache
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.frmMain.resources
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.frmXMLData.resources
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.Properties.Resources.resources
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.UcBlog.resources
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.vwUC.UC_ItemKhoaHoc.resources
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.csproj.GenerateResource.cache
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.csproj.CoreCompileInputs.cache
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHo.E14CD0F6.Up2Date
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.exe
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.pdb
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.exe.config
+E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.vwUC.UcCourses.resources
