@@ -1,0 +1,26 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.db
+*.db-shm
+*.db-wal
+
+# Build results
+bin/
+obj/
+Debug/
+Release/
+*.pdb
+*.exe
+
+# Visual Studio indexes
+*.vsidx
+
+# Backup
+*.bak
+
+# Others
+*.log
+*.tmp

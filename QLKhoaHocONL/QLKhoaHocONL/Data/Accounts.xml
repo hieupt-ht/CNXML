@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Accounts>
+  <Account>
+    <Username>admin</Username>
+    <Password>admin123</Password>
+    <FullName>Quản trị viên</FullName>
+    <Role>Admin</Role>
+  </Account>
+  <Account>
+    <Username>hocvien</Username>
+    <Password>123456</Password>
+    <FullName>Học viên F8</FullName>
+    <Role>User</Role>
+  </Account>
+</Accounts>
