@@ -41,6 +41,7 @@
     <Reference Include="System.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\AppState.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Video.cs" />
     <Compile Include="vwUC\UcBlog.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -69,6 +74,12 @@
     </Compile>
     <Compile Include="vwUC\UcDetail.Designer.cs">
       <DependentUpon>UcDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="vwUC\UcMyCourses.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="vwUC\UcMyCourses.Designer.cs">
+      <DependentUpon>UcMyCourses.cs</DependentUpon>
     </Compile>
     <Compile Include="vwUC\UcHome.cs">
       <SubType>UserControl</SubType>
@@ -94,9 +105,24 @@
     <Compile Include="vwUC\UC_ItemKhoaHoc.Designer.cs">
       <DependentUpon>UC_ItemKhoaHoc.cs</DependentUpon>
     </Compile>
-    <Content Include="Data\DangKy.xml" />
-    <Content Include="Data\HocVien.xml" />
-    <Content Include="Data\KhoaHoc.xml" />
+    <Content Include="Data\Accounts.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\DangKy.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\HocVien.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\KhoaHoc.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\UserCourses.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\Videos.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Compile Include="GUI\frmDangKy.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +134,9 @@
     </Compile>
     <Compile Include="GUI\frmHocVien.Designer.cs">
       <DependentUpon>frmHocVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmLogin.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\frmKhoaHoc.cs">
       <SubType>Form</SubType>

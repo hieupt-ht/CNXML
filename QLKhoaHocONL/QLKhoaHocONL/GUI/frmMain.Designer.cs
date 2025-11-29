@@ -1,4 +1,4 @@
-﻿namespace QLKhoaHocONL
+namespace QLKhoaHocONL
 {
     partial class frmMain
     {
@@ -22,6 +22,10 @@
             this.btnCourses = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.topbar = new System.Windows.Forms.Panel();
+            this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
+            this.btnAdmin = new Guna.UI2.WinForms.Guna2Button();
+            this.btnMyCourses = new Guna.UI2.WinForms.Guna2Button();
+            this.lblUser = new System.Windows.Forms.Label();
             this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txbF8 = new Guna.UI2.WinForms.Guna2TextBox();
             this.txtSearch = new Guna.UI2.WinForms.Guna2TextBox();
@@ -57,7 +61,7 @@
             this.btnRoadmap.Name = "btnRoadmap";
             this.btnRoadmap.Size = new System.Drawing.Size(70, 75);
             this.btnRoadmap.TabIndex = 2;
-            this.btnRoadmap.Text = "📄\r\nBài viết";
+            this.btnRoadmap.Text = "Bài viết";
             this.btnRoadmap.UseVisualStyleBackColor = false;
             this.btnRoadmap.Click += new System.EventHandler(this.btnRoadmap_Click);
             // 
@@ -73,7 +77,7 @@
             this.btnCourses.Name = "btnCourses";
             this.btnCourses.Size = new System.Drawing.Size(70, 75);
             this.btnCourses.TabIndex = 1;
-            this.btnCourses.Text = "🅰️\r\nLộ trình";
+            this.btnCourses.Text = "Lộ trình";
             this.btnCourses.UseVisualStyleBackColor = false;
             this.btnCourses.Click += new System.EventHandler(this.btnCourses_Click);
             // 
@@ -89,13 +93,17 @@
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(70, 75);
             this.btnHome.TabIndex = 0;
-            this.btnHome.Text = "🏠\r\nTrang chủ";
+            this.btnHome.Text = "Trang chủ";
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // topbar
             // 
             this.topbar.BackColor = System.Drawing.Color.White;
+            this.topbar.Controls.Add(this.btnLogout);
+            this.topbar.Controls.Add(this.btnAdmin);
+            this.topbar.Controls.Add(this.btnMyCourses);
+            this.topbar.Controls.Add(this.lblUser);
             this.topbar.Controls.Add(this.lblTitle);
             this.topbar.Controls.Add(this.txbF8);
             this.topbar.Controls.Add(this.txtSearch);
@@ -108,13 +116,94 @@
             this.topbar.Size = new System.Drawing.Size(1120, 66);
             this.topbar.TabIndex = 1;
             // 
+            // btnLogout
+            // 
+            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogout.AutoRoundedCorners = true;
+            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogout.BorderRadius = 15;
+            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLogout.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLogout.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLogout.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLogout.FillColor = System.Drawing.Color.WhiteSmoke;
+            this.btnLogout.Font = new System.Drawing.Font("Times New Roman", 10.8F);
+            this.btnLogout.ForeColor = System.Drawing.Color.Black;
+            this.btnLogout.HoverState.FillColor = System.Drawing.Color.Gainsboro;
+            this.btnLogout.Location = new System.Drawing.Point(1000, 17);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(104, 33);
+            this.btnLogout.TabIndex = 7;
+            this.btnLogout.Text = "Đăng xuất";
+            this.btnLogout.Visible = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // btnAdmin
+            // 
+            this.btnAdmin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdmin.AutoRoundedCorners = true;
+            this.btnAdmin.BackColor = System.Drawing.Color.Transparent;
+            this.btnAdmin.BorderRadius = 15;
+            this.btnAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdmin.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnAdmin.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnAdmin.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnAdmin.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnAdmin.FillColor = System.Drawing.Color.White;
+            this.btnAdmin.Font = new System.Drawing.Font("Times New Roman", 10.2F);
+            this.btnAdmin.ForeColor = System.Drawing.Color.Black;
+            this.btnAdmin.HoverState.FillColor = System.Drawing.Color.WhiteSmoke;
+            this.btnAdmin.Location = new System.Drawing.Point(880, 17);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Size = new System.Drawing.Size(114, 33);
+            this.btnAdmin.TabIndex = 6;
+            this.btnAdmin.Text = "Admin";
+            this.btnAdmin.Visible = false;
+            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
+            // 
+            // btnMyCourses
+            // 
+            this.btnMyCourses.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMyCourses.AutoRoundedCorners = true;
+            this.btnMyCourses.BackColor = System.Drawing.Color.Transparent;
+            this.btnMyCourses.BorderRadius = 15;
+            this.btnMyCourses.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMyCourses.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnMyCourses.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnMyCourses.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnMyCourses.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnMyCourses.FillColor = System.Drawing.Color.White;
+            this.btnMyCourses.Font = new System.Drawing.Font("Times New Roman", 10.2F);
+            this.btnMyCourses.ForeColor = System.Drawing.Color.Black;
+            this.btnMyCourses.HoverState.FillColor = System.Drawing.Color.WhiteSmoke;
+            this.btnMyCourses.Location = new System.Drawing.Point(630, 17);
+            this.btnMyCourses.Name = "btnMyCourses";
+            this.btnMyCourses.Size = new System.Drawing.Size(124, 33);
+            this.btnMyCourses.TabIndex = 5;
+            this.btnMyCourses.Text = "Khoá của tôi";
+            this.btnMyCourses.Visible = false;
+            this.btnMyCourses.Click += new System.EventHandler(this.btnMyCourses_Click);
+            // 
+            // lblUser
+            // 
+            this.lblUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUser.AutoSize = true;
+            this.lblUser.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblUser.Location = new System.Drawing.Point(775, 23);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(116, 23);
+            this.lblUser.TabIndex = 8;
+            this.lblUser.Text = "Xin chào F8";
+            this.lblUser.Visible = false;
+            // 
             // lblTitle
             // 
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblTitle.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(89, 25);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(223, 25);
+            this.lblTitle.Size = new System.Drawing.Size(204, 25);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Học Lập Trình Để Đi Làm";
             // 
@@ -139,14 +228,16 @@
             this.txbF8.Margin = new System.Windows.Forms.Padding(4);
             this.txbF8.Name = "txbF8";
             this.txbF8.PlaceholderText = "";
+            this.txbF8.ReadOnly = true;
             this.txbF8.SelectedText = "";
             this.txbF8.Size = new System.Drawing.Size(60, 42);
             this.txbF8.TabIndex = 1;
             this.txbF8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txbF8.TextChanged += new System.EventHandler(this.txbF8_TextChanged);
             // 
             // txtSearch
             // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtSearch.AutoRoundedCorners = true;
             this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSearch.DefaultText = "";
@@ -159,13 +250,13 @@
             this.txtSearch.ForeColor = System.Drawing.Color.Black;
             this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtSearch.IconLeft = global::QLKhoaHocONL.Properties.Resources.ic_search;
-            this.txtSearch.Location = new System.Drawing.Point(388, 17);
+            this.txtSearch.Location = new System.Drawing.Point(230, 17);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 3, 4);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderForeColor = System.Drawing.Color.DimGray;
             this.txtSearch.PlaceholderText = "Tìm kiếm khóa học, bài viết, video, ...";
             this.txtSearch.SelectedText = "";
-            this.txtSearch.Size = new System.Drawing.Size(373, 33);
+            this.txtSearch.Size = new System.Drawing.Size(380, 33);
             this.txtSearch.TabIndex = 3;
             // 
             // btnSignup
@@ -184,11 +275,12 @@
             this.btnSignup.HoverState.FillColor = System.Drawing.Color.WhiteSmoke;
             this.btnSignup.HoverState.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSignup.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(163)))), ((int)(((byte)(238)))));
-            this.btnSignup.Location = new System.Drawing.Point(878, 17);
+            this.btnSignup.Location = new System.Drawing.Point(808, 17);
             this.btnSignup.Name = "btnSignup";
             this.btnSignup.Size = new System.Drawing.Size(114, 33);
             this.btnSignup.TabIndex = 6;
             this.btnSignup.Text = "Đăng ký";
+            this.btnSignup.Click += new System.EventHandler(this.btnSignup_Click);
             // 
             // btnLogin
             // 
@@ -204,11 +296,12 @@
             this.btnLogin.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.HoverState.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(998, 17);
+            this.btnLogin.Location = new System.Drawing.Point(928, 17);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(114, 33);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Đăng nhập";
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // pnlContent
             // 
@@ -252,5 +345,9 @@
         private Guna.UI2.WinForms.Guna2TextBox txtSearch;
         private Guna.UI2.WinForms.Guna2TextBox txbF8;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTitle;
+        private Guna.UI2.WinForms.Guna2Button btnMyCourses;
+        private Guna.UI2.WinForms.Guna2Button btnAdmin;
+        private Guna.UI2.WinForms.Guna2Button btnLogout;
+        private System.Windows.Forms.Label lblUser;
     }
 }

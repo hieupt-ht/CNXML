@@ -1,20 +1,299 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using QLKhoaHocONL.Helpers;
+using QLKhoaHocONL.Models;
 
 namespace QLKhoaHocONL
 {
     public partial class frmKhoaHoc : Form
     {
+        private List<Course> _courses = new List<Course>();
+        private Course _selected;
+        private readonly Timer _chartTimer = new Timer();
+        private readonly List<double> _targets = new List<double>();
+
         public frmKhoaHoc()
         {
             InitializeComponent();
+            _chartTimer.Interval = 50;
+            _chartTimer.Tick += ChartTimer_Tick;
+        }
+
+        private void frmKhoaHoc_Load(object sender, EventArgs e)
+        {
+            ReloadData();
+            SetupChart();
+            UpdateStats();
+            chartRevenue.MouseClick += chartRevenue_MouseClick;
+            tabControl.SelectedIndexChanged += tabControl_SelectedIndexChanged;
+        }
+
+        private void ReloadData()
+        {
+            _courses = XMLHelper.LoadCourses();
+            dgvCourses.DataSource = _courses.Select(c => new
+            {
+                c.Id,
+                c.TenKhoaHoc,
+                c.GiaGoc,
+                c.GiaGiam,
+                c.SoHocVien,
+                c.ThoiLuong,
+                c.TenAnh,
+                c.MauBatDau,
+                c.MauKetThuc,
+                c.DemoLink
+            }).ToList();
+            dgvCourses.AutoResizeColumns();
+            UpdateStats();
+            UpdateSelectedStats();
+        }
+
+        private void dgvCourses_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvCourses.SelectedRows.Count == 0) return;
+            var id = (int)dgvCourses.SelectedRows[0].Cells["Id"].Value;
+            _selected = _courses.FirstOrDefault(c => c.Id == id);
+            if (_selected == null) return;
+
+            txtId.Text = _selected.Id.ToString();
+            txtTen.Text = _selected.TenKhoaHoc;
+            txtGiaGoc.Text = _selected.GiaGoc;
+            txtGiaGiam.Text = _selected.GiaGiam;
+            txtHocVien.Text = _selected.SoHocVien.ToString();
+            txtThoiLuong.Text = _selected.ThoiLuong;
+            txtAnh.Text = _selected.TenAnh;
+            txtMau1.Text = _selected.MauBatDau;
+            txtMau2.Text = _selected.MauKetThuc;
+            txtDemo.Text = _selected.DemoLink;
+            UpdateSelectedStats();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            var newCourse = ReadForm();
+            if (newCourse == null) return;
+            newCourse.Id = _courses.Any() ? _courses.Max(c => c.Id) + 1 : 1;
+            _courses.Add(newCourse);
+            SaveAndRefresh();
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (_selected == null)
+            {
+                MessageBox.Show("Chọn một khóa học để sửa.");
+                return;
+            }
+
+            var updated = ReadForm();
+            if (updated == null) return;
+            updated.Id = _selected.Id;
+
+            var idx = _courses.FindIndex(c => c.Id == _selected.Id);
+            if (idx >= 0)
+            {
+                _courses[idx] = updated;
+                SaveAndRefresh();
+            }
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (_selected == null)
+            {
+                MessageBox.Show("Chọn một khóa học để xóa.");
+                return;
+            }
+
+            if (MessageBox.Show("Xóa khóa học này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                _courses = _courses.Where(c => c.Id != _selected.Id).ToList();
+                SaveAndRefresh();
+            }
+        }
+
+        private Course ReadForm()
+        {
+            if (string.IsNullOrWhiteSpace(txtTen.Text))
+            {
+                MessageBox.Show("Tên khóa học không được trống.");
+                return null;
+            }
+
+            int.TryParse(txtHocVien.Text, out var hv);
+            return new Course
+            {
+                TenKhoaHoc = txtTen.Text.Trim(),
+                GiaGoc = txtGiaGoc.Text.Trim(),
+                GiaGiam = txtGiaGiam.Text.Trim(),
+                SoHocVien = hv,
+                ThoiLuong = txtThoiLuong.Text.Trim(),
+                TenAnh = txtAnh.Text.Trim(),
+                MauBatDau = txtMau1.Text.Trim(),
+                MauKetThuc = txtMau2.Text.Trim(),
+                DemoLink = txtDemo.Text.Trim()
+            };
+        }
+
+        private void SaveAndRefresh()
+        {
+            XMLHelper.SaveCourses(_courses);
+            ReloadData();
+        }
+
+        private void SetupChart()
+        {
+            chartRevenue.Series.Clear();
+            chartRevenue.ChartAreas.Clear();
+            var area = new ChartArea("RevenueArea");
+            area.AxisX.Interval = 1;
+            area.AxisX.LabelStyle.Angle = -30;
+            area.AxisX.MajorGrid.Enabled = false;
+            area.AxisY.MajorGrid.LineDashStyle = ChartDashStyle.Dash;
+            area.AxisY.Minimum = 0;
+            chartRevenue.ChartAreas.Add(area);
+
+            var series = new Series("Doanh thu từng khóa")
+            {
+                ChartType = SeriesChartType.Column,
+                ChartArea = "RevenueArea"
+            };
+            chartRevenue.Series.Add(series);
+        }
+
+        private void UpdateStats()
+        {
+            if (chartRevenue.Series.Count == 0) SetupChart();
+
+            int totalCourses = _courses.Count;
+            int totalStudents = _courses.Sum(c => c.SoHocVien);
+            decimal totalRevenue = 0;
+
+            var series = chartRevenue.Series[0];
+            series.Points.Clear();
+            _targets.Clear();
+            bool animate = tabControl.SelectedTab == tabStats;
+
+            foreach (var c in _courses)
+            {
+                var price = ParseMoney(c.GiaGiam);
+                var revenue = price * c.SoHocVien;
+                totalRevenue += revenue;
+                double start = animate ? 1 : (double)revenue;
+                int idx = series.Points.AddXY(c.TenKhoaHoc, start);
+                series.Points[idx].Tag = c.Id;
+                _targets.Add((double)revenue);
+            }
+
+            chartRevenue.ResetAutoValues();
+
+            lblCountValue.Text = totalCourses.ToString();
+            lblStudentsValue.Text = totalStudents.ToString();
+            lblRevenueValue.Text = $"{totalRevenue:N0} đ";
+            if (_selected == null) UpdateSelectedStats(null);
+
+            _chartTimer.Stop();
+            if (animate)
+            {
+                _chartTimer.Start();
+            }
+            else
+            {
+                for (int i = 0; i < series.Points.Count && i < _targets.Count; i++)
+                {
+                    series.Points[i].YValues[0] = _targets[i];
+                }
+            }
+        }
+
+        private void UpdateSelectedStats(Course courseOverride = null)
+        {
+            var course = courseOverride ?? _selected;
+            if (course == null)
+            {
+                lblSelCourse.Text = "Tất cả khóa";
+                lblSelStudents.Text = $"Học viên: {_courses.Sum(c => c.SoHocVien):N0}";
+                lblSelRevenue.Text = $"Doanh thu: {_courses.Sum(c => ParseMoney(c.GiaGiam) * c.SoHocVien):N0} đ";
+                return;
+            }
+
+            var revenue = ParseMoney(course.GiaGiam) * course.SoHocVien;
+            lblSelCourse.Text = course.TenKhoaHoc;
+            lblSelStudents.Text = $"Học viên: {course.SoHocVien:N0}";
+            lblSelRevenue.Text = $"Doanh thu: {revenue:N0} đ";
+        }
+
+        private void chartRevenue_MouseClick(object sender, MouseEventArgs e)
+        {
+            var hit = chartRevenue.HitTest(e.X, e.Y);
+            if (hit?.Series == null || hit.PointIndex < 0) return;
+
+            var point = hit.Series.Points[hit.PointIndex];
+            Course course = null;
+            if (point.Tag is int id)
+            {
+                course = _courses.FirstOrDefault(c => c.Id == id);
+            }
+            else
+            {
+                var label = point.AxisLabel;
+                course = _courses.FirstOrDefault(c => c.TenKhoaHoc == label);
+            }
+
+            if (course != null)
+            {
+                _selected = course;
+                UpdateSelectedStats(course);
+            }
+        }
+
+        private void ChartTimer_Tick(object sender, EventArgs e)
+        {
+            if (chartRevenue.Series.Count == 0) return;
+            var points = chartRevenue.Series[0].Points;
+            bool done = true;
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                double target = i < _targets.Count ? _targets[i] : 0;
+                double current = points[i].YValues[0];
+                if (current < target)
+                {
+                    double step = Math.Max(1, target * 0.08); // nhanh hơn và đảm bảo lên đúng
+                    current = Math.Min(target, current + step);
+                    points[i].YValues[0] = current;
+                    done = false;
+                }
+            }
+
+            chartRevenue.ChartAreas[0].RecalculateAxesScale();
+            chartRevenue.Invalidate();
+            if (done) _chartTimer.Stop();
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == tabStats)
+            {
+                UpdateStats();
+            }
+            else
+            {
+                _chartTimer.Stop();
+            }
+        }
+
+        private decimal ParseMoney(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return 0;
+            var digits = new string(text.Where(char.IsDigit).ToArray());
+            if (decimal.TryParse(digits, out var val))
+                return val;
+            return 0;
         }
     }
 }

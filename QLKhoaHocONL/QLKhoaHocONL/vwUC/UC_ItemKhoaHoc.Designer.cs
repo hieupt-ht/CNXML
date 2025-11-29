@@ -1,4 +1,4 @@
-﻿// QUAN TRỌNG: Namespace phải giống hệt file .cs ở trên
+// QUAN TRỌNG: Namespace phải giống hệt file .cs ở trên
 namespace QLKhoaHocONL.vwUC
 {
     partial class UC_ItemKhoaHoc
@@ -47,19 +47,19 @@ namespace QLKhoaHocONL.vwUC
             this.lblGiaGiam.Name = "lblGiaGiam";
             this.lblGiaGiam.Size = new System.Drawing.Size(119, 28);
             this.lblGiaGiam.TabIndex = 3;
-            this.lblGiaGiam.Text = "1.299.000đ";
+            this.lblGiaGiam.Text = "1.299.000d";
             // 
             // lblGiaGoc
             // 
             this.lblGiaGoc.AutoSize = true;
             this.lblGiaGoc.BackColor = System.Drawing.Color.Transparent;
             this.lblGiaGoc.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Strikeout);
-            this.lblGiaGoc.ForeColor = System.Drawing.Color.Transparent;
+            this.lblGiaGoc.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.lblGiaGoc.Location = new System.Drawing.Point(16, 300);
             this.lblGiaGoc.Name = "lblGiaGoc";
             this.lblGiaGoc.Size = new System.Drawing.Size(91, 23);
             this.lblGiaGoc.TabIndex = 2;
-            this.lblGiaGoc.Text = "2.500.000đ";
+            this.lblGiaGoc.Text = "2.500.000d";
             // 
             // lblTenKhoaHoc
             // 
