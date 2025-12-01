@@ -12,14 +12,15 @@ namespace QLKhoaHocONL.vwUC
     {
         private readonly bool _onlyOwned;
         private int _bannerIndex;
+        private string _searchQuery = string.Empty;
 
         private readonly (string title, string desc, string action, string link, Color c1, Color c2)[] _banners =
         {
-            ("F8 trên Youtube", "F8 được nhắc tới ở mọi nơi, cơ hội việc làm cho người yêu thích lập trình.", "Đăng ký kênh", "https://www.youtube.com/c/F8VNOfficial",
+            ("F8 on Youtube", "F8 duoc nhac toi day moi noi, co hoi viec lam cho nguoi yeu lap trinh.", "Dang ky kenh", "https://www.youtube.com/c/F8VNOfficial",
                 Color.FromArgb(255,94,0), Color.FromArgb(255,166,0)),
-            ("Học React nhanh", "Lộ trình ReactJS Master dành cho frontender muốn lên tầm cao mới.", "Xem lộ trình", "https://fullstack.edu.vn/learning/reactjs",
+            ("Hoc React nhanh", "Lo trinh ReactJS Master cho frontender muon len tam cao moi.", "Xem lo trinh", "https://fullstack.edu.vn/learning/reactjs",
                 Color.FromArgb(0,198,255), Color.FromArgb(0,114,255)),
-            ("Việc làm IT", "Học xong là thực chiến – chuẩn bị hồ sơ, phỏng vấn và nhận offer.", "Xem khoá", "https://fullstack.edu.vn/learning/html-css",
+            ("Viec lam IT", "Hoc xong la thuc chien - chuan bi ho so, phong van va nhan offer.", "Xem khoa", "https://fullstack.edu.vn/learning/html-css",
                 Color.FromArgb(17,153,142), Color.FromArgb(56,239,125))
         };
 
@@ -32,8 +33,14 @@ namespace QLKhoaHocONL.vwUC
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            lblTitle.Text = _onlyOwned ? "Khoá học của tôi" : "Khóa học nổi bật";
+            lblTitle.Text = _onlyOwned ? "Khoa hoc cua toi" : "Khoa hoc noi bat";
             UpdateBanner();
+            DocXML();
+        }
+
+        public void SetSearch(string query)
+        {
+            _searchQuery = (query ?? string.Empty).Trim();
             DocXML();
         }
 
@@ -43,11 +50,17 @@ namespace QLKhoaHocONL.vwUC
             {
                 flowLayoutPanelKhoaHoc.Controls.Clear();
 
-                var list = XMLHelper.LoadCourses();
+                var list = DbHelper.LoadCourses();
                 if (_onlyOwned && AppState.IsLoggedIn)
                 {
-                    var ownedIds = XMLHelper.LoadUserCourses(AppState.CurrentUser.Username);
+                    var ownedIds = DbHelper.LoadUserCourseIds(AppState.CurrentUser.Username);
                     list = list.Where(c => ownedIds.Contains(c.Id)).ToList();
+                }
+
+                if (!string.IsNullOrWhiteSpace(_searchQuery))
+                {
+                    var key = _searchQuery.ToLowerInvariant();
+                    list = list.Where(c => (c.TenKhoaHoc ?? string.Empty).ToLowerInvariant().Contains(key)).ToList();
                 }
 
                 foreach (var item in list)
@@ -64,14 +77,14 @@ namespace QLKhoaHocONL.vwUC
                         AutoSize = true,
                         Font = new System.Drawing.Font("Segoe UI", 11F),
                         Text = _onlyOwned
-                            ? "Bạn chưa mua khóa học nào, quay lại Trang chủ để đăng ký nhé!"
-                            : "Chưa có dữ liệu khóa học."
+                            ? "Ban chua mua khoa hoc nao, quay lai Trang chu de dang ky nhe!"
+                            : "Chua co du lieu khoa hoc."
                     });
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi: " + ex.Message);
+                MessageBox.Show("Loi: " + ex.Message);
             }
         }
 
@@ -113,7 +126,7 @@ namespace QLKhoaHocONL.vwUC
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Không mở được link: " + ex.Message);
+                    MessageBox.Show("Khong mo duoc link: " + ex.Message);
                 }
             }
         }

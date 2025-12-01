@@ -152,7 +152,7 @@ namespace QLKhoaHocONL.GUI
                 return;
             }
 
-            var acc = XMLHelper.Authenticate(user, pass);
+            var acc = DbHelper.Authenticate(user, pass);
             if (acc == null)
             {
                 _lblStatus.Text = "Sai tài khoản hoặc mật khẩu.";
@@ -183,7 +183,7 @@ namespace QLKhoaHocONL.GUI
                 Role = "User"
             };
 
-            if (!XMLHelper.AddAccount(account, out var error))
+            if (!DbHelper.AddAccount(account, out var error))
             {
                 _lblStatus.Text = error;
                 return;

@@ -15,5 +15,7 @@ namespace QLKhoaHocONL.Models
         public string MauBatDau { get; set; }
         public string MauKetThuc { get; set; }
         public string DemoLink { get; set; }
+        public int? InstructorId { get; set; }
+        public string InstructorName { get; set; }
     }
 }

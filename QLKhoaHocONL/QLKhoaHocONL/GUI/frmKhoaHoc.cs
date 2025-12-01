@@ -37,19 +37,20 @@ namespace QLKhoaHocONL
 
         private void ReloadData()
         {
-            _courses = XMLHelper.LoadCourses();
+            _courses = DbHelper.LoadCourses();
             dgvCourses.DataSource = _courses.Select(c => new
             {
                 c.Id,
-                TenKhoaHoc = c.TenKhoaHoc,
-                GiaGoc = c.GiaGoc,
-                GiaGiam = c.GiaGiam,
-                SoHocVien = c.SoHocVien,
-                ThoiLuong = c.ThoiLuong,
-                TenAnh = c.TenAnh,
-                MauBatDau = c.MauBatDau,
-                MauKetThuc = c.MauKetThuc,
-                DemoLink = c.DemoLink
+                c.TenKhoaHoc,
+                c.GiaGoc,
+                c.GiaGiam,
+                c.SoHocVien,
+                c.ThoiLuong,
+                c.TenAnh,
+                c.MauBatDau,
+                c.MauKetThuc,
+                c.DemoLink,
+                c.InstructorName
             }).ToList();
             dgvCourses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCourses.AutoResizeColumns();
@@ -120,16 +121,16 @@ namespace QLKhoaHocONL
         {
             var newCourse = ReadForm();
             if (newCourse == null) return;
-            newCourse.Id = _courses.Any() ? _courses.Max(c => c.Id) + 1 : 1;
+            newCourse.Id = DbHelper.AddCourse(newCourse);
             _courses.Add(newCourse);
-            SaveAndRefresh();
+            ReloadData();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (_selected == null)
             {
-                MessageBox.Show("Ch\u1ecdn m\u1ed9t kh\u00f3a h\u1ecdc \u0111\u1ec3 s\u1eeda.");
+                MessageBox.Show("Chọn một khóa học để sửa.");
                 return;
             }
 
@@ -137,26 +138,22 @@ namespace QLKhoaHocONL
             if (updated == null) return;
             updated.Id = _selected.Id;
 
-            var idx = _courses.FindIndex(c => c.Id == _selected.Id);
-            if (idx >= 0)
-            {
-                _courses[idx] = updated;
-                SaveAndRefresh();
-            }
+            DbHelper.UpdateCourse(updated);
+            ReloadData();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (_selected == null)
             {
-                MessageBox.Show("Ch\u1ecdn m\u1ed9t kh\u00f3a h\u1ecdc \u0111\u1ec3 x\u00f3a.");
+                MessageBox.Show("Chọn một khóa học để xóa.");
                 return;
             }
 
-            if (MessageBox.Show("X\u00f3a kh\u00f3a h\u1ecdc n\u00e0y?", "X\u00e1c nh\u1eadn", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Xóa khóa học này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                _courses = _courses.Where(c => c.Id != _selected.Id).ToList();
-                SaveAndRefresh();
+                DbHelper.DeleteCourse(_selected.Id);
+                ReloadData();
             }
         }
 
@@ -164,7 +161,7 @@ namespace QLKhoaHocONL
         {
             if (string.IsNullOrWhiteSpace(txtTen.Text))
             {
-                MessageBox.Show("T\u00ean kh\u00f3a h\u1ecdc kh\u00f4ng \u0111\u01b0\u1ee3c tr\u1ed1ng.");
+                MessageBox.Show("Tên khóa học không được trống.");
                 return null;
             }
 
@@ -181,12 +178,6 @@ namespace QLKhoaHocONL
                 MauKetThuc = txtMau2.Text.Trim(),
                 DemoLink = txtDemo.Text.Trim()
             };
-        }
-
-        private void SaveAndRefresh()
-        {
-            XMLHelper.SaveCourses(_courses);
-            ReloadData();
         }
 
         private void ClearInputs()
@@ -224,7 +215,7 @@ namespace QLKhoaHocONL
             area.AxisY.Minimum = 0;
             chartRevenue.ChartAreas.Add(area);
 
-            var series = new Series("Doanh thu t\u1eebng kh\u00f3a")
+            var series = new Series("Doanh thu từng khóa")
             {
                 ChartType = SeriesChartType.Column,
                 ChartArea = "RevenueArea"
@@ -260,7 +251,7 @@ namespace QLKhoaHocONL
 
             lblCountValue.Text = totalCourses.ToString();
             lblStudentsValue.Text = totalStudents.ToString();
-            lblRevenueValue.Text = $"{totalRevenue:N0} \u0111";
+            lblRevenueValue.Text = $"{totalRevenue:N0} đ";
             if (_selected == null) UpdateSelectedStats(null);
 
             _chartTimer.Stop();
@@ -282,16 +273,16 @@ namespace QLKhoaHocONL
             var course = courseOverride ?? _selected;
             if (course == null)
             {
-                lblSelCourse.Text = "T\u1ea5t c\u1ea3 kh\u00f3a h\u1ecdc";
-                lblSelStudents.Text = $"H\u1ecdc vi\u00ean: {_courses.Sum(c => c.SoHocVien):N0}";
-                lblSelRevenue.Text = $"Doanh thu: {_courses.Sum(c => ParseMoney(c.GiaGiam) * c.SoHocVien):N0} \u0111";
+                lblSelCourse.Text = "Tất cả khóa học";
+                lblSelStudents.Text = $"Học viên: {_courses.Sum(c => c.SoHocVien):N0}";
+                lblSelRevenue.Text = $"Doanh thu: {_courses.Sum(c => ParseMoney(c.GiaGiam) * c.SoHocVien):N0} đ";
                 return;
             }
 
             var revenue = ParseMoney(course.GiaGiam) * course.SoHocVien;
             lblSelCourse.Text = course.TenKhoaHoc;
-            lblSelStudents.Text = $"H\u1ecdc vi\u00ean: {course.SoHocVien:N0}";
-            lblSelRevenue.Text = $"Doanh thu: {revenue:N0} \u0111";
+            lblSelStudents.Text = $"Học viên: {course.SoHocVien:N0}";
+            lblSelRevenue.Text = $"Doanh thu: {revenue:N0} đ";
         }
 
         private void chartRevenue_MouseClick(object sender, MouseEventArgs e)
@@ -373,6 +364,7 @@ namespace QLKhoaHocONL
             SetHeader("MauBatDau", "Màu bắt đầu");
             SetHeader("MauKetThuc", "Màu kết thúc");
             SetHeader("DemoLink", "Demo");
+            SetHeader("InstructorName", "Giảng viên");
         }
 
         private decimal ParseMoney(string text)

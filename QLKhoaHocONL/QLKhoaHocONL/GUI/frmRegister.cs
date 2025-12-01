@@ -115,7 +115,7 @@ namespace QLKhoaHocONL.GUI
 
             var lblFull = new Guna2HtmlLabel
             {
-                Text = "Họ tên (tuỳ chọn)",
+                Text = "Họ tên (tùy chọn)",
                 AutoSize = true,
                 Font = new Font("Segoe UI", 10, FontStyle.Regular),
                 Margin = new Padding(0, 0, 0, 6)
@@ -187,7 +187,7 @@ namespace QLKhoaHocONL.GUI
                 Role = "User"
             };
 
-            if (!XMLHelper.AddAccount(account, out var error))
+            if (!DbHelper.AddAccount(account, out var error))
             {
                 _lblStatus.Text = error;
                 return;

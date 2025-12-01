@@ -31,8 +31,8 @@ namespace QLKhoaHocONL.vwUC
                 return;
             }
 
-            var ids = XMLHelper.LoadUserCourses(AppState.CurrentUser.Username);
-            var courses = XMLHelper.LoadCourses().Where(c => ids.Contains(c.Id)).ToList();
+            var ids = DbHelper.LoadUserCourseIds(AppState.CurrentUser.Username);
+            var courses = DbHelper.LoadCourses().Where(c => ids.Contains(c.Id)).ToList();
 
             lblTitle.Text = $"Khóa học của {AppState.CurrentUser.FullName ?? AppState.CurrentUser.Username}";
 

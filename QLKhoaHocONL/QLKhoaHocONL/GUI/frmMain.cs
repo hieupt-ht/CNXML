@@ -9,13 +9,16 @@ namespace QLKhoaHocONL
 {
     public partial class frmMain : Form
     {
+        private readonly ContextMenuStrip _adminMenu = new ContextMenuStrip();
+        private readonly UcCourses _homeCourses = new UcCourses();
+
         public frmMain()
         {
             InitializeComponent();
-            XMLHelper.EnsureSeedData();
             AppState.UserChanged += AppState_UserChanged;
             UpdateUserStateUI();
-            ChuyenManHinh(new UcCourses());
+            BuildAdminMenu();
+            ChuyenManHinh(_homeCourses);
         }
 
         private void AppState_UserChanged()
@@ -42,7 +45,7 @@ namespace QLKhoaHocONL
         {
             ResetMauNut();
             btnHome.BackColor = Color.White;
-            ChuyenManHinh(new UcCourses());
+            ChuyenManHinh(_homeCourses);
         }
 
         private void btnRoadmap_Click(object sender, EventArgs e)
@@ -79,7 +82,7 @@ namespace QLKhoaHocONL
         {
             AppState.Logout();
             ResetMauNut();
-            ChuyenManHinh(new UcCourses());
+            ChuyenManHinh(_homeCourses);
         }
 
         private void btnMyCourses_Click(object sender, EventArgs e)
@@ -98,10 +101,7 @@ namespace QLKhoaHocONL
                 return;
             }
 
-            using (var frm = new frmKhoaHoc())
-            {
-                frm.ShowDialog();
-            }
+            _adminMenu.Show(btnAdmin, 0, btnAdmin.Height);
         }
 
         private bool EnsureLogin()
@@ -122,6 +122,25 @@ namespace QLKhoaHocONL
 
             if (logged)
                 lblUser.Text = $"Xin chào, {AppState.CurrentUser.FullName ?? AppState.CurrentUser.Username}";
+        }
+
+        private void BuildAdminMenu()
+        {
+            _adminMenu.Items.Clear();
+            _adminMenu.Items.Add("Quản lý khóa học", null, (_, __) => { using (var f = new frmKhoaHoc()) f.ShowDialog(); });
+            _adminMenu.Items.Add("Quản lý giảng viên", null, (_, __) => { using (var f = new frmInstructor()) f.ShowDialog(); });
+            _adminMenu.Items.Add("Quản lý học viên", null, (_, __) => { using (var f = new frmStudent()) f.ShowDialog(); });
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+            e.SuppressKeyPress = true;
+            var keyword = txtSearch.Text;
+            _homeCourses.SetSearch(keyword);
+            ResetMauNut();
+            btnHome.BackColor = Color.White;
+            ChuyenManHinh(_homeCourses);
         }
     }
 }
