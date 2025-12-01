@@ -236,8 +236,7 @@ namespace QLKhoaHocONL
             // 
             // txtSearch
             // 
-            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.txtSearch.AutoRoundedCorners = true;
             this.txtSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtSearch.DefaultText = "";
@@ -250,14 +249,15 @@ namespace QLKhoaHocONL
             this.txtSearch.ForeColor = System.Drawing.Color.Black;
             this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtSearch.IconLeft = global::QLKhoaHocONL.Properties.Resources.ic_search;
-            this.txtSearch.Location = new System.Drawing.Point(230, 17);
+            this.txtSearch.Location = new System.Drawing.Point(320, 17);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 3, 4);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderForeColor = System.Drawing.Color.DimGray;
             this.txtSearch.PlaceholderText = "Tìm kiếm khóa học, bài viết, video, ...";
             this.txtSearch.SelectedText = "";
-            this.txtSearch.Size = new System.Drawing.Size(380, 33);
+            this.txtSearch.Size = new System.Drawing.Size(280, 33);
             this.txtSearch.TabIndex = 3;
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // btnSignup
             // 

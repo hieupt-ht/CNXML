@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,6 +46,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -54,8 +56,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\AppState.cs" />
+    <Compile Include="Helpers\DbHelper.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Instructor.cs" />
+    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="vwUC\UcBlog.cs">
       <SubType>UserControl</SubType>
@@ -135,6 +140,9 @@
     <Compile Include="GUI\frmHocVien.Designer.cs">
       <DependentUpon>frmHocVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmInstructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GUI\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +154,9 @@
     </Compile>
     <Compile Include="GUI\frmKhoaHoc.Designer.cs">
       <DependentUpon>frmKhoaHoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmStudent.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\frmMain.cs">
       <SubType>Form</SubType>

@@ -22,7 +22,10 @@ namespace QLKhoaHocONL.vwUC
             _course = course;
             lblTenKhoaHoc.Text = course.TenKhoaHoc;
             lblGia.Text = course.GiaGiam;
-            lblThongTin.Text = $"Giá gốc: {course.GiaGoc} | {course.ThoiLuong} | {course.SoHocVien} học viên";
+            var giangVien = string.IsNullOrWhiteSpace(course.InstructorName)
+                ? "Chưa rõ giảng viên"
+                : $"Giảng viên: {course.InstructorName}";
+            lblThongTin.Text = $"{giangVien} | Giá gốc: {course.GiaGoc} | Giá giảm: {course.GiaGiam} | {course.ThoiLuong} | {course.SoHocVien} học viên";
             lblDemo.Text = string.IsNullOrWhiteSpace(course.DemoLink) ? "Chưa có link demo" : course.DemoLink;
 
             try
@@ -41,7 +44,7 @@ namespace QLKhoaHocONL.vwUC
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            frmMain main = (frmMain)this.ParentForm;
+            var main = (frmMain)this.ParentForm;
             main.ChuyenManHinh(new UcCourses());
         }
 
@@ -57,7 +60,7 @@ namespace QLKhoaHocONL.vwUC
                 }
             }
 
-            XMLHelper.AddUserCourse(AppState.CurrentUser.Username, _course.Id);
+            DbHelper.AddUserCourse(AppState.CurrentUser.Username, _course.Id);
             MessageBox.Show("Đã thêm khóa học vào tài khoản của bạn!");
             UpdateOwnershipUI(true);
             LoadVideos();
@@ -71,18 +74,7 @@ namespace QLKhoaHocONL.vwUC
                 return;
             }
 
-            try
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = _course.DemoLink,
-                    UseShellExecute = true
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Không mở được link demo: " + ex.Message);
-            }
+            OpenUrl(_course.DemoLink);
         }
 
         private void LoadVideos()
@@ -106,7 +98,7 @@ namespace QLKhoaHocONL.vwUC
                 return;
             }
 
-            var videos = XMLHelper.LoadVideos(_course.Id);
+            var videos = DbHelper.LoadVideos(_course.Id);
             if (!videos.Any())
             {
                 flowVideos.Controls.Add(new Label
@@ -160,7 +152,7 @@ namespace QLKhoaHocONL.vwUC
         private bool UserOwnsCourse()
         {
             if (_course == null || !AppState.IsLoggedIn || AppState.CurrentUser == null) return false;
-            return XMLHelper.LoadUserCourses(AppState.CurrentUser.Username).Contains(_course.Id);
+            return DbHelper.LoadUserCourseIds(AppState.CurrentUser.Username).Contains(_course.Id);
         }
 
         private void UpdateOwnershipUI(bool owned)
