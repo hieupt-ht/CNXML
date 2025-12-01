@@ -7,17 +7,19 @@ using QLKhoaHocONL.Models;
 
 namespace QLKhoaHocONL.GUI
 {
-    public class frmLogin : Form
+    public class frmRegister : Form
     {
         private readonly Guna2TextBox _txtUser = new Guna2TextBox();
         private readonly Guna2TextBox _txtPass = new Guna2TextBox();
+        private readonly Guna2TextBox _txtConfirm = new Guna2TextBox();
+        private readonly Guna2TextBox _txtFullname = new Guna2TextBox();
         private readonly Guna2HtmlLabel _lblStatus = new Guna2HtmlLabel();
 
-        public frmLogin()
+        public frmRegister()
         {
-            Text = "Đăng nhập / Đăng ký";
+            Text = "Đăng ký";
             Width = 560;
-            Height = 520;
+            Height = 660;
             StartPosition = FormStartPosition.CenterParent;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
@@ -52,7 +54,7 @@ namespace QLKhoaHocONL.GUI
 
             var lblTitle = new Guna2HtmlLabel
             {
-                Text = "Chào mừng bạn đến F8",
+                Text = "Tạo tài khoản mới",
                 Font = new Font("Segoe UI", 18, FontStyle.Bold),
                 AutoSize = true,
                 Margin = new Padding(0, 0, 0, 4)
@@ -60,7 +62,7 @@ namespace QLKhoaHocONL.GUI
 
             var lblSubtitle = new Guna2HtmlLabel
             {
-                Text = "Đăng nhập hoặc tạo tài khoản mới",
+                Text = "Nhập thông tin để đăng ký",
                 Font = new Font("Segoe UI", 10, FontStyle.Regular),
                 AutoSize = true,
                 ForeColor = Color.DimGray,
@@ -74,10 +76,10 @@ namespace QLKhoaHocONL.GUI
                 Font = new Font("Segoe UI", 10, FontStyle.Regular),
                 Margin = new Padding(0, 0, 0, 6)
             };
-            _txtUser.Size = new Size(inputWidth, 48);
             _txtUser.BorderRadius = 10;
             _txtUser.PlaceholderText = "Nhập email hoặc username";
             _txtUser.Font = new Font("Segoe UI", 11);
+            _txtUser.Size = new Size(inputWidth, 44);
             _txtUser.Margin = new Padding(0, 0, 0, 14);
             _txtUser.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 
@@ -88,90 +90,92 @@ namespace QLKhoaHocONL.GUI
                 Font = new Font("Segoe UI", 10, FontStyle.Regular),
                 Margin = new Padding(0, 0, 0, 6)
             };
-            _txtPass.Size = new Size(inputWidth, 48);
+            _txtPass.Size = new Size(inputWidth, 44);
             _txtPass.BorderRadius = 10;
             _txtPass.PlaceholderText = "Nhập mật khẩu";
             _txtPass.PasswordChar = '*';
             _txtPass.Font = new Font("Segoe UI", 11);
-            _txtPass.Margin = new Padding(0, 0, 0, 16);
+            _txtPass.Margin = new Padding(0, 0, 0, 14);
             _txtPass.Anchor = AnchorStyles.Left | AnchorStyles.Right;
 
-            var btnLogin = new Guna2Button
+            var lblConfirm = new Guna2HtmlLabel
             {
-                Text = "Đăng nhập",
-                Size = new Size(inputWidth, 48),
-                BorderRadius = 12,
-                FillColor = Color.FromArgb(255, 102, 0),
-                ForeColor = Color.White,
-                Font = new Font("Segoe UI", 11, FontStyle.Bold),
-                Margin = new Padding(0, 0, 0, 10),
-                Anchor = AnchorStyles.Left | AnchorStyles.Right
+                Text = "Nhập lại mật khẩu",
+                AutoSize = true,
+                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                Margin = new Padding(0, 0, 0, 6)
             };
-            btnLogin.Click += BtnLogin_Click;
+            _txtConfirm.Size = new Size(inputWidth, 44);
+            _txtConfirm.BorderRadius = 10;
+            _txtConfirm.PlaceholderText = "Nhập lại mật khẩu";
+            _txtConfirm.PasswordChar = '*';
+            _txtConfirm.Font = new Font("Segoe UI", 11);
+            _txtConfirm.Margin = new Padding(0, 0, 0, 14);
+            _txtConfirm.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+
+            var lblFull = new Guna2HtmlLabel
+            {
+                Text = "Họ tên (tuỳ chọn)",
+                AutoSize = true,
+                Font = new Font("Segoe UI", 10, FontStyle.Regular),
+                Margin = new Padding(0, 0, 0, 6)
+            };
+            _txtFullname.Size = new Size(inputWidth, 44);
+            _txtFullname.BorderRadius = 10;
+            _txtFullname.PlaceholderText = "Nhập họ tên";
+            _txtFullname.Font = new Font("Segoe UI", 11);
+            _txtFullname.Margin = new Padding(0, 0, 0, 16);
+            _txtFullname.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+
+            _lblStatus.ForeColor = Color.Firebrick;
+            _lblStatus.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            _lblStatus.AutoSize = true;
+            _lblStatus.Margin = new Padding(0, 0, 0, 10);
 
             var btnRegister = new Guna2Button
             {
                 Text = "Đăng ký",
                 Size = new Size(inputWidth, 48),
                 BorderRadius = 12,
-                FillColor = Color.White,
-                ForeColor = Color.Black,
+                FillColor = Color.FromArgb(255, 102, 0),
+                ForeColor = Color.White,
                 Font = new Font("Segoe UI", 11, FontStyle.Bold),
-                BorderThickness = 1,
-                BorderColor = Color.LightGray,
-                Margin = new Padding(0, 0, 0, 10),
+                Margin = new Padding(0, 4, 0, 10),
                 Anchor = AnchorStyles.Left | AnchorStyles.Right
             };
             btnRegister.Click += BtnRegister_Click;
-
-            _lblStatus.ForeColor = Color.Firebrick;
-            _lblStatus.Font = new Font("Segoe UI", 9, FontStyle.Regular);
-            _lblStatus.AutoSize = true;
-            _lblStatus.Margin = new Padding(0, 0, 0, 6);
 
             layout.Controls.AddRange(new Control[]
             {
                 lblTitle, lblSubtitle,
                 lblUser, _txtUser,
                 lblPass, _txtPass,
-                btnLogin, btnRegister,
-                _lblStatus
+                lblConfirm, _txtConfirm,
+                lblFull, _txtFullname,
+                _lblStatus,
+                btnRegister
             });
 
             card.Controls.Add(layout);
             Controls.Add(card);
         }
 
-        private void BtnLogin_Click(object sender, EventArgs e)
-        {
-            var user = _txtUser.Text.Trim();
-            var pass = _txtPass.Text.Trim();
-            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
-            {
-                _lblStatus.Text = "Nhập tài khoản và mật khẩu.";
-                return;
-            }
-
-            var acc = XMLHelper.Authenticate(user, pass);
-            if (acc == null)
-            {
-                _lblStatus.Text = "Sai tài khoản hoặc mật khẩu.";
-                return;
-            }
-
-            AppState.SetUser(acc);
-            DialogResult = DialogResult.OK;
-            Close();
-        }
-
         private void BtnRegister_Click(object sender, EventArgs e)
         {
             var user = _txtUser.Text.Trim();
             var pass = _txtPass.Text.Trim();
+            var confirm = _txtConfirm.Text.Trim();
+            var full = _txtFullname.Text.Trim();
 
-            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
+            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass) || string.IsNullOrEmpty(confirm))
             {
                 _lblStatus.Text = "Tài khoản và mật khẩu không được trống.";
+                return;
+            }
+
+            if (pass != confirm)
+            {
+                _lblStatus.Text = "Mật khẩu nhập lại không khớp.";
                 return;
             }
 
@@ -179,7 +183,7 @@ namespace QLKhoaHocONL.GUI
             {
                 Username = user,
                 Password = pass,
-                FullName = user,
+                FullName = string.IsNullOrEmpty(full) ? user : full,
                 Role = "User"
             };
 

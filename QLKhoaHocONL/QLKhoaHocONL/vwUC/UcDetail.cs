@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Windows.Forms;
 using System.Linq;
+using System.Windows.Forms;
 using QLKhoaHocONL.Helpers;
 using QLKhoaHocONL.Models;
 
@@ -31,7 +31,10 @@ namespace QLKhoaHocONL.vwUC
                 object obj = Properties.Resources.ResourceManager.GetObject(tenResource);
                 if (obj != null) picAnhLon.Image = (Image)obj;
             }
-            catch { }
+            catch
+            {
+                // ignore load failures
+            }
 
             LoadVideos();
         }
@@ -56,6 +59,7 @@ namespace QLKhoaHocONL.vwUC
 
             XMLHelper.AddUserCourse(AppState.CurrentUser.Username, _course.Id);
             MessageBox.Show("Đã thêm khóa học vào tài khoản của bạn!");
+            UpdateOwnershipUI(true);
             LoadVideos();
         }
 
@@ -87,7 +91,8 @@ namespace QLKhoaHocONL.vwUC
 
             if (_course == null) return;
 
-            bool owned = AppState.IsLoggedIn && XMLHelper.LoadUserCourses(AppState.CurrentUser.Username).Contains(_course.Id);
+            bool owned = UserOwnsCourse();
+            UpdateOwnershipUI(owned);
             lblVideoTitle.Text = owned ? "Danh sách bài học" : "Bạn cần mua để xem danh sách bài học";
 
             if (!owned)
@@ -150,6 +155,18 @@ namespace QLKhoaHocONL.vwUC
             {
                 MessageBox.Show("Không mở được video: " + ex.Message);
             }
+        }
+
+        private bool UserOwnsCourse()
+        {
+            if (_course == null || !AppState.IsLoggedIn || AppState.CurrentUser == null) return false;
+            return XMLHelper.LoadUserCourses(AppState.CurrentUser.Username).Contains(_course.Id);
+        }
+
+        private void UpdateOwnershipUI(bool owned)
+        {
+            btnMuaNgay.Visible = !owned;
+            btnDemo.Enabled = owned || !string.IsNullOrWhiteSpace(_course?.DemoLink);
         }
     }
 }
