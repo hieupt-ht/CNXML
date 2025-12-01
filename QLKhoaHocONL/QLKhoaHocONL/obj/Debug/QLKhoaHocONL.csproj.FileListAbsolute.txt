@@ -15,6 +15,8 @@ E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHoc
 E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.pdb
 E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.exe.config
 E:\PhungVanVu\HOCTAP\Year 3\HK125\XML\XML_LT\QLKhoaHocONL\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.vwUC.UcCourses.resources
+D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\QLKhoaHocONL.exe
+D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Guna.UI2.dll
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\Accounts.xml
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\DangKy.xml
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\HocVien.xml
@@ -22,11 +24,11 @@ D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\KhoaHoc.x
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\UserCourses.xml
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\Videos.xml
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\QLKhoaHocONL.exe.config
-D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\QLKhoaHocONL.exe
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\QLKhoaHocONL.pdb
-D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Guna.UI2.dll
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.csproj.AssemblyReference.cache
+D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.GUI.frmLogin.resources
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.frmMain.resources
+D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.GUI.frmRegister.resources
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.frmXMLData.resources
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.Properties.Resources.resources
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.UcBlog.resources

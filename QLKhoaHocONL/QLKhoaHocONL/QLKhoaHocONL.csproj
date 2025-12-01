@@ -138,6 +138,9 @@
     <Compile Include="GUI\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GUI\frmRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GUI\frmKhoaHoc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,8 +169,14 @@
     <None Include="Resources\design.png" />
     <None Include="Resources\html_css_pro.png" />
     <Content Include="Resources\ic_search.png" />
+    <EmbeddedResource Include="GUI\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmRegister.resx">
+      <DependentUpon>frmRegister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmXMLData.resx">
       <DependentUpon>frmXMLData.cs</DependentUpon>

@@ -69,7 +69,7 @@ namespace QLKhoaHocONL
 
         private void btnSignup_Click(object sender, EventArgs e)
         {
-            using (var frm = new frmLogin())
+            using (var frm = new frmRegister())
             {
                 frm.ShowDialog();
             }
