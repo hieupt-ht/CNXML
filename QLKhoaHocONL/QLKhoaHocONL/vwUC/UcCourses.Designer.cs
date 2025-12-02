@@ -22,7 +22,9 @@ namespace QLKhoaHocONL.vwUC
             this.lblBannerTitle = new System.Windows.Forms.Label();
             this.btnPrev = new Guna.UI2.WinForms.Guna2CircleButton();
             this.btnNext = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.heroImage = new System.Windows.Forms.PictureBox();
             this.bannerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heroImage)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -31,7 +33,7 @@ namespace QLKhoaHocONL.vwUC
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold);
             this.lblTitle.Location = new System.Drawing.Point(30, 250);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(258, 41);
+            this.lblTitle.Size = new System.Drawing.Size(295, 41);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Khóa học nổi bật";
             // 
@@ -51,29 +53,44 @@ namespace QLKhoaHocONL.vwUC
             this.bannerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.bannerPanel.BorderRadius = 20;
+            this.bannerPanel.Controls.Add(this.heroImage);
+
             this.bannerPanel.Controls.Add(this.btnBannerAction);
             this.bannerPanel.Controls.Add(this.lblBannerDesc);
             this.bannerPanel.Controls.Add(this.lblBannerTitle);
             this.bannerPanel.Controls.Add(this.btnPrev);
             this.bannerPanel.Controls.Add(this.btnNext);
-            this.bannerPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(94)))), ((int)(((byte)(0)))));
-            this.bannerPanel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(166)))), ((int)(((byte)(0)))));
+            this.bannerPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(166)))), ((int)(((byte)(219)))));
+            this.bannerPanel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(140)))), ((int)(((byte)(190)))));
             this.bannerPanel.Location = new System.Drawing.Point(23, 18);
             this.bannerPanel.Name = "bannerPanel";
             this.bannerPanel.Size = new System.Drawing.Size(1308, 220);
             this.bannerPanel.TabIndex = 2;
+            this.bannerPanel.UseTransparentBackground = true;
+            // 
+            // heroImage
+            // 
+            this.heroImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.heroImage.BackColor = System.Drawing.Color.Transparent;
+            this.heroImage.Image = global::QLKhoaHocONL.Properties.Resources.design;
+            this.heroImage.Location = new System.Drawing.Point(760, 20);
+            this.heroImage.Name = "heroImage";
+            this.heroImage.Size = new System.Drawing.Size(520, 180);
+            this.heroImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.heroImage.TabIndex = 5;
+            this.heroImage.TabStop = false;
             // 
             // btnBannerAction
             // 
             this.btnBannerAction.BorderRadius = 12;
             this.btnBannerAction.FillColor = System.Drawing.Color.White;
             this.btnBannerAction.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnBannerAction.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(94)))), ((int)(((byte)(0)))));
+            this.btnBannerAction.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(140)))), ((int)(((byte)(190)))));
             this.btnBannerAction.Location = new System.Drawing.Point(42, 148);
             this.btnBannerAction.Name = "btnBannerAction";
             this.btnBannerAction.Size = new System.Drawing.Size(160, 40);
             this.btnBannerAction.TabIndex = 4;
-            this.btnBannerAction.Text = "Đăng ký kênh";
+            this.btnBannerAction.Text = "Tư vấn miễn phí";
             this.btnBannerAction.Click += new System.EventHandler(this.btnBannerAction_Click);
             // 
             // lblBannerDesc
@@ -83,9 +100,9 @@ namespace QLKhoaHocONL.vwUC
             this.lblBannerDesc.ForeColor = System.Drawing.Color.White;
             this.lblBannerDesc.Location = new System.Drawing.Point(38, 82);
             this.lblBannerDesc.Name = "lblBannerDesc";
-            this.lblBannerDesc.Size = new System.Drawing.Size(328, 25);
+            this.lblBannerDesc.Size = new System.Drawing.Size(574, 25);
             this.lblBannerDesc.TabIndex = 3;
-            this.lblBannerDesc.Text = "Nội dung sẽ được cập nhật qua banner";
+            this.lblBannerDesc.Text = "Học online trực tiếp qua Zoom, phù hợp nếu bạn muốn được review code và hỗ trợ bởi giảng viên giàu kinh nghiệm.";
             // 
             // lblBannerTitle
             // 
@@ -94,9 +111,9 @@ namespace QLKhoaHocONL.vwUC
             this.lblBannerTitle.ForeColor = System.Drawing.Color.White;
             this.lblBannerTitle.Location = new System.Drawing.Point(36, 28);
             this.lblBannerTitle.Name = "lblBannerTitle";
-            this.lblBannerTitle.Size = new System.Drawing.Size(253, 46);
+            this.lblBannerTitle.Size = new System.Drawing.Size(350, 46);
             this.lblBannerTitle.TabIndex = 2;
-            this.lblBannerTitle.Text = "F8 trên Youtube";
+            this.lblBannerTitle.Text = "Lớp học FullStack Online";
             // 
             // btnPrev
             // 
@@ -152,6 +169,7 @@ namespace QLKhoaHocONL.vwUC
             this.Size = new System.Drawing.Size(1341, 799);
             this.bannerPanel.ResumeLayout(false);
             this.bannerPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.heroImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,5 +185,6 @@ namespace QLKhoaHocONL.vwUC
         private Guna.UI2.WinForms.Guna2Button btnBannerAction;
         private Guna.UI2.WinForms.Guna2CircleButton btnPrev;
         private Guna.UI2.WinForms.Guna2CircleButton btnNext;
+        private System.Windows.Forms.PictureBox heroImage;
     }
 }

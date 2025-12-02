@@ -39,3 +39,4 @@ D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.c
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHo.E14CD0F6.Up2Date
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.exe
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.pdb
+D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.exe.config

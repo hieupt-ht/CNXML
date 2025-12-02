@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using QLKhoaHocONL.GUI;
 using QLKhoaHocONL.Helpers;
@@ -11,10 +12,14 @@ namespace QLKhoaHocONL
     {
         private readonly ContextMenuStrip _adminMenu = new ContextMenuStrip();
         private readonly UcCourses _homeCourses = new UcCourses();
+        private readonly UcBlog _blog = new UcBlog();
 
         public frmMain()
         {
             InitializeComponent();
+            picAdminAvatar.Image = SystemIcons.Shield.ToBitmap();
+            picLogo.Image = CreateAvatarCircle("F8", Color.FromArgb(255, 117, 24), Color.White);
+            ApplyButtonIcons();
             AppState.UserChanged += AppState_UserChanged;
             UpdateUserStateUI();
             BuildAdminMenu();
@@ -45,6 +50,8 @@ namespace QLKhoaHocONL
         {
             ResetMauNut();
             btnHome.BackColor = Color.White;
+            txtSearch.Text = string.Empty;
+            _homeCourses.RefreshData(resetSearch: true);
             ChuyenManHinh(_homeCourses);
         }
 
@@ -52,7 +59,7 @@ namespace QLKhoaHocONL
         {
             ResetMauNut();
             btnRoadmap.BackColor = Color.White;
-            MessageBox.Show("Bài viết/lộ trình chi tiết sẽ cập nhật sau.");
+            ChuyenManHinh(_blog);
         }
 
         private void ResetMauNut()
@@ -116,12 +123,70 @@ namespace QLKhoaHocONL
         private void UpdateUserStateUI()
         {
             bool logged = AppState.IsLoggedIn;
+            bool isAdmin = AppState.IsAdmin;
             btnLogin.Visible = btnSignup.Visible = !logged;
-            lblUser.Visible = btnLogout.Visible = btnMyCourses.Visible = logged;
-            btnAdmin.Visible = AppState.IsAdmin;
+            btnLogout.Visible = logged;
+            btnAdmin.Visible = isAdmin;
+            lblUser.Visible = logged && !isAdmin;
+            btnMyCourses.Visible = logged && !isAdmin;
+            picAdminAvatar.Visible = logged && isAdmin;
 
-            if (logged)
+            if (logged && !isAdmin)
                 lblUser.Text = $"Xin chào, {AppState.CurrentUser.FullName ?? AppState.CurrentUser.Username}";
+        }
+
+        private void ApplyButtonIcons()
+        {
+            // Dùng glyph Segoe MDL2 Assets để tạo icon phẳng
+            btnHome.Image = CreateGlyphIcon("\uE80F", Color.FromArgb(64, 64, 64));           // home
+            btnCourses.Image = CreateGlyphIcon("\uE816", Color.FromArgb(64, 64, 64));        // route/map
+            btnRoadmap.Image = CreateGlyphIcon("\uE8A5", Color.FromArgb(64, 64, 64));        // article/list
+
+            btnHome.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnCourses.TextImageRelation = TextImageRelation.ImageAboveText;
+            btnRoadmap.TextImageRelation = TextImageRelation.ImageAboveText;
+        }
+
+        private static Bitmap CreateAvatarCircle(string text, Color background, Color foreground)
+        {
+            var size = 36;
+            var bmp = new Bitmap(size, size);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                using (var brush = new SolidBrush(background))
+                {
+                    g.FillEllipse(brush, 0, 0, size - 1, size - 1);
+                }
+
+                using (var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
+                using (var font = new Font("Segoe UI", 12, FontStyle.Bold, GraphicsUnit.Pixel))
+                using (var brush = new SolidBrush(foreground))
+                {
+                    g.DrawString(text, font, brush, new RectangleF(0, 0, size, size), sf);
+                }
+            }
+
+            return bmp;
+        }
+
+        private static Bitmap CreateGlyphIcon(string glyph, Color color)
+        {
+            var size = 36;
+            var bmp = new Bitmap(size, size);
+            using (var g = Graphics.FromImage(bmp))
+            {
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                g.Clear(Color.Transparent);
+                using (var font = new Font("Segoe MDL2 Assets", 20, FontStyle.Regular, GraphicsUnit.Pixel))
+                using (var brush = new SolidBrush(color))
+                using (var sf = new StringFormat { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center })
+                {
+                    g.DrawString(glyph, font, brush, new RectangleF(0, 0, size, size), sf);
+                }
+            }
+
+            return bmp;
         }
 
         private void BuildAdminMenu()
@@ -141,6 +206,11 @@ namespace QLKhoaHocONL
             ResetMauNut();
             btnHome.BackColor = Color.White;
             ChuyenManHinh(_homeCourses);
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
