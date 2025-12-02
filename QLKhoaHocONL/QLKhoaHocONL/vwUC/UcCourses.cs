@@ -13,21 +13,23 @@ namespace QLKhoaHocONL.vwUC
         private readonly bool _onlyOwned;
         private int _bannerIndex;
         private string _searchQuery = string.Empty;
+        private readonly Timer _bannerTimer = new Timer { Interval = 3000 };
 
         private readonly (string title, string desc, string action, string link, Color c1, Color c2)[] _banners =
         {
-            ("F8 on Youtube", "F8 duoc nhac toi day moi noi, co hoi viec lam cho nguoi yeu lap trinh.", "Dang ky kenh", "https://www.youtube.com/c/F8VNOfficial",
-                Color.FromArgb(255,94,0), Color.FromArgb(255,166,0)),
-            ("Hoc React nhanh", "Lo trinh ReactJS Master cho frontender muon len tam cao moi.", "Xem lo trinh", "https://fullstack.edu.vn/learning/reactjs",
-                Color.FromArgb(0,198,255), Color.FromArgb(0,114,255)),
-            ("Viec lam IT", "Hoc xong la thuc chien - chuan bi ho so, phong van va nhan offer.", "Xem khoa", "https://fullstack.edu.vn/learning/html-css",
-                Color.FromArgb(17,153,142), Color.FromArgb(56,239,125))
+            ("F8 trên Youtube", "F8 được nhắc tới ở mọi nơi, mở rộng cơ hội việc làm cho người yêu lập trình.", "Đăng ký kênh", "https://www.youtube.com/c/F8VNOfficial",
+                Color.FromArgb(255, 94, 0), Color.FromArgb(255, 166, 0)),
+            ("Học React nhanh", "Lộ trình ReactJS Master cho frontend developer muốn lên tầm cao mới.", "Xem lộ trình", "https://fullstack.edu.vn/learning/reactjs",
+                Color.FromArgb(0, 198, 255), Color.FromArgb(0, 114, 255)),
+            ("Việc làm IT", "Học xong là thực chiến - chuẩn bị hồ sơ, phỏng vấn và nhận offer.", "Xem khóa", "https://fullstack.edu.vn/learning/html-css",
+                Color.FromArgb(17, 153, 142), Color.FromArgb(56, 239, 125))
         };
 
         public UcCourses(bool onlyOwned = false)
         {
             _onlyOwned = onlyOwned;
             InitializeComponent();
+            _bannerTimer.Tick += (s, e) => btnNext_Click(s, e);
         }
 
         protected override void OnLoad(EventArgs e)
@@ -35,6 +37,7 @@ namespace QLKhoaHocONL.vwUC
             base.OnLoad(e);
             lblTitle.Text = _onlyOwned ? "Khoa hoc cua toi" : "Khoa hoc noi bat";
             UpdateBanner();
+            _bannerTimer.Start();
             DocXML();
         }
 
@@ -88,6 +91,12 @@ namespace QLKhoaHocONL.vwUC
             }
         }
 
+        public void RefreshData(bool resetSearch = false)
+        {
+            if (resetSearch) _searchQuery = string.Empty;
+            DocXML();
+        }
+
         private void UpdateBanner()
         {
             var b = _banners[_bannerIndex];
@@ -103,6 +112,8 @@ namespace QLKhoaHocONL.vwUC
         {
             _bannerIndex = (_bannerIndex + 1) % _banners.Length;
             UpdateBanner();
+            _bannerTimer.Stop();
+            _bannerTimer.Start();
         }
 
         private void btnPrev_Click(object sender, EventArgs e)
@@ -110,6 +121,8 @@ namespace QLKhoaHocONL.vwUC
             _bannerIndex--;
             if (_bannerIndex < 0) _bannerIndex = _banners.Length - 1;
             UpdateBanner();
+            _bannerTimer.Stop();
+            _bannerTimer.Start();
         }
 
         private void btnBannerAction_Click(object sender, EventArgs e)
