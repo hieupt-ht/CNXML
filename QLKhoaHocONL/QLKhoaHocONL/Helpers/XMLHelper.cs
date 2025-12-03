@@ -19,9 +19,6 @@ namespace QLKhoaHocONL.Helpers
         private static string EnrollmentsPath => Path.Combine(DataDir, "UserCourses.xml");
         private static string VideosPath => Path.Combine(DataDir, "Videos.xml");
 
-        /// <summary>
-        /// Tạo dữ liệu mẫu nếu thiếu file XML (để chạy demo giống F8 nhanh).
-        /// </summary>
         public static void EnsureSeedData()
         {
             Directory.CreateDirectory(DataDir);

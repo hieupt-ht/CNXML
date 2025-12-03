@@ -1,118 +1,78 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\",
+  "WorkspaceRootPath": "E:\\New folder (2)\\QLKhoaHocONL\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|d:\\workspace\\nam3\\cnxml\\cnxml\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|d:\\workspace\\nam3\\cnxml\\cnxml\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|d:\\workspace\\nam3\\cnxml\\cnxml\\qlkhoahoconl\\qlkhoahoconl\\gui\\frminstructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frminstructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\ucsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\ucsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\ucroadmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\ucroadmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\uc_itemkhoahoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\uc_itemkhoahoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\ucblog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\ucblog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\ucmycourses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\ucmycourses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\gui\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\gui\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|d:\\workspace\\nam3\\cnxml\\cnxml\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmxmldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmxmldata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frminstructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frminstructor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\uccourses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\uccourses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\helpers\\dbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\helpers\\dbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\gui\\frmregister.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmregister.resx||{81828910-B8B3-4D2B-99A3-067027C180C1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\gui\\frmregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\gui\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\gui\\frmregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\uchome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\uchome.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\ucdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\ucdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\uccourses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\uccourses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\gui\\frmhocvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmhocvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\gui\\frmkhoahoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmkhoahoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmkhoahoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmstudent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\gui\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmmain.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmhocvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmhocvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmhocvien.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmhocvien.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmhocvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmhocvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmregister.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmregister.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmlogin.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmlogin.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\models\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\helpers\\xmlhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\helpers\\xmlhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\helpers\\dbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\helpers\\dbhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\helpers\\appstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\helpers\\appstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|e:\\new folder (2)\\qlkhoahoconl\\qlkhoahoconl\\gui\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\uc_itemkhoahoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\uc_itemkhoahoc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\vwuc\\ucdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\vwuc\\ucdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\qlkhoahoconl\\gui\\frmdangky.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{86F94503-9FA9-4496-96A1-9AF989B587A6}|QLKhoaHocONL\\QLKhoaHocONL.csproj|solutionrelative:qlkhoahoconl\\gui\\frmdangky.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -122,23 +82,15 @@
       "DocumentGroups": [
         {
           "DockedHeight": 383,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
             },
             {
               "$type": "Bookmark",
@@ -147,6 +99,10 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Bookmark",
@@ -162,338 +118,246 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{fbcae063-e2c0-4ab1-a516-996ea3dafb72}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "frmStudent.cs",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmStudent.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmStudent.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmStudent.cs",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmStudent.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "frmHocVien.Designer.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmHocVien.Designer.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmHocVien.Designer.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmHocVien.Designer.cs",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmHocVien.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T15:55:10.129Z",
+              "WhenOpened": "2025-12-03T17:31:04.778Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "frmStudent.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmStudent.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmStudent.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmStudent.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmStudent.cs [Design]",
+              "DocumentIndex": 7,
+              "Title": "frmHocVien.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmHocVien.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmHocVien.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmHocVien.cs",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmHocVien.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T15:55:06.44Z",
+              "WhenOpened": "2025-12-03T17:31:00.904Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "frmMain.Designer.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmMain.Designer.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmMain.Designer.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmMain.Designer.cs*",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmMain.Designer.cs*",
+              "ViewState": "AgIAAMsAAAAAAAAAAAAwwNwAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T17:08:40.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "frmLogin.Designer.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmLogin.Designer.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmLogin.Designer.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmLogin.Designer.cs",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmLogin.Designer.cs",
+              "ViewState": "AgIAAK0AAAAAAAAAAAAcwLYAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T17:02:09.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frmMain.cs [Design]",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmMain.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmMain.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmMain.cs [Design]*",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmMain.cs [Design]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T16:57:46.447Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "frmRegister.Designer.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.Designer.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmRegister.Designer.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.Designer.cs",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmRegister.Designer.cs",
+              "ViewState": "AgIAAKkAAAAAAAAAAAASwNUAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T16:56:41.179Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "frmRegister.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmRegister.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.cs",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmRegister.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T16:56:34.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "frmRegister.cs [Design]",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmRegister.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.cs [Design]",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmRegister.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T16:56:29.627Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "frmInstructor.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmInstructor.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmInstructor.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmInstructor.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmInstructor.cs [Design]",
+              "Title": "frmKhoaHoc.cs [Design]",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmKhoaHoc.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmKhoaHoc.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmKhoaHoc.cs [Design]",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmKhoaHoc.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T15:54:10.814Z",
+              "WhenOpened": "2025-12-03T16:54:59.191Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UcBlog.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcBlog.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UcBlog.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcBlog.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UcBlog.cs [Design]",
+              "DocumentIndex": 1,
+              "Title": "frmInstructor.cs [Design]",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmInstructor.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmInstructor.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmInstructor.cs [Design]",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmInstructor.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:37:27.78Z",
+              "WhenOpened": "2025-12-03T16:54:56.142Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "UC_ItemKhoaHoc.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UC_ItemKhoaHoc.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UC_ItemKhoaHoc.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UC_ItemKhoaHoc.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UC_ItemKhoaHoc.cs [Design]",
+              "Title": "frmHocVien.cs [Design]",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmHocVien.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmHocVien.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmHocVien.cs [Design]",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmHocVien.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:37:26.767Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UcRoadmap.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcRoadmap.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UcRoadmap.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcRoadmap.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UcRoadmap.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:37:31.027Z",
+              "WhenOpened": "2025-12-03T16:54:55.063Z",
               "EditorCaption": " [Design]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "UcSetting.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcSetting.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UcSetting.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcSetting.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UcSetting.cs [Design]",
+              "Title": "frmStudent.cs [Design]",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmStudent.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmStudent.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmStudent.cs [Design]",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmStudent.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:37:31.778Z",
+              "WhenOpened": "2025-12-03T16:54:50.959Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "UcMyCourses.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcMyCourses.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UcMyCourses.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcMyCourses.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UcMyCourses.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T15:20:22.392Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "frmMain.cs",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmMain.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmMain.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmMain.cs",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmMain.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAowCgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:52:59.004Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "frmMain.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmMain.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmMain.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmMain.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmMain.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:36:49.017Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "frmXMLData.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmXMLData.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmXMLData.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmXMLData.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmXMLData.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:36:57.536Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "UcCourses.cs",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcCourses.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UcCourses.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcCourses.cs",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UcCourses.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAArwBYAAAA7AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:53:21.843Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "frmRegister.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmRegister.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmRegister.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T15:39:45.742Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "DbHelper.cs",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\Helpers\\DbHelper.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\Helpers\\DbHelper.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\Helpers\\DbHelper.cs",
-              "RelativeToolTip": "QLKhoaHocONL\\Helpers\\DbHelper.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAkwNEAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T16:41:23.53Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "frmRegister.resx",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.resx",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmRegister.resx",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.resx",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmRegister.resx",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001005|",
-              "WhenOpened": "2025-12-01T15:40:25.651Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "frmRegister.cs",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmRegister.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmRegister.cs",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmRegister.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAAAG4AAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T15:41:37.645Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "App.config",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\App.config",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\App.config",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\App.config",
-              "RelativeToolTip": "QLKhoaHocONL\\App.config",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwAgAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-12-01T16:39:54.547Z",
+              "Title": "Account.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\Models\\Account.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\Models\\Account.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\Models\\Account.cs",
+              "RelativeToolTip": "QLKhoaHocONL\\Models\\Account.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T16:51:05.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "XMLHelper.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\Helpers\\XMLHelper.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\Helpers\\XMLHelper.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\Helpers\\XMLHelper.cs",
+              "RelativeToolTip": "QLKhoaHocONL\\Helpers\\XMLHelper.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAIwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T16:50:15.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "DbHelper.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\Helpers\\DbHelper.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\Helpers\\DbHelper.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\Helpers\\DbHelper.cs",
+              "RelativeToolTip": "QLKhoaHocONL\\Helpers\\DbHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-03T16:49:55.689Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 16,
-              "Title": "frmLogin.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmLogin.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmLogin.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmLogin.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmLogin.cs [Design]",
+              "Title": "AppState.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\Helpers\\AppState.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\Helpers\\AppState.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\Helpers\\AppState.cs",
+              "RelativeToolTip": "QLKhoaHocONL\\Helpers\\AppState.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T14:43:01.793Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "UcHome.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcHome.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UcHome.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcHome.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UcHome.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:37:30.246Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "UcDetail.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcDetail.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UcDetail.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcDetail.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UcDetail.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:37:29.542Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "UcCourses.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcCourses.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UcCourses.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcCourses.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UcCourses.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:37:28.711Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "frmHocVien.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmHocVien.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmHocVien.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmHocVien.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmHocVien.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-01T15:24:37.226Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "frmKhoaHoc.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmKhoaHoc.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmKhoaHoc.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmKhoaHoc.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmKhoaHoc.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T13:37:19.557Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "Course.cs",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\Models\\Course.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\Models\\Course.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\Models\\Course.cs",
-              "RelativeToolTip": "QLKhoaHocONL\\Models\\Course.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T14:48:18.309Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "frmLogin.cs",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmLogin.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmLogin.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmLogin.cs",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmLogin.cs",
-              "ViewState": "AgIAAEUAAAAAAAAAAAAYwAkAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T14:46:57.678Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "UC_ItemKhoaHoc.cs",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UC_ItemKhoaHoc.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UC_ItemKhoaHoc.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UC_ItemKhoaHoc.cs",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UC_ItemKhoaHoc.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAEwBgAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T14:44:56.717Z",
+              "WhenOpened": "2025-12-03T16:49:50.478Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "UcDetail.cs",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcDetail.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\vwUC\\UcDetail.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcDetail.cs",
-              "RelativeToolTip": "QLKhoaHocONL\\vwUC\\UcDetail.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAawBIAAAAuAAAAAAAAAA==",
+              "DocumentIndex": 17,
+              "Title": "frmLogin.cs",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmLogin.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmLogin.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmLogin.cs",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmLogin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T14:44:14.117Z"
+              "WhenOpened": "2025-12-03T16:49:41.976Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "frmDangKy.cs [Design]",
-              "DocumentMoniker": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmDangKy.cs",
-              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmDangKy.cs",
-              "ToolTip": "D:\\workspace\\NAM3\\CNXML\\CNXML\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmDangKy.cs [Design]",
-              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmDangKy.cs [Design]",
+              "DocumentIndex": 8,
+              "Title": "frmLogin.cs [Design]",
+              "DocumentMoniker": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmLogin.cs",
+              "RelativeDocumentMoniker": "QLKhoaHocONL\\GUI\\frmLogin.cs",
+              "ToolTip": "E:\\New folder (2)\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmLogin.cs [Design]",
+              "RelativeToolTip": "QLKhoaHocONL\\GUI\\frmLogin.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-29T14:42:54.272Z"
+              "WhenOpened": "2025-12-03T16:49:39.636Z",
+              "EditorCaption": " [Design]"
             }
           ]
         },
@@ -501,6 +365,14 @@
           "DockedHeight": 17,
           "SelectedChildIndex": -1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3fd5e0cc-709a-4f8c-94c3-7f0f8dff5bb2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"

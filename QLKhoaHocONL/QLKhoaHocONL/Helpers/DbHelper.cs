@@ -13,7 +13,7 @@ namespace QLKhoaHocONL.Helpers
     internal static class DbHelper
     {
         private static string ConnStr => ConfigurationManager.ConnectionStrings["OnlineCourseDb"]?.ConnectionString
-                                         ?? "Server=(localdb)\\MSSQLLocalDB;Database=OnlineCourseDB;Trusted_Connection=True;";
+                                         ?? "Server=.;Database=OnlineCourseDB;Trusted_Connection=True;";
 
         private static SqlConnection OpenConnection()
         {

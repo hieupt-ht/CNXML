@@ -124,6 +124,7 @@ namespace QLKhoaHocONL
         {
             bool logged = AppState.IsLoggedIn;
             bool isAdmin = AppState.IsAdmin;
+
             btnLogin.Visible = btnSignup.Visible = !logged;
             btnLogout.Visible = logged;
             btnAdmin.Visible = isAdmin;
