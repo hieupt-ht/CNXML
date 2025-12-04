@@ -40,3 +40,28 @@ D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHo.E14CD
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.exe
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.pdb
 D:\workspace\NAM3\CNXML\CNXML\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.exe.config
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\Accounts.xml
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\DangKy.xml
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\HocVien.xml
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\KhoaHoc.xml
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\UserCourses.xml
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Data\Videos.xml
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\QLKhoaHocONL.exe.config
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\QLKhoaHocONL.exe
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\QLKhoaHocONL.pdb
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\bin\Debug\Guna.UI2.dll
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.csproj.AssemblyReference.cache
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.GUI.frmLogin.resources
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.frmMain.resources
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.frmXMLData.resources
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.Properties.Resources.resources
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.UcBlog.resources
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.vwUC.UcCourses.resources
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.vwUC.UC_ItemKhoaHoc.resources
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.csproj.GenerateResource.cache
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.csproj.CoreCompileInputs.cache
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHo.E14CD0F6.Up2Date
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.exe
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.pdb
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.exe.config
+E:\New folder (2)\QLKhoaHocONL\QLKhoaHocONL\obj\Debug\QLKhoaHocONL.GUI.frmRegister.resources
