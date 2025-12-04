@@ -16,6 +16,7 @@ namespace QLKhoaHocONL
         private Course _selected;
         private readonly Timer _chartTimer = new Timer();
         private readonly List<double> _targets = new List<double>();
+        private readonly Random _rnd = new Random();
 
         public frmKhoaHoc()
         {
@@ -166,6 +167,14 @@ namespace QLKhoaHocONL
             }
 
             int.TryParse(txtHocVien.Text, out var hv);
+            var startColor = txtMau1.Text.Trim();
+            var endColor = txtMau2.Text.Trim();
+            if (string.IsNullOrWhiteSpace(startColor) || string.IsNullOrWhiteSpace(endColor))
+            {
+                (startColor, endColor) = GenerateGradientPair();
+                txtMau1.Text = startColor;
+                txtMau2.Text = endColor;
+            }
             return new Course
             {
                 TenKhoaHoc = txtTen.Text.Trim(),
@@ -174,8 +183,8 @@ namespace QLKhoaHocONL
                 SoHocVien = hv,
                 ThoiLuong = txtThoiLuong.Text.Trim(),
                 TenAnh = txtAnh.Text.Trim(),
-                MauBatDau = txtMau1.Text.Trim(),
-                MauKetThuc = txtMau2.Text.Trim(),
+                MauBatDau = startColor,
+                MauKetThuc = endColor,
                 DemoLink = txtDemo.Text.Trim()
             };
         }
@@ -189,8 +198,9 @@ namespace QLKhoaHocONL
             txtHocVien.Text = string.Empty;
             txtThoiLuong.Text = string.Empty;
             txtAnh.Text = string.Empty;
-            txtMau1.Text = string.Empty;
-            txtMau2.Text = string.Empty;
+            var (m1, m2) = GenerateGradientPair();
+            txtMau1.Text = m1;
+            txtMau2.Text = m2;
             txtDemo.Text = string.Empty;
             _selected = null;
             UpdateSelectedStats(null);
@@ -221,6 +231,44 @@ namespace QLKhoaHocONL
                 ChartArea = "RevenueArea"
             };
             chartRevenue.Series.Add(series);
+        }
+
+        private (string start, string end) GenerateGradientPair()
+        {
+            // Sinh màu đồng bộ cùng tông để tránh phải nhập tay.
+            double hue = _rnd.NextDouble() * 360; // 0-360
+            var start = HslToColor(hue, 0.65, 0.55);
+            var end = HslToColor(hue, 0.70, 0.42);
+            return (ColorToHex(start), ColorToHex(end));
+        }
+
+        private static Color HslToColor(double h, double s, double l)
+        {
+            h = h % 360;
+            s = Math.Max(0, Math.Min(1, s));
+            l = Math.Max(0, Math.Min(1, l));
+
+            double c = (1 - Math.Abs(2 * l - 1)) * s;
+            double x = c * (1 - Math.Abs((h / 60) % 2 - 1));
+            double m = l - c / 2;
+
+            double r = 0, g = 0, b = 0;
+            if (h < 60) { r = c; g = x; }
+            else if (h < 120) { r = x; g = c; }
+            else if (h < 180) { g = c; b = x; }
+            else if (h < 240) { g = x; b = c; }
+            else if (h < 300) { r = x; b = c; }
+            else { r = c; b = x; }
+
+            return Color.FromArgb(
+                (int)Math.Round((r + m) * 255),
+                (int)Math.Round((g + m) * 255),
+                (int)Math.Round((b + m) * 255));
+        }
+
+        private static string ColorToHex(Color c)
+        {
+            return ColorTranslator.ToHtml(c).ToUpperInvariant();
         }
 
         private void UpdateStats()

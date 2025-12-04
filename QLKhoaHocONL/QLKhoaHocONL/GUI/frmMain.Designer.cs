@@ -18,6 +18,8 @@ namespace QLKhoaHocONL
         private void InitializeComponent()
         {
             this.sidebar = new System.Windows.Forms.Panel();
+            this.btnSyncData = new System.Windows.Forms.Button();
+            this.btnNotifications = new System.Windows.Forms.Button();
             this.btnRoadmap = new System.Windows.Forms.Button();
             this.btnCourses = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
@@ -42,6 +44,8 @@ namespace QLKhoaHocONL
             // sidebar
             // 
             this.sidebar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.sidebar.Controls.Add(this.btnSyncData);
+            this.sidebar.Controls.Add(this.btnNotifications);
             this.sidebar.Controls.Add(this.btnRoadmap);
             this.sidebar.Controls.Add(this.btnCourses);
             this.sidebar.Controls.Add(this.btnHome);
@@ -51,6 +55,42 @@ namespace QLKhoaHocONL
             this.sidebar.Padding = new System.Windows.Forms.Padding(0, 19, 0, 0);
             this.sidebar.Size = new System.Drawing.Size(90, 635);
             this.sidebar.TabIndex = 0;
+            // 
+            // btnSyncData
+            // 
+            this.btnSyncData.BackColor = System.Drawing.Color.Transparent;
+            this.btnSyncData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSyncData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnSyncData.FlatAppearance.BorderSize = 0;
+            this.btnSyncData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSyncData.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnSyncData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSyncData.Location = new System.Drawing.Point(0, 375);
+            this.btnSyncData.Name = "btnSyncData";
+            this.btnSyncData.Size = new System.Drawing.Size(90, 70);
+            this.btnSyncData.TabIndex = 4;
+            this.btnSyncData.Text = "Đồng bộ";
+            this.btnSyncData.UseVisualStyleBackColor = false;
+            this.btnSyncData.Visible = false;
+            this.btnSyncData.Click += new System.EventHandler(this.btnSyncData_Click);
+            // 
+            // btnNotifications
+            // 
+            this.btnNotifications.BackColor = System.Drawing.Color.Transparent;
+            this.btnNotifications.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnNotifications.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnNotifications.FlatAppearance.BorderSize = 0;
+            this.btnNotifications.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNotifications.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnNotifications.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnNotifications.Location = new System.Drawing.Point(0, 285);
+            this.btnNotifications.Name = "btnNotifications";
+            this.btnNotifications.Size = new System.Drawing.Size(90, 90);
+            this.btnNotifications.TabIndex = 3;
+            this.btnNotifications.Text = "Thông báo";
+            this.btnNotifications.UseVisualStyleBackColor = false;
+            this.btnNotifications.Visible = false;
+            this.btnNotifications.Click += new System.EventHandler(this.btnNotifications_Click);
             // 
             // btnRoadmap
             // 
@@ -348,6 +388,8 @@ namespace QLKhoaHocONL
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.Button btnCourses;
         private System.Windows.Forms.Button btnRoadmap;
+        private System.Windows.Forms.Button btnNotifications;
+        private System.Windows.Forms.Button btnSyncData;
         private System.Windows.Forms.Panel topbar;
         private System.Windows.Forms.Panel pnlContent;
         private Guna.UI2.WinForms.Guna2Button btnLogin;

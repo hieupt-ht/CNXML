@@ -3,8 +3,9 @@
     "",
     "\\QLKhoaHocONL",
     "\\QLKhoaHocONL\\QLKhoaHocONL",
+    "\\QLKhoaHocONL\\QLKhoaHocONL\\GUI",
     "\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC"
   ],
-  "SelectedNode": "\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC\\UcCourses.resx",
+  "SelectedNode": "\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmMain.cs",
   "PreviewInSolutionExplorer": false
 }

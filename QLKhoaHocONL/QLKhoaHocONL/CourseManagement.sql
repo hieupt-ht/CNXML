@@ -78,6 +78,20 @@ CREATE TABLE AccountCourse (
 );
 GO
 
+-- Notification (thong bao cho admin)
+CREATE TABLE Notification (
+    NotificationId INT IDENTITY PRIMARY KEY,
+    Title          NVARCHAR(200) NOT NULL,
+    Content        NVARCHAR(500) NOT NULL,
+    CreatedAt      DATETIME NOT NULL CONSTRAINT DF_Notification_CreatedAt DEFAULT (GETDATE()),
+    IsRead         BIT NOT NULL CONSTRAINT DF_Notification_IsRead DEFAULT (0),
+    CourseId       INT NULL,
+    AccountId      INT NULL,
+    CONSTRAINT FK_Notification_Course FOREIGN KEY (CourseId) REFERENCES Course(CourseId),
+    CONSTRAINT FK_Notification_Account FOREIGN KEY (AccountId) REFERENCES Account(AccountId)
+);
+GO
+
 -- Video
 CREATE TABLE Video (
     VideoId INT IDENTITY PRIMARY KEY,
@@ -169,6 +183,11 @@ INSERT INTO Video (CourseId,Title,Url,[Order]) VALUES
 GO
 
 
+-- Notification
+INSERT INTO Notification (Title, Content, CourseId, AccountId, IsRead)
+VALUES (N'Thông báo demo', N'Học viên demo đã mua khóa HTML/CSS Pro', 1, 2, 0);
+GO
+
 -------------------------------------------------------------
 -- CHECK RESULT
 -------------------------------------------------------------
@@ -177,5 +196,6 @@ SELECT * FROM Instructor;
 SELECT * FROM Student;
 SELECT * FROM Course;
 SELECT * FROM Video;
+SELECT * FROM Notification;
 GO
 select * from AccountCourse

@@ -194,6 +194,49 @@ namespace QLKhoaHocONL.Helpers
             cmd.ExecuteNonQuery();
         }
 
+        public static void ReplaceCourses(IEnumerable<Course> courses)
+        {
+            using var conn = OpenConnection();
+            using var tran = conn.BeginTransaction();
+            try
+            {
+                // Clean dependencies first
+                using (var delVid = new SqlCommand("DELETE FROM Video", conn, tran))
+                {
+                    delVid.ExecuteNonQuery();
+                }
+                using (var delAcc = new SqlCommand("DELETE FROM AccountCourse", conn, tran))
+                {
+                    delAcc.ExecuteNonQuery();
+                }
+                using (var delCourse = new SqlCommand("DELETE FROM Course", conn, tran))
+                {
+                    delCourse.ExecuteNonQuery();
+                }
+                using (var reseed = new SqlCommand("DBCC CHECKIDENT('Course', RESEED, 0)", conn, tran))
+                {
+                    reseed.ExecuteNonQuery();
+                }
+
+                foreach (var c in courses)
+                {
+                    const string sql = @"INSERT INTO Course(TenKhoaHoc, GiaGoc, GiaGiam, SoHocVien, ThoiLuong,
+                                                   TenAnh, MauBatDau, MauKetThuc, DemoLink, InstructorId)
+                                 VALUES(@ten, @giaGoc, @giaGiam, @soHv, @thoiLuong, @anh, @mau1, @mau2, @demo, @instructor)";
+                    using var cmd = new SqlCommand(sql, conn, tran);
+                    FillCourseParameters(cmd, c);
+                    cmd.ExecuteNonQuery();
+                }
+
+                tran.Commit();
+            }
+            catch
+            {
+                tran.Rollback();
+                throw;
+            }
+        }
+
         private static void FillCourseParameters(SqlCommand cmd, Course c)
         {
             cmd.Parameters.AddWithValue("@ten", c.TenKhoaHoc);
@@ -265,6 +308,41 @@ namespace QLKhoaHocONL.Helpers
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }
+
+        public static void ReplaceInstructors(IEnumerable<Instructor> instructors)
+        {
+            using var conn = OpenConnection();
+            using var tran = conn.BeginTransaction();
+            try
+            {
+                using (var del = new SqlCommand("DELETE FROM Instructor", conn, tran))
+                {
+                    del.ExecuteNonQuery();
+                }
+
+                using (var reseed = new SqlCommand("DBCC CHECKIDENT('Instructor', RESEED, 0)", conn, tran))
+                {
+                    reseed.ExecuteNonQuery();
+                }
+
+                foreach (var i in instructors)
+                {
+                    using var ins = new SqlCommand(@"INSERT INTO Instructor(FullName, Email, Phone, Expertise) VALUES(@n,@e,@p,@x)", conn, tran);
+                    ins.Parameters.AddWithValue("@n", (object)i.FullName ?? DBNull.Value);
+                    ins.Parameters.AddWithValue("@e", (object)i.Email ?? DBNull.Value);
+                    ins.Parameters.AddWithValue("@p", (object)i.Phone ?? DBNull.Value);
+                    ins.Parameters.AddWithValue("@x", (object)i.Expertise ?? DBNull.Value);
+                    ins.ExecuteNonQuery();
+                }
+
+                tran.Commit();
+            }
+            catch
+            {
+                tran.Rollback();
+                throw;
+            }
+        }
         #endregion
 
         #region Students & Ownership
@@ -324,19 +402,73 @@ namespace QLKhoaHocONL.Helpers
             cmd.ExecuteNonQuery();
         }
 
-        public static void AddUserCourse(string username, int courseId)
+        public static void ReplaceStudents(IEnumerable<Student> students)
         {
-            const string sql = @"DECLARE @accId INT = (SELECT AccountId FROM Account WHERE Username=@u);
-                                 IF @accId IS NULL RETURN;
-                                 IF NOT EXISTS(SELECT 1 FROM AccountCourse WHERE AccountId=@accId AND CourseId=@c)
-                                 BEGIN
-                                     INSERT INTO AccountCourse(AccountId, CourseId) VALUES(@accId, @c);
-                                 END";
             using var conn = OpenConnection();
-            using var cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@u", username);
-            cmd.Parameters.AddWithValue("@c", courseId);
-            cmd.ExecuteNonQuery();
+            using var tran = conn.BeginTransaction();
+            try
+            {
+                using (var del = new SqlCommand("DELETE FROM Student", conn, tran))
+                {
+                    del.ExecuteNonQuery();
+                }
+
+                using (var reseed = new SqlCommand("DBCC CHECKIDENT('Student', RESEED, 0)", conn, tran))
+                {
+                    reseed.ExecuteNonQuery();
+                }
+
+                foreach (var s in students)
+                {
+                    using var ins = new SqlCommand(@"INSERT INTO Student(FullName, Email, Phone, Address) VALUES(@n,@e,@p,@a)", conn, tran);
+                    ins.Parameters.AddWithValue("@n", (object)s.FullName ?? DBNull.Value);
+                    ins.Parameters.AddWithValue("@e", (object)s.Email ?? DBNull.Value);
+                    ins.Parameters.AddWithValue("@p", (object)s.Phone ?? DBNull.Value);
+                    ins.Parameters.AddWithValue("@a", (object)s.Address ?? DBNull.Value);
+                    ins.ExecuteNonQuery();
+                }
+
+                tran.Commit();
+            }
+            catch
+            {
+                tran.Rollback();
+                throw;
+            }
+        }
+
+        public static bool AddUserCourse(string username, int courseId)
+        {
+            if (string.IsNullOrWhiteSpace(username)) return false;
+
+            using var conn = OpenConnection();
+
+            int? accId = null;
+            using (var cmdAcc = new SqlCommand("SELECT AccountId FROM Account WHERE Username=@u", conn))
+            {
+                cmdAcc.Parameters.AddWithValue("@u", username);
+                var obj = cmdAcc.ExecuteScalar();
+                if (obj != null && obj != DBNull.Value) accId = Convert.ToInt32(obj);
+            }
+
+            if (accId == null) return false;
+
+            using (var cmdCheck = new SqlCommand("SELECT 1 FROM AccountCourse WHERE AccountId=@a AND CourseId=@c", conn))
+            {
+                cmdCheck.Parameters.AddWithValue("@a", accId.Value);
+                cmdCheck.Parameters.AddWithValue("@c", courseId);
+                if (cmdCheck.ExecuteScalar() != null) return false;
+            }
+
+            using (var cmdInsert = new SqlCommand("INSERT INTO AccountCourse(AccountId, CourseId) VALUES(@a, @c);", conn))
+            {
+                cmdInsert.Parameters.AddWithValue("@a", accId.Value);
+                cmdInsert.Parameters.AddWithValue("@c", courseId);
+                cmdInsert.ExecuteNonQuery();
+            }
+
+            AddPurchaseNotification(conn, accId.Value, courseId, username);
+            return true;
         }
 
         public static List<int> LoadUserCourseIds(string username)
@@ -356,7 +488,126 @@ namespace QLKhoaHocONL.Helpers
             }
             return ids;
         }
+
+        public static List<CourseBuyer> LoadCourseBuyers(int courseId)
+        {
+            var list = new List<CourseBuyer>();
+            const string sql = @"SELECT a.AccountId, a.Username, a.FullName, s.Email, s.Phone, ac.PurchasedAt
+                                 FROM AccountCourse ac
+                                 INNER JOIN Account a ON ac.AccountId = a.AccountId
+                                 LEFT JOIN Student s ON s.AccountId = a.AccountId
+                                 WHERE ac.CourseId = @c
+                                 ORDER BY ac.PurchasedAt DESC";
+            using var conn = OpenConnection();
+            using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@c", courseId);
+            using var rd = cmd.ExecuteReader();
+            while (rd.Read())
+            {
+                list.Add(new CourseBuyer
+                {
+                    AccountId = rd.GetInt32(0),
+                    Username = rd.GetString(1),
+                    FullName = rd.IsDBNull(2) ? null : rd.GetString(2),
+                    Email = rd.IsDBNull(3) ? null : rd.GetString(3),
+                    Phone = rd.IsDBNull(4) ? null : rd.GetString(4),
+                    PurchasedAt = rd.GetDateTime(5)
+                });
+            }
+            return list;
+        }
+
+        public static List<NotificationItem> LoadNotifications(bool includeRead = true)
+        {
+            var list = new List<NotificationItem>();
+            const string sql = @"SELECT NotificationId, Title, Content, CreatedAt, IsRead
+                                 FROM Notification
+                                 WHERE (@all = 1 OR IsRead = 0)
+                                 ORDER BY CreatedAt DESC";
+            using var conn = OpenConnection();
+            using var cmd = new SqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@all", includeRead ? 1 : 0);
+            using var rd = cmd.ExecuteReader();
+            while (rd.Read())
+            {
+                list.Add(new NotificationItem
+                {
+                    Id = rd.GetInt32(0),
+                    Title = rd.GetString(1),
+                    Content = rd.GetString(2),
+                    CreatedAt = rd.GetDateTime(3),
+                    IsRead = rd.GetBoolean(4)
+                });
+            }
+            return list;
+        }
+
+        public static int CountUnreadNotifications()
+        {
+            using var conn = OpenConnection();
+            using var cmd = new SqlCommand("SELECT COUNT(*) FROM Notification WHERE IsRead = 0", conn);
+            return Convert.ToInt32(cmd.ExecuteScalar() ?? 0);
+        }
+
+        public static void MarkNotificationsAsRead(IEnumerable<int> ids)
+        {
+            if (ids == null) return;
+            var list = new List<int>(ids);
+            if (list.Count == 0) return;
+
+            using var conn = OpenConnection();
+            var paramNames = new List<string>();
+            var cmd = new SqlCommand();
+            cmd.Connection = conn;
+            for (int i = 0; i < list.Count; i++)
+            {
+                var pName = "@id" + i;
+                paramNames.Add(pName);
+                cmd.Parameters.AddWithValue(pName, list[i]);
+            }
+
+            cmd.CommandText = $"UPDATE Notification SET IsRead = 1 WHERE NotificationId IN ({string.Join(",", paramNames)})";
+            cmd.ExecuteNonQuery();
+        }
+
+        public static void MarkAllNotificationsAsRead()
+        {
+            using var conn = OpenConnection();
+            using var cmd = new SqlCommand("UPDATE Notification SET IsRead = 1 WHERE IsRead = 0", conn);
+            cmd.ExecuteNonQuery();
+        }
         #endregion
+
+        private static void AddPurchaseNotification(SqlConnection conn, int accountId, int courseId, string username)
+        {
+            string courseName = null;
+            using (var cmdCourse = new SqlCommand("SELECT TenKhoaHoc FROM Course WHERE CourseId = @id", conn))
+            {
+                cmdCourse.Parameters.AddWithValue("@id", courseId);
+                var obj = cmdCourse.ExecuteScalar();
+                if (obj != null && obj != DBNull.Value) courseName = Convert.ToString(obj);
+            }
+
+            string fullName = null;
+            using (var cmdAcc = new SqlCommand("SELECT FullName FROM Account WHERE AccountId = @id", conn))
+            {
+                cmdAcc.Parameters.AddWithValue("@id", accountId);
+                var obj = cmdAcc.ExecuteScalar();
+                if (obj != null && obj != DBNull.Value) fullName = Convert.ToString(obj);
+            }
+
+            string displayName = string.IsNullOrWhiteSpace(fullName) ? username : fullName;
+            string title = "Học viên mua khóa học";
+            string content = $"{displayName} đã mua khóa {(courseName ?? courseId.ToString())}";
+
+            using var cmd = new SqlCommand(
+                "INSERT INTO Notification(Title, Content, CourseId, AccountId) VALUES(@t, @ct, @courseId, @accId)", conn);
+            cmd.Parameters.AddWithValue("@t", title);
+            cmd.Parameters.AddWithValue("@ct", content);
+            cmd.Parameters.AddWithValue("@courseId", courseId);
+            cmd.Parameters.AddWithValue("@accId", accountId);
+            cmd.ExecuteNonQuery();
+        }
 
         #region Videos
         public static List<Video> LoadVideos(int courseId)
