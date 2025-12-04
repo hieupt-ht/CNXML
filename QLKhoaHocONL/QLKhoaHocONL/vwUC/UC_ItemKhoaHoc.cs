@@ -29,6 +29,11 @@ namespace QLKhoaHocONL.vwUC
             lblGiaGoc.Text = course.GiaGoc;
             lblGiaGiam.Text = course.GiaGiam;
 
+            
+            // Fallback m?u m?c ??nh ?? tr?nh n?n tr?ng.
+            string fallbackStart = "#7E57C2";
+            string fallbackEnd = "#5C6BC0";
+
             try
             {
                 string tenResource = System.IO.Path.GetFileNameWithoutExtension(course.TenAnh);
@@ -38,19 +43,32 @@ namespace QLKhoaHocONL.vwUC
                 {
                     picAnhBia.Image = (Image)obj;
                 }
+                else
+                {
+                    picAnhBia.Image = null;
+                    picAnhBia.FillColor = Color.WhiteSmoke;
+                }
             }
             catch
             {
-                // ignore lỗi load ảnh để không chặn UI.
+                picAnhBia.Image = null;
+                picAnhBia.FillColor = Color.WhiteSmoke;
             }
 
             try
             {
-                guna2PanelNen.FillColor = ColorTranslator.FromHtml(course.MauBatDau);
-                guna2PanelNen.FillColor2 = ColorTranslator.FromHtml(course.MauKetThuc);
+                var c1 = string.IsNullOrWhiteSpace(course.MauBatDau) ? fallbackStart : course.MauBatDau;
+                var c2 = string.IsNullOrWhiteSpace(course.MauKetThuc) ? fallbackEnd : course.MauKetThuc;
+                guna2PanelNen.FillColor = ColorTranslator.FromHtml(c1);
+                guna2PanelNen.FillColor2 = ColorTranslator.FromHtml(c2);
             }
-            catch { }
+            catch
+            {
+                guna2PanelNen.FillColor = ColorTranslator.FromHtml(fallbackStart);
+                guna2PanelNen.FillColor2 = ColorTranslator.FromHtml(fallbackEnd);
+            }
         }
+        
 
         private void UC_ItemKhoaHoc_Click(object sender, EventArgs e)
         {

@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using QLKhoaHocONL.GUI;
 using QLKhoaHocONL.Helpers;
 using QLKhoaHocONL.Models;
 
@@ -23,7 +24,7 @@ namespace QLKhoaHocONL.vwUC
             lblTenKhoaHoc.Text = course.TenKhoaHoc;
             lblGia.Text = course.GiaGiam;
             var giangVien = string.IsNullOrWhiteSpace(course.InstructorName)
-                ? "Chưa rõ giảng viên"
+                ? "Chưa có giảng viên"
                 : $"Giảng viên: {course.InstructorName}";
             lblThongTin.Text = $"{giangVien} | Giá gốc: {course.GiaGoc} | Giá giảm: {course.GiaGiam} | {course.ThoiLuong} | {course.SoHocVien} học viên";
             lblDemo.Text = string.IsNullOrWhiteSpace(course.DemoLink) ? "Chưa có link demo" : course.DemoLink;
@@ -48,9 +49,16 @@ namespace QLKhoaHocONL.vwUC
             main.ChuyenManHinh(new UcCourses());
         }
 
+        
         private void btnMuaNgay_Click(object sender, EventArgs e)
         {
             if (_course == null) return;
+
+            if (AppState.IsAdmin)
+            {
+                ShowBuyers();
+                return;
+            }
 
             if (!AppState.IsLoggedIn)
             {
@@ -60,8 +68,14 @@ namespace QLKhoaHocONL.vwUC
                 }
             }
 
-            DbHelper.AddUserCourse(AppState.CurrentUser.Username, _course.Id);
-            MessageBox.Show("Đã thêm khóa học vào tài khoản của bạn!");
+            var added = DbHelper.AddUserCourse(AppState.CurrentUser.Username, _course.Id);
+            if (!added)
+            {
+                MessageBox.Show("Ban da mua khoa hoc nay truoc do.");
+                return;
+            }
+
+            MessageBox.Show("Da them khoa hoc vao tai khoan cua ban!");
             UpdateOwnershipUI(true);
             LoadVideos();
         }
@@ -83,7 +97,7 @@ namespace QLKhoaHocONL.vwUC
 
             if (_course == null) return;
 
-            bool owned = UserOwnsCourse();
+            bool owned = AppState.IsAdmin || UserOwnsCourse();
             UpdateOwnershipUI(owned);
             lblVideoTitle.Text = owned ? "Danh sách bài học" : "Bạn cần mua để xem danh sách bài học";
 
@@ -157,8 +171,31 @@ namespace QLKhoaHocONL.vwUC
 
         private void UpdateOwnershipUI(bool owned)
         {
+            if (AppState.IsAdmin)
+            {
+                btnMuaNgay.Visible = true;
+                btnMuaNgay.Text = "Xem hoc vien";
+                btnDemo.Enabled = true;
+                return;
+            }
+
             btnMuaNgay.Visible = !owned;
             btnDemo.Enabled = owned || !string.IsNullOrWhiteSpace(_course?.DemoLink);
+        }
+
+        private void ShowBuyers()
+        {
+            var buyers = DbHelper.LoadCourseBuyers(_course.Id);
+            if (!buyers.Any())
+            {
+                MessageBox.Show("Chua co hoc vien mua khoa hoc nay.");
+                return;
+            }
+
+            using (var frm = new frmCourseBuyers(_course.TenKhoaHoc, buyers))
+            {
+                frm.ShowDialog();
+            }
         }
     }
 }

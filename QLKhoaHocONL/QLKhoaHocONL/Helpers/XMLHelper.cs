@@ -18,10 +18,9 @@ namespace QLKhoaHocONL.Helpers
         private static string AccountsPath => Path.Combine(DataDir, "Accounts.xml");
         private static string EnrollmentsPath => Path.Combine(DataDir, "UserCourses.xml");
         private static string VideosPath => Path.Combine(DataDir, "Videos.xml");
+        private static string StudentsPath => Path.Combine(DataDir, "HocVien.xml");
+        private static string InstructorsPath => Path.Combine(DataDir, "GiangVien.xml");
 
-        /// <summary>
-        /// Tạo dữ liệu mẫu nếu thiếu file XML (để chạy demo giống F8 nhanh).
-        /// </summary>
         public static void EnsureSeedData()
         {
             Directory.CreateDirectory(DataDir);
@@ -124,6 +123,64 @@ namespace QLKhoaHocONL.Helpers
                     ))
                 ));
             doc.Save(CoursesPath);
+        }
+
+        public static List<Student> LoadStudentsFromXml()
+        {
+            if (!File.Exists(StudentsPath)) return new List<Student>();
+            var doc = XDocument.Load(StudentsPath);
+            return doc.Descendants("Student").Select(x => new Student
+            {
+                StudentId = int.TryParse(x.Element("StudentId")?.Value, out var id) ? id : 0,
+                FullName = x.Element("FullName")?.Value,
+                Email = x.Element("Email")?.Value,
+                Phone = x.Element("Phone")?.Value,
+                Address = x.Element("Address")?.Value
+            }).ToList();
+        }
+
+        public static void SaveStudentsToXml(IEnumerable<Student> students)
+        {
+            Directory.CreateDirectory(DataDir);
+            var doc = new XDocument(
+                new XElement("Students",
+                    students.Select(s => new XElement("Student",
+                        new XElement("StudentId", s.StudentId),
+                        new XElement("FullName", s.FullName),
+                        new XElement("Email", s.Email),
+                        new XElement("Phone", s.Phone),
+                        new XElement("Address", s.Address)
+                    ))));
+            doc.Save(StudentsPath);
+        }
+
+        public static List<Instructor> LoadInstructorsFromXml()
+        {
+            if (!File.Exists(InstructorsPath)) return new List<Instructor>();
+            var doc = XDocument.Load(InstructorsPath);
+            return doc.Descendants("Instructor").Select(x => new Instructor
+            {
+                InstructorId = int.TryParse(x.Element("InstructorId")?.Value, out var id) ? id : 0,
+                FullName = x.Element("FullName")?.Value,
+                Email = x.Element("Email")?.Value,
+                Phone = x.Element("Phone")?.Value,
+                Expertise = x.Element("Expertise")?.Value
+            }).ToList();
+        }
+
+        public static void SaveInstructorsToXml(IEnumerable<Instructor> instructors)
+        {
+            Directory.CreateDirectory(DataDir);
+            var doc = new XDocument(
+                new XElement("Instructors",
+                    instructors.Select(i => new XElement("Instructor",
+                        new XElement("InstructorId", i.InstructorId),
+                        new XElement("FullName", i.FullName),
+                        new XElement("Email", i.Email),
+                        new XElement("Phone", i.Phone),
+                        new XElement("Expertise", i.Expertise)
+                    ))));
+            doc.Save(InstructorsPath);
         }
 
         public static List<Account> LoadAccounts()

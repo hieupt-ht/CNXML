@@ -55,11 +55,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GUI\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\frmRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frmRegister.Designer.cs">
+      <DependentUpon>frmRegister.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\AppState.cs" />
     <Compile Include="Helpers\DbHelper.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\CourseBuyer.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Instructor.cs" />
+    <Compile Include="Models\NotificationItem.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="vwUC\UcBlog.cs">
@@ -128,25 +142,19 @@
     <Content Include="Data\Videos.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Compile Include="GUI\frmDangKy.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmDangKy.Designer.cs">
-      <DependentUpon>frmDangKy.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI\frmHocVien.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\frmHocVien.Designer.cs">
       <DependentUpon>frmHocVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frmCourseBuyers.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GUI\frmInstructor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\frmLogin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\frmRegister.cs">
+    <Compile Include="GUI\frmNotifications.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="GUI\frmKhoaHoc.cs">
