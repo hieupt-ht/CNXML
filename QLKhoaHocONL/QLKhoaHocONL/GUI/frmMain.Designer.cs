@@ -17,6 +17,7 @@ namespace QLKhoaHocONL
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.sidebar = new System.Windows.Forms.Panel();
             this.btnSyncData = new System.Windows.Forms.Button();
             this.btnNotifications = new System.Windows.Forms.Button();
@@ -24,10 +25,11 @@ namespace QLKhoaHocONL
             this.btnCourses = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.topbar = new System.Windows.Forms.Panel();
-            this.lblUser = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnCloseFrm = new Guna.UI2.WinForms.Guna2Button();
             this.btnMyCourses = new Guna.UI2.WinForms.Guna2Button();
-            this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
+            this.lblUser = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnAdmin = new Guna.UI2.WinForms.Guna2Button();
+            this.btnLogout = new Guna.UI2.WinForms.Guna2Button();
             this.picAdminAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.picLogo = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.lblTitle = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -63,11 +65,11 @@ namespace QLKhoaHocONL
             this.btnSyncData.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnSyncData.FlatAppearance.BorderSize = 0;
             this.btnSyncData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSyncData.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnSyncData.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSyncData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnSyncData.Location = new System.Drawing.Point(0, 375);
             this.btnSyncData.Name = "btnSyncData";
-            this.btnSyncData.Size = new System.Drawing.Size(90, 70);
+            this.btnSyncData.Size = new System.Drawing.Size(90, 90);
             this.btnSyncData.TabIndex = 4;
             this.btnSyncData.Text = "Đồng bộ";
             this.btnSyncData.UseVisualStyleBackColor = false;
@@ -146,6 +148,7 @@ namespace QLKhoaHocONL
             // topbar
             // 
             this.topbar.BackColor = System.Drawing.Color.White;
+            this.topbar.Controls.Add(this.btnCloseFrm);
             this.topbar.Controls.Add(this.btnMyCourses);
             this.topbar.Controls.Add(this.lblUser);
             this.topbar.Controls.Add(this.btnAdmin);
@@ -160,19 +163,32 @@ namespace QLKhoaHocONL
             this.topbar.Location = new System.Drawing.Point(90, 0);
             this.topbar.Name = "topbar";
             this.topbar.Padding = new System.Windows.Forms.Padding(18, 0, 18, 0);
-            this.topbar.Size = new System.Drawing.Size(1176, 80);
+            this.topbar.Size = new System.Drawing.Size(1355, 80);
             this.topbar.TabIndex = 1;
             // 
-            // lblUser
+            // btnCloseFrm
             // 
-            this.lblUser.BackColor = System.Drawing.Color.Transparent;
-            this.lblUser.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUser.Location = new System.Drawing.Point(800, 31);
-            this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(72, 22);
-            this.lblUser.TabIndex = 15;
-            this.lblUser.Text = "Xin chào";
-            this.lblUser.Visible = false;
+            this.btnCloseFrm.AutoRoundedCorners = true;
+            this.btnCloseFrm.BackColor = System.Drawing.Color.Transparent;
+            this.btnCloseFrm.BorderRadius = 15;
+            this.btnCloseFrm.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCloseFrm.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnCloseFrm.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnCloseFrm.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnCloseFrm.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnCloseFrm.FillColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.btnCloseFrm.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseFrm.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.btnCloseFrm.HoverState.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCloseFrm.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseFrm.Image")));
+            this.btnCloseFrm.ImageAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.btnCloseFrm.Location = new System.Drawing.Point(1234, 24);
+            this.btnCloseFrm.Name = "btnCloseFrm";
+            this.btnCloseFrm.Size = new System.Drawing.Size(95, 33);
+            this.btnCloseFrm.TabIndex = 16;
+            this.btnCloseFrm.Text = "Thoát";
+            this.btnCloseFrm.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnCloseFrm.Click += new System.EventHandler(this.btnCloseFrm_Click);
             // 
             // btnMyCourses
             // 
@@ -188,7 +204,7 @@ namespace QLKhoaHocONL
             this.btnMyCourses.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMyCourses.ForeColor = System.Drawing.Color.White;
             this.btnMyCourses.HoverState.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMyCourses.Location = new System.Drawing.Point(901, 24);
+            this.btnMyCourses.Location = new System.Drawing.Point(1080, 24);
             this.btnMyCourses.Name = "btnMyCourses";
             this.btnMyCourses.Size = new System.Drawing.Size(125, 33);
             this.btnMyCourses.TabIndex = 14;
@@ -197,27 +213,16 @@ namespace QLKhoaHocONL
             this.btnMyCourses.Visible = false;
             this.btnMyCourses.Click += new System.EventHandler(this.btnMyCourses_Click);
             // 
-            // btnLogout
+            // lblUser
             // 
-            this.btnLogout.AutoRoundedCorners = true;
-            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
-            this.btnLogout.BorderRadius = 15;
-            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnLogout.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnLogout.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnLogout.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnLogout.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
-            this.btnLogout.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.ForeColor = System.Drawing.Color.White;
-            this.btnLogout.HoverState.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.Location = new System.Drawing.Point(1050, 24);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(114, 33);
-            this.btnLogout.TabIndex = 13;
-            this.btnLogout.Text = "Đăng xuất";
-            this.btnLogout.Visible = false;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            this.lblUser.BackColor = System.Drawing.Color.Transparent;
+            this.lblUser.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUser.Location = new System.Drawing.Point(794, 31);
+            this.lblUser.Name = "lblUser";
+            this.lblUser.Size = new System.Drawing.Size(72, 22);
+            this.lblUser.TabIndex = 15;
+            this.lblUser.Text = "Xin chào";
+            this.lblUser.Visible = false;
             // 
             // btnAdmin
             // 
@@ -233,7 +238,7 @@ namespace QLKhoaHocONL
             this.btnAdmin.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAdmin.ForeColor = System.Drawing.Color.White;
             this.btnAdmin.HoverState.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdmin.Location = new System.Drawing.Point(925, 24);
+            this.btnAdmin.Location = new System.Drawing.Point(1090, 24);
             this.btnAdmin.Name = "btnAdmin";
             this.btnAdmin.Size = new System.Drawing.Size(84, 33);
             this.btnAdmin.TabIndex = 12;
@@ -242,12 +247,34 @@ namespace QLKhoaHocONL
             this.btnAdmin.Visible = false;
             this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
+            // btnLogout
+            // 
+            this.btnLogout.AutoRoundedCorners = true;
+            this.btnLogout.BackColor = System.Drawing.Color.Transparent;
+            this.btnLogout.BorderRadius = 15;
+            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogout.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnLogout.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnLogout.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnLogout.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnLogout.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(53)))), ((int)(((byte)(69)))));
+            this.btnLogout.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.ForeColor = System.Drawing.Color.White;
+            this.btnLogout.HoverState.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.Location = new System.Drawing.Point(1225, 24);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(114, 33);
+            this.btnLogout.TabIndex = 13;
+            this.btnLogout.Text = "Đăng xuất";
+            this.btnLogout.Visible = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
             // picAdminAvatar
             // 
             this.picAdminAvatar.BackColor = System.Drawing.Color.Transparent;
             this.picAdminAvatar.FillColor = System.Drawing.Color.WhiteSmoke;
             this.picAdminAvatar.ImageRotate = 0F;
-            this.picAdminAvatar.Location = new System.Drawing.Point(843, 19);
+            this.picAdminAvatar.Location = new System.Drawing.Point(1009, 19);
             this.picAdminAvatar.Name = "picAdminAvatar";
             this.picAdminAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             this.picAdminAvatar.Size = new System.Drawing.Size(44, 44);
@@ -297,7 +324,7 @@ namespace QLKhoaHocONL
             this.txtSearch.ForeColor = System.Drawing.Color.Black;
             this.txtSearch.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtSearch.IconLeft = global::QLKhoaHocONL.Properties.Resources.ic_search;
-            this.txtSearch.Location = new System.Drawing.Point(358, 24);
+            this.txtSearch.Location = new System.Drawing.Point(337, 24);
             this.txtSearch.Margin = new System.Windows.Forms.Padding(4, 4, 3, 4);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.PlaceholderForeColor = System.Drawing.Color.DimGray;
@@ -323,7 +350,7 @@ namespace QLKhoaHocONL
             this.btnSignup.HoverState.FillColor = System.Drawing.Color.WhiteSmoke;
             this.btnSignup.HoverState.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSignup.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(163)))), ((int)(((byte)(238)))));
-            this.btnSignup.Location = new System.Drawing.Point(842, 24);
+            this.btnSignup.Location = new System.Drawing.Point(972, 24);
             this.btnSignup.Name = "btnSignup";
             this.btnSignup.Size = new System.Drawing.Size(114, 33);
             this.btnSignup.TabIndex = 6;
@@ -344,9 +371,9 @@ namespace QLKhoaHocONL
             this.btnLogin.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
             this.btnLogin.HoverState.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogin.Location = new System.Drawing.Point(965, 24);
+            this.btnLogin.Location = new System.Drawing.Point(1093, 24);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(114, 33);
+            this.btnLogin.Size = new System.Drawing.Size(112, 32);
             this.btnLogin.TabIndex = 5;
             this.btnLogin.Text = "Đăng nhập";
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -358,14 +385,14 @@ namespace QLKhoaHocONL
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContent.Location = new System.Drawing.Point(90, 80);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1176, 555);
+            this.pnlContent.Size = new System.Drawing.Size(1355, 555);
             this.pnlContent.TabIndex = 2;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1266, 635);
+            this.ClientSize = new System.Drawing.Size(1445, 635);
             this.Controls.Add(this.pnlContent);
             this.Controls.Add(this.topbar);
             this.Controls.Add(this.sidebar);
@@ -402,5 +429,6 @@ namespace QLKhoaHocONL
         private Guna.UI2.WinForms.Guna2Button btnLogout;
         private Guna.UI2.WinForms.Guna2Button btnMyCourses;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblUser;
+        private Guna.UI2.WinForms.Guna2Button btnCloseFrm;
     }
 }

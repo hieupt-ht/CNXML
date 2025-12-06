@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -17,6 +18,7 @@ namespace QLKhoaHocONL
         private readonly Timer _chartTimer = new Timer();
         private readonly List<double> _targets = new List<double>();
         private readonly Random _rnd = new Random();
+        private List<Instructor> _instructors = new List<Instructor>();
 
         public frmKhoaHoc()
         {
@@ -29,6 +31,7 @@ namespace QLKhoaHocONL
 
         private void frmKhoaHoc_Load(object sender, EventArgs e)
         {
+            LoadInstructors();
             ReloadData();
             SetupChart();
             UpdateStats();
@@ -36,9 +39,29 @@ namespace QLKhoaHocONL
             tabControl.SelectedIndexChanged += tabControl_SelectedIndexChanged;
         }
 
+        private void LoadInstructors()
+        {
+            _instructors = XmlRepository.GetInstructors();
+
+            cboInstructor.Items.Clear();
+            cboInstructor.Items.Add("(Chưa chọn giảng viên)");
+
+            foreach (var instructor in _instructors)
+            {
+                cboInstructor.Items.Add(instructor);
+            }
+
+            cboInstructor.DisplayMember = "FullName";
+            cboInstructor.ValueMember = "InstructorId";
+            cboInstructor.SelectedIndex = 0;
+        }
+
         private void ReloadData()
         {
-            _courses = DbHelper.LoadCourses();
+            _courses = XMLHelper.LoadCourses();
+
+            var instructors = XmlRepository.GetInstructors();
+
             dgvCourses.DataSource = _courses.Select(c => new
             {
                 c.Id,
@@ -51,16 +74,17 @@ namespace QLKhoaHocONL
                 c.MauBatDau,
                 c.MauKetThuc,
                 c.DemoLink,
-                c.InstructorName
+                InstructorName = c.InstructorId.HasValue
+                    ? instructors.FirstOrDefault(i => i.InstructorId == c.InstructorId.Value)?.FullName ?? "(Chưa có)"
+                    : "(Chưa có)"
             }).ToList();
+
             dgvCourses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvCourses.AutoResizeColumns();
             dgvCourses.ClearSelection();
             _selected = null;
             ClearInputs();
             LocalizeGridHeaders();
             UpdateStats();
-            UpdateSelectedStats();
         }
 
         private void dgvCourses_SelectionChanged(object sender, EventArgs e)
@@ -80,6 +104,24 @@ namespace QLKhoaHocONL
             txtMau1.Text = _selected.MauBatDau;
             txtMau2.Text = _selected.MauKetThuc;
             txtDemo.Text = _selected.DemoLink;
+
+            if (_selected.InstructorId.HasValue)
+            {
+                var instructor = _instructors.FirstOrDefault(i => i.InstructorId == _selected.InstructorId.Value);
+                if (instructor != null)
+                {
+                    cboInstructor.SelectedItem = instructor;
+                }
+                else
+                {
+                    cboInstructor.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                cboInstructor.SelectedIndex = 0;
+            }
+
             UpdateSelectedStats();
         }
 
@@ -108,6 +150,13 @@ namespace QLKhoaHocONL
                 btn.Font = fontBold;
             }
 
+            cboInstructor.Font = font;
+
+            if (groupActions != null)
+            {
+                groupActions.Font = fontBold;
+            }
+
             dgvCourses.ColumnHeadersDefaultCellStyle.Font = fontBold;
             dgvCourses.DefaultCellStyle.Font = font;
         }
@@ -122,9 +171,15 @@ namespace QLKhoaHocONL
         {
             var newCourse = ReadForm();
             if (newCourse == null) return;
-            newCourse.Id = DbHelper.AddCourse(newCourse);
+
+            int maxId = _courses.Any() ? _courses.Max(c => c.Id) : 0;
+            newCourse.Id = maxId + 1;
+
             _courses.Add(newCourse);
+            XMLHelper.SaveCourses(_courses);
+
             ReloadData();
+            MessageBox.Show("Đã thêm thành công!");
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -135,12 +190,27 @@ namespace QLKhoaHocONL
                 return;
             }
 
-            var updated = ReadForm();
-            if (updated == null) return;
-            updated.Id = _selected.Id;
+            var updatedInfo = ReadForm();
+            if (updatedInfo == null) return;
 
-            DbHelper.UpdateCourse(updated);
-            ReloadData();
+            var courseInList = _courses.FirstOrDefault(c => c.Id == _selected.Id);
+            if (courseInList != null)
+            {
+                courseInList.TenKhoaHoc = updatedInfo.TenKhoaHoc;
+                courseInList.GiaGoc = updatedInfo.GiaGoc;
+                courseInList.GiaGiam = updatedInfo.GiaGiam;
+                courseInList.SoHocVien = updatedInfo.SoHocVien;
+                courseInList.ThoiLuong = updatedInfo.ThoiLuong;
+                courseInList.TenAnh = updatedInfo.TenAnh;
+                courseInList.MauBatDau = updatedInfo.MauBatDau;
+                courseInList.MauKetThuc = updatedInfo.MauKetThuc;
+                courseInList.DemoLink = updatedInfo.DemoLink;
+                courseInList.InstructorId = updatedInfo.InstructorId;
+
+                XMLHelper.SaveCourses(_courses);
+                ReloadData();
+                MessageBox.Show("Đã cập nhật file XML!");
+            }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -151,10 +221,16 @@ namespace QLKhoaHocONL
                 return;
             }
 
-            if (MessageBox.Show("Xóa khóa học này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Xóa khóa học này khỏi XML?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                DbHelper.DeleteCourse(_selected.Id);
-                ReloadData();
+                var courseToRemove = _courses.FirstOrDefault(c => c.Id == _selected.Id);
+                if (courseToRemove != null)
+                {
+                    _courses.Remove(courseToRemove);
+                    XMLHelper.SaveCourses(_courses);
+                    ReloadData();
+                    MessageBox.Show("Đã xóa thành công!");
+                }
             }
         }
 
@@ -163,10 +239,17 @@ namespace QLKhoaHocONL
             if (string.IsNullOrWhiteSpace(txtTen.Text))
             {
                 MessageBox.Show("Tên khóa học không được trống.");
+                txtTen.Focus();
                 return null;
             }
 
-            int.TryParse(txtHocVien.Text, out var hv);
+            if (!int.TryParse(txtHocVien.Text, out var hv) || hv < 0)
+            {
+                MessageBox.Show("Số học viên phải là số nguyên không âm.");
+                txtHocVien.Focus();
+                return null;
+            }
+
             var startColor = txtMau1.Text.Trim();
             var endColor = txtMau2.Text.Trim();
             if (string.IsNullOrWhiteSpace(startColor) || string.IsNullOrWhiteSpace(endColor))
@@ -175,6 +258,13 @@ namespace QLKhoaHocONL
                 txtMau1.Text = startColor;
                 txtMau2.Text = endColor;
             }
+
+            int? instructorId = null;
+            if (cboInstructor.SelectedIndex > 0 && cboInstructor.SelectedItem is Instructor selectedInstructor)
+            {
+                instructorId = selectedInstructor.InstructorId;
+            }
+
             return new Course
             {
                 TenKhoaHoc = txtTen.Text.Trim(),
@@ -185,8 +275,44 @@ namespace QLKhoaHocONL
                 TenAnh = txtAnh.Text.Trim(),
                 MauBatDau = startColor,
                 MauKetThuc = endColor,
-                DemoLink = txtDemo.Text.Trim()
+                DemoLink = txtDemo.Text.Trim(),
+                InstructorId = instructorId
             };
+        }
+
+        private void txtAnh_IconRightClick(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "Chọn ảnh bìa khóa học";
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif"; // Chỉ cho chọn ảnh
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    string sourceFileName = ofd.FileName;
+                    string fileName = Path.GetFileName(sourceFileName);
+
+                    txtAnh.Text = fileName;
+
+                    try
+                    {
+                        string projectPath = Application.StartupPath;
+                        string destFolder = Path.Combine(projectPath, "Images");
+                        if (!Directory.Exists(destFolder))
+                        {
+                            Directory.CreateDirectory(destFolder);
+                        }
+
+                        string destPath = Path.Combine(destFolder, fileName);
+
+                        File.Copy(sourceFileName, destPath, true);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Không thể copy ảnh vào thư mục hệ thống: " + ex.Message);
+                    }
+                }
+            }
         }
 
         private void ClearInputs()
@@ -195,20 +321,20 @@ namespace QLKhoaHocONL
             txtTen.Text = string.Empty;
             txtGiaGoc.Text = string.Empty;
             txtGiaGiam.Text = string.Empty;
-            txtHocVien.Text = string.Empty;
+            txtHocVien.Text = "0";
             txtThoiLuong.Text = string.Empty;
             txtAnh.Text = string.Empty;
             var (m1, m2) = GenerateGradientPair();
             txtMau1.Text = m1;
             txtMau2.Text = m2;
             txtDemo.Text = string.Empty;
+            cboInstructor.SelectedIndex = 0;
             _selected = null;
             UpdateSelectedStats(null);
         }
 
         private void EnableChartDoubleBuffer()
         {
-            // Chart control hides DoubleBuffered; enable via reflection to reduce flicker while animating.
             typeof(Chart).GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic)
                 ?.SetValue(chartRevenue, true);
         }
@@ -235,8 +361,7 @@ namespace QLKhoaHocONL
 
         private (string start, string end) GenerateGradientPair()
         {
-            // Sinh màu đồng bộ cùng tông để tránh phải nhập tay.
-            double hue = _rnd.NextDouble() * 360; // 0-360
+            double hue = _rnd.NextDouble() * 360;
             var start = HslToColor(hue, 0.65, 0.55);
             var end = HslToColor(hue, 0.70, 0.42);
             return (ColorToHex(start), ColorToHex(end));
@@ -370,7 +495,7 @@ namespace QLKhoaHocONL
                 if (current < target)
                 {
                     var delta = target - current;
-                    double step = Math.Max(1, delta * 0.2); // ease-out to keep animation smooth
+                    double step = Math.Max(1, delta * 0.2);
                     current = Math.Min(target, current + step);
                     points[i].YValues[0] = current;
                     done = false;
@@ -422,6 +547,11 @@ namespace QLKhoaHocONL
             if (decimal.TryParse(digits, out var val))
                 return val;
             return 0;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

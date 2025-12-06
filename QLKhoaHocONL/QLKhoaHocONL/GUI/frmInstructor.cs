@@ -1,89 +1,73 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Windows.Forms;
 using QLKhoaHocONL.Helpers;
 using QLKhoaHocONL.Models;
+using System.Drawing;
 
 namespace QLKhoaHocONL.GUI
 {
-    public class frmInstructor : Form
+    public partial class frmInstructor : Form
     {
-        private readonly DataGridView _grid = new DataGridView();
-        private readonly TextBox _txtName = new TextBox();
-        private readonly TextBox _txtEmail = new TextBox();
-        private readonly TextBox _txtPhone = new TextBox();
-        private readonly TextBox _txtExp = new TextBox();
         private Instructor _selected;
 
         public frmInstructor()
         {
-            Text = "Quản lý giảng viên";
-            Width = 820;
-            Height = 520;
-            StartPosition = FormStartPosition.CenterParent;
-            BuildUI();
-            Load += (_, __) => LoadData();
+            InitializeComponent();
+            ApplyVietnameseFonts();
+
+            txtPhone.KeyPress += TxtPhone_KeyPress;
         }
 
-        private void BuildUI()
+        private void TxtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
-            var panelForm = new TableLayoutPanel
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                Dock = DockStyle.Top,
-                Height = 140,
-                ColumnCount = 4,
-                RowCount = 2,
-                Padding = new Padding(8)
-            };
-            panelForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15));
-            panelForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35));
-            panelForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 15));
-            panelForm.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 35));
+                e.Handled = true;
+            }
 
-            panelForm.Controls.Add(new Label { Text = "Họ tên", AutoSize = true, Anchor = AnchorStyles.Left }, 0, 0);
-            panelForm.Controls.Add(_txtName, 1, 0);
-            panelForm.Controls.Add(new Label { Text = "Email", AutoSize = true, Anchor = AnchorStyles.Left }, 2, 0);
-            panelForm.Controls.Add(_txtEmail, 3, 0);
-            panelForm.Controls.Add(new Label { Text = "SĐT", AutoSize = true, Anchor = AnchorStyles.Left }, 0, 1);
-            panelForm.Controls.Add(_txtPhone, 1, 1);
-            panelForm.Controls.Add(new Label { Text = "Chuyên môn", AutoSize = true, Anchor = AnchorStyles.Left }, 2, 1);
-            panelForm.Controls.Add(_txtExp, 3, 1);
-
-            _txtName.Dock = _txtEmail.Dock = _txtPhone.Dock = _txtExp.Dock = DockStyle.Fill;
-
-            var btnPanel = new FlowLayoutPanel
+            if (txtPhone.Text.Length >= 10 && !char.IsControl(e.KeyChar) && txtPhone.SelectionLength == 0)
             {
-                Dock = DockStyle.Top,
-                Height = 44,
-                FlowDirection = FlowDirection.LeftToRight,
-                Padding = new Padding(8, 0, 8, 0)
-            };
-            var btnAdd = new Button { Text = "Thêm", Width = 90 };
-            var btnUpd = new Button { Text = "Sửa", Width = 90 };
-            var btnDel = new Button { Text = "Xóa", Width = 90 };
-            var btnClose = new Button { Text = "Đóng", Width = 90 };
-            btnAdd.Click += (_, __) => AddInstructor();
-            btnUpd.Click += (_, __) => UpdateInstructor();
-            btnDel.Click += (_, __) => DeleteInstructor();
-            btnClose.Click += (_, __) => Close();
-            btnPanel.Controls.AddRange(new Control[] { btnAdd, btnUpd, btnDel, btnClose });
+                e.Handled = true;
+            }
+        }
 
-            _grid.Dock = DockStyle.Fill;
-            _grid.ReadOnly = true;
-            _grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            _grid.MultiSelect = false;
-            _grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            _grid.CellClick += (_, __) => BindSelected();
+        private void frmInstructor_Load(object sender, EventArgs e)
+        {
+            LoadData();
+        }
 
-            Controls.Add(_grid);
-            Controls.Add(btnPanel);
-            Controls.Add(panelForm);
+        private void ApplyVietnameseFonts()
+        {
+            var font = new Font("Times New Roman", 10, FontStyle.Regular);
+            var fontBold = new Font("Times New Roman", 10, FontStyle.Bold);
+
+            this.Font = font;
+
+            foreach (var lbl in panelForm.Controls.OfType<Label>())
+            {
+                lbl.Font = font;
+            }
+
+            foreach (var txt in panelForm.Controls.OfType<Guna.UI2.WinForms.Guna2TextBox>())
+            {
+                txt.Font = font;
+            }
+
+            foreach (var btn in panelForm.Controls.OfType<Guna.UI2.WinForms.Guna2Button>())
+            {
+                btn.Font = fontBold;
+            }
+
+            dgvInstructors.ColumnHeadersDefaultCellStyle.Font = fontBold;
+            dgvInstructors.DefaultCellStyle.Font = font;
         }
 
         private void LoadData()
         {
-            var list = DbHelper.LoadInstructors();
-            _grid.DataSource = list.Select(i => new
+            var list = XmlRepository.GetInstructors();
+
+            dgvInstructors.DataSource = list.Select(i => new
             {
                 i.InstructorId,
                 i.FullName,
@@ -91,15 +75,33 @@ namespace QLKhoaHocONL.GUI
                 i.Phone,
                 i.Expertise
             }).ToList();
-            _grid.ClearSelection();
+
+            dgvInstructors.ClearSelection();
             _selected = null;
             ClearInputs();
+            LocalizeGridHeaders();
         }
 
-        private void BindSelected()
+        private void LocalizeGridHeaders()
         {
-            if (_grid.SelectedRows.Count == 0) return;
-            var row = _grid.SelectedRows[0];
+            void SetHeader(string name, string text)
+            {
+                if (dgvInstructors.Columns.Contains(name))
+                    dgvInstructors.Columns[name].HeaderText = text;
+            }
+
+            SetHeader("InstructorId", "ID");
+            SetHeader("FullName", "Họ tên");
+            SetHeader("Email", "Email");
+            SetHeader("Phone", "Số điện thoại");
+            SetHeader("Expertise", "Chuyên môn");
+        }
+
+        private void dgvInstructors_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvInstructors.SelectedRows.Count == 0) return;
+
+            var row = dgvInstructors.SelectedRows[0];
             _selected = new Instructor
             {
                 InstructorId = (int)row.Cells["InstructorId"].Value,
@@ -108,67 +110,135 @@ namespace QLKhoaHocONL.GUI
                 Phone = row.Cells["Phone"].Value?.ToString(),
                 Expertise = row.Cells["Expertise"].Value?.ToString()
             };
-            _txtName.Text = _selected.FullName;
-            _txtEmail.Text = _selected.Email;
-            _txtPhone.Text = _selected.Phone;
-            _txtExp.Text = _selected.Expertise;
+
+            txtId.Text = _selected.InstructorId.ToString();
+            txtName.Text = _selected.FullName;
+            txtEmail.Text = _selected.Email;
+            txtPhone.Text = _selected.Phone;
+            txtExpertise.Text = _selected.Expertise;
         }
 
         private Instructor ReadForm()
         {
-            if (string.IsNullOrWhiteSpace(_txtName.Text))
+            // 1. Kiểm tra Tên
+            if (string.IsNullOrWhiteSpace(txtName.Text))
             {
                 MessageBox.Show("Họ tên không được trống.");
+                txtName.Focus();
                 return null;
             }
+
+            // 2. Kiểm tra Email 
+            string email = txtEmail.Text.Trim();
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                MessageBox.Show("Email là bắt buộc.");
+                txtEmail.Focus();
+                return null;
+            }
+
+            // Check trùng Email trong danh sách XML hiện tại
+            var currentList = XmlRepository.GetInstructors();
+            // Nếu tìm thấy ai đó có cùng email (mà ID khác với người đang sửa) -> Báo lỗi
+            bool isDuplicate = currentList.Any(i =>
+                i.Email.Equals(email, StringComparison.OrdinalIgnoreCase) &&
+                (_selected == null || i.InstructorId != _selected.InstructorId)
+            );
+
+            if (isDuplicate)
+            {
+                MessageBox.Show($"Email '{email}' đã tồn tại! Vui lòng nhập email khác.");
+                txtEmail.Focus();
+                return null;
+            }
+
+            // Kiểm tra Số điện thoại (10 số hoặc Null)
+            string phone = txtPhone.Text.Trim();
+            if (string.IsNullOrEmpty(phone))
+            {
+                phone = null;
+            }
+            else
+            {
+                if (phone.Length != 10)
+                {
+                    MessageBox.Show("Số điện thoại phải có đúng 10 chữ số.");
+                    txtPhone.Focus();
+                    return null;
+                }
+            }
+
             return new Instructor
             {
-                FullName = _txtName.Text.Trim(),
-                Email = _txtEmail.Text.Trim(),
-                Phone = _txtPhone.Text.Trim(),
-                Expertise = _txtExp.Text.Trim()
+                FullName = txtName.Text.Trim(),
+                Email = email,
+                Phone = phone,
+                Expertise = txtExpertise.Text.Trim()
             };
         }
 
-        private void AddInstructor()
+        private void btnAdd_Click(object sender, EventArgs e)
         {
-            var i = ReadForm();
-            if (i == null) return;
-            DbHelper.AddInstructor(i);
+            var instructor = ReadForm();
+            if (instructor == null) return;
+
+            XmlRepository.AddInstructor(instructor);
             LoadData();
+            MessageBox.Show("Đã thêm giảng viên thành công vào XML!");
         }
 
-        private void UpdateInstructor()
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (_selected == null)
             {
                 MessageBox.Show("Chọn giảng viên để sửa.");
                 return;
             }
-            var i = ReadForm();
-            if (i == null) return;
-            i.InstructorId = _selected.InstructorId;
-            DbHelper.UpdateInstructor(i);
+
+            var instructor = ReadForm();
+            if (instructor == null) return;
+
+            instructor.InstructorId = _selected.InstructorId;
+            XmlRepository.UpdateInstructor(instructor);
             LoadData();
+            MessageBox.Show("Đã cập nhật thành công vào XML!");
         }
 
-        private void DeleteInstructor()
+        private void btnDelete_Click(object sender, EventArgs e)
         {
             if (_selected == null)
             {
                 MessageBox.Show("Chọn giảng viên để xóa.");
                 return;
             }
-            if (MessageBox.Show("Xóa giảng viên này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+
+            if (MessageBox.Show("Xóa giảng viên này khỏi XML?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                DbHelper.DeleteInstructor(_selected.InstructorId);
+                XmlRepository.DeleteInstructor(_selected.InstructorId);
                 LoadData();
+                MessageBox.Show("Đã xóa thành công khỏi XML!");
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            ClearInputs();
+            LoadData();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void ClearInputs()
         {
-            _txtName.Text = _txtEmail.Text = _txtPhone.Text = _txtExp.Text = string.Empty;
+            txtId.Text = string.Empty;
+            txtName.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtPhone.Text = string.Empty;
+            txtExpertise.Text = string.Empty;
+            _selected = null;
         }
     }
 }

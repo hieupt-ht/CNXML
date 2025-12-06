@@ -179,7 +179,6 @@
             this.Controls.Add(this._txtUser);
             this.Controls.Add(this.lblUser);
             this.Controls.Add(this.lblTitle);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "frmLogin";

@@ -1,16 +1,14 @@
-﻿namespace QLKhoaHocONL
+﻿using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
+using Guna.UI2.WinForms;
+
+namespace QLKhoaHocONL
 {
     partial class frmXMLData
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,355 +20,319 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.grpChucNang = new System.Windows.Forms.GroupBox();
-            this.btnLamMoi = new System.Windows.Forms.Button();
-            this.btnXSLT = new System.Windows.Forms.Button();
-            this.btnXPath = new System.Windows.Forms.Button();
-            this.btnValidate = new System.Windows.Forms.Button();
-            this.btnXoaNode = new System.Windows.Forms.Button();
-            this.btnSuaNode = new System.Windows.Forms.Button();
-            this.btnThemNode = new System.Windows.Forms.Button();
-            this.lblNote = new System.Windows.Forms.Label();
-            this.grpContent = new System.Windows.Forms.GroupBox();
-            this.txtXMLContent = new System.Windows.Forms.TextBox();
-            this.grpTree = new System.Windows.Forms.GroupBox();
+            this.components = new System.ComponentModel.Container();
+            this.panelTop = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnClose = new Guna.UI2.WinForms.Guna2Button();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.panelControls = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnReadXml = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSyncSelected = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSyncAll = new Guna.UI2.WinForms.Guna2Button();
+            this.cboLoaiDuLieu = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.lblLoaiDuLieu = new System.Windows.Forms.Label();
+            this.panelContent = new Guna.UI2.WinForms.Guna2Panel();
+            this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.grpTree = new Guna.UI2.WinForms.Guna2GroupBox();
             this.treeXML = new System.Windows.Forms.TreeView();
-            this.grpFile = new System.Windows.Forms.GroupBox();
-            this.btnGhiXML = new System.Windows.Forms.Button();
-            this.btnDocXML = new System.Windows.Forms.Button();
-            this.btnChonFile = new System.Windows.Forms.Button();
-            this.txtFilePath = new System.Windows.Forms.TextBox();
-            this.lblFile = new System.Windows.Forms.Label();
-            this.cboLoaiDuLieu = new System.Windows.Forms.ComboBox();
-            this.lblLoai = new System.Windows.Forms.Label();
-            this.grpChucNang.SuspendLayout();
-            this.grpContent.SuspendLayout();
+            this.grpContent = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.txtXMLContent = new System.Windows.Forms.TextBox();
+            this.elipseBorder = new Guna.UI2.WinForms.Guna2Elipse(this.components);
+            this.panelTop.SuspendLayout();
+            this.panelControls.SuspendLayout();
+            this.panelContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
+            this.splitContainer.SuspendLayout();
             this.grpTree.SuspendLayout();
-            this.grpFile.SuspendLayout();
+            this.grpContent.SuspendLayout();
             this.SuspendLayout();
             // 
-            // grpChucNang
+            // panelTop
             // 
-            this.grpChucNang.Controls.Add(this.btnLamMoi);
-            this.grpChucNang.Controls.Add(this.btnXSLT);
-            this.grpChucNang.Controls.Add(this.btnXPath);
-            this.grpChucNang.Controls.Add(this.btnValidate);
-            this.grpChucNang.Controls.Add(this.btnXoaNode);
-            this.grpChucNang.Controls.Add(this.btnSuaNode);
-            this.grpChucNang.Controls.Add(this.btnThemNode);
-            this.grpChucNang.Controls.Add(this.lblNote);
-            this.grpChucNang.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.grpChucNang.Location = new System.Drawing.Point(419, 563);
-            this.grpChucNang.Name = "grpChucNang";
-            this.grpChucNang.Size = new System.Drawing.Size(840, 120);
-            this.grpChucNang.TabIndex = 7;
-            this.grpChucNang.TabStop = false;
-            this.grpChucNang.Text = "Thao Tác";
+            this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.panelTop.Controls.Add(this.btnClose);
+            this.panelTop.Controls.Add(this.lblTitle);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(1320, 60);
+            this.panelTop.TabIndex = 0;
             // 
-            // btnLamMoi
+            // btnClose
             // 
-            this.btnLamMoi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(149)))), ((int)(((byte)(165)))), ((int)(((byte)(166)))));
-            this.btnLamMoi.FlatAppearance.BorderSize = 0;
-            this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnLamMoi.ForeColor = System.Drawing.Color.White;
-            this.btnLamMoi.Location = new System.Drawing.Point(340, 85);
-            this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(150, 30);
-            this.btnLamMoi.TabIndex = 7;
-            this.btnLamMoi.Text = "Làm Mới";
-            this.btnLamMoi.UseVisualStyleBackColor = false;
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.BorderRadius = 8;
+            this.btnClose.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnClose.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnClose.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnClose.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
+            this.btnClose.Font = new System.Drawing.Font("Segoe UI Emoji", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.Location = new System.Drawing.Point(1161, 12);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(139, 36);
+            this.btnClose.TabIndex = 1;
+            this.btnClose.Text = "✕ Thoát";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // btnXSLT
+            // lblTitle
             // 
-            this.btnXSLT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(126)))), ((int)(((byte)(34)))));
-            this.btnXSLT.FlatAppearance.BorderSize = 0;
-            this.btnXSLT.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXSLT.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnXSLT.ForeColor = System.Drawing.Color.White;
-            this.btnXSLT.Location = new System.Drawing.Point(180, 85);
-            this.btnXSLT.Name = "btnXSLT";
-            this.btnXSLT.Size = new System.Drawing.Size(150, 30);
-            this.btnXSLT.TabIndex = 6;
-            this.btnXSLT.Text = "Biến đổi XSLT";
-            this.btnXSLT.UseVisualStyleBackColor = false;
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.lblTitle.ForeColor = System.Drawing.Color.White;
+            this.lblTitle.Location = new System.Drawing.Point(20, 15);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(404, 37);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Đồng Bộ Dữ Liệu (XML ↔ SQL)";
             // 
-            // btnXPath
+            // panelControls
             // 
-            this.btnXPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(160)))), ((int)(((byte)(133)))));
-            this.btnXPath.FlatAppearance.BorderSize = 0;
-            this.btnXPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXPath.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnXPath.ForeColor = System.Drawing.Color.White;
-            this.btnXPath.Location = new System.Drawing.Point(20, 85);
-            this.btnXPath.Name = "btnXPath";
-            this.btnXPath.Size = new System.Drawing.Size(150, 30);
-            this.btnXPath.TabIndex = 5;
-            this.btnXPath.Text = "Truy vấn XPath";
-            this.btnXPath.UseVisualStyleBackColor = false;
+            this.panelControls.BackColor = System.Drawing.Color.White;
+            this.panelControls.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.panelControls.BorderRadius = 10;
+            this.panelControls.BorderThickness = 1;
+            this.panelControls.Controls.Add(this.btnReadXml);
+            this.panelControls.Controls.Add(this.btnSyncSelected);
+            this.panelControls.Controls.Add(this.btnSyncAll);
+            this.panelControls.Controls.Add(this.cboLoaiDuLieu);
+            this.panelControls.Controls.Add(this.lblLoaiDuLieu);
+            this.panelControls.Location = new System.Drawing.Point(20, 75);
+            this.panelControls.Name = "panelControls";
+            this.panelControls.Padding = new System.Windows.Forms.Padding(15);
+            this.panelControls.Size = new System.Drawing.Size(1280, 85);
+            this.panelControls.TabIndex = 1;
             // 
-            // btnValidate
+            // btnReadXml
             // 
-            this.btnValidate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(89)))), ((int)(((byte)(182)))));
-            this.btnValidate.FlatAppearance.BorderSize = 0;
-            this.btnValidate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnValidate.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnValidate.ForeColor = System.Drawing.Color.White;
-            this.btnValidate.Location = new System.Drawing.Point(500, 50);
-            this.btnValidate.Name = "btnValidate";
-            this.btnValidate.Size = new System.Drawing.Size(150, 30);
-            this.btnValidate.TabIndex = 4;
-            this.btnValidate.Text = "Validate XML";
-            this.btnValidate.UseVisualStyleBackColor = false;
+            this.btnReadXml.BorderRadius = 8;
+            this.btnReadXml.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnReadXml.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnReadXml.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnReadXml.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnReadXml.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btnReadXml.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnReadXml.ForeColor = System.Drawing.Color.White;
+            this.btnReadXml.Location = new System.Drawing.Point(1085, 22);
+            this.btnReadXml.Name = "btnReadXml";
+            this.btnReadXml.Size = new System.Drawing.Size(180, 40);
+            this.btnReadXml.TabIndex = 4;
+            this.btnReadXml.Text = "🔄 Làm Mới";
+            this.btnReadXml.Click += new System.EventHandler(this.btnReadXml_Click);
             // 
-            // btnXoaNode
+            // btnSyncSelected
             // 
-            this.btnXoaNode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
-            this.btnXoaNode.FlatAppearance.BorderSize = 0;
-            this.btnXoaNode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXoaNode.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnXoaNode.ForeColor = System.Drawing.Color.White;
-            this.btnXoaNode.Location = new System.Drawing.Point(340, 50);
-            this.btnXoaNode.Name = "btnXoaNode";
-            this.btnXoaNode.Size = new System.Drawing.Size(150, 30);
-            this.btnXoaNode.TabIndex = 3;
-            this.btnXoaNode.Text = "Xóa Node";
-            this.btnXoaNode.UseVisualStyleBackColor = false;
+            this.btnSyncSelected.BorderRadius = 8;
+            this.btnSyncSelected.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSyncSelected.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSyncSelected.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSyncSelected.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSyncSelected.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
+            this.btnSyncSelected.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSyncSelected.ForeColor = System.Drawing.Color.White;
+            this.btnSyncSelected.Location = new System.Drawing.Point(750, 22);
+            this.btnSyncSelected.Name = "btnSyncSelected";
+            this.btnSyncSelected.Size = new System.Drawing.Size(306, 40);
+            this.btnSyncSelected.TabIndex = 3;
+            this.btnSyncSelected.Text = "📤 Đồng Bộ XML → SQL";
+            this.btnSyncSelected.Click += new System.EventHandler(this.btnSyncSelected_Click);
             // 
-            // btnSuaNode
+            // btnSyncAll
             // 
-            this.btnSuaNode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.btnSuaNode.FlatAppearance.BorderSize = 0;
-            this.btnSuaNode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSuaNode.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnSuaNode.ForeColor = System.Drawing.Color.White;
-            this.btnSuaNode.Location = new System.Drawing.Point(180, 50);
-            this.btnSuaNode.Name = "btnSuaNode";
-            this.btnSuaNode.Size = new System.Drawing.Size(150, 30);
-            this.btnSuaNode.TabIndex = 2;
-            this.btnSuaNode.Text = "Sửa Node";
-            this.btnSuaNode.UseVisualStyleBackColor = false;
-            // 
-            // btnThemNode
-            // 
-            this.btnThemNode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
-            this.btnThemNode.FlatAppearance.BorderSize = 0;
-            this.btnThemNode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnThemNode.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnThemNode.ForeColor = System.Drawing.Color.White;
-            this.btnThemNode.Location = new System.Drawing.Point(20, 50);
-            this.btnThemNode.Name = "btnThemNode";
-            this.btnThemNode.Size = new System.Drawing.Size(150, 30);
-            this.btnThemNode.TabIndex = 1;
-            this.btnThemNode.Text = "Thêm Node";
-            this.btnThemNode.UseVisualStyleBackColor = false;
-            // 
-            // lblNote
-            // 
-            this.lblNote.AutoSize = true;
-            this.lblNote.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic);
-            this.lblNote.Location = new System.Drawing.Point(20, 25);
-            this.lblNote.Name = "lblNote";
-            this.lblNote.Size = new System.Drawing.Size(194, 20);
-            this.lblNote.TabIndex = 0;
-            this.lblNote.Text = "Chức năng thao tác với XML:";
-            // 
-            // grpContent
-            // 
-            this.grpContent.Controls.Add(this.txtXMLContent);
-            this.grpContent.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.grpContent.Location = new System.Drawing.Point(419, 103);
-            this.grpContent.Name = "grpContent";
-            this.grpContent.Size = new System.Drawing.Size(840, 450);
-            this.grpContent.TabIndex = 6;
-            this.grpContent.TabStop = false;
-            this.grpContent.Text = "Nội Dung XML";
-            // 
-            // txtXMLContent
-            // 
-            this.txtXMLContent.BackColor = System.Drawing.Color.White;
-            this.txtXMLContent.Font = new System.Drawing.Font("Consolas", 9F);
-            this.txtXMLContent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
-            this.txtXMLContent.Location = new System.Drawing.Point(10, 25);
-            this.txtXMLContent.Multiline = true;
-            this.txtXMLContent.Name = "txtXMLContent";
-            this.txtXMLContent.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtXMLContent.Size = new System.Drawing.Size(820, 415);
-            this.txtXMLContent.TabIndex = 0;
-            // 
-            // grpTree
-            // 
-            this.grpTree.Controls.Add(this.treeXML);
-            this.grpTree.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.grpTree.Location = new System.Drawing.Point(9, 103);
-            this.grpTree.Name = "grpTree";
-            this.grpTree.Size = new System.Drawing.Size(400, 580);
-            this.grpTree.TabIndex = 5;
-            this.grpTree.TabStop = false;
-            this.grpTree.Text = "Cấu Trúc XML";
-            // 
-            // treeXML
-            // 
-            this.treeXML.BackColor = System.Drawing.Color.White;
-            this.treeXML.Font = new System.Drawing.Font("Consolas", 9F);
-            this.treeXML.Location = new System.Drawing.Point(10, 25);
-            this.treeXML.Name = "treeXML";
-            this.treeXML.Size = new System.Drawing.Size(380, 545);
-            this.treeXML.TabIndex = 0;
-            // 
-            // grpFile
-            // 
-            this.grpFile.Controls.Add(this.btnGhiXML);
-            this.grpFile.Controls.Add(this.btnDocXML);
-            this.grpFile.Controls.Add(this.btnChonFile);
-            this.grpFile.Controls.Add(this.txtFilePath);
-            this.grpFile.Controls.Add(this.lblFile);
-            this.grpFile.Controls.Add(this.cboLoaiDuLieu);
-            this.grpFile.Controls.Add(this.lblLoai);
-            this.grpFile.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.grpFile.Location = new System.Drawing.Point(9, 13);
-            this.grpFile.Name = "grpFile";
-            this.grpFile.Size = new System.Drawing.Size(1250, 80);
-            this.grpFile.TabIndex = 4;
-            this.grpFile.TabStop = false;
-            this.grpFile.Text = "Chọn File XML";
-            // 
-            // btnGhiXML
-            // 
-            this.btnGhiXML.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(126)))), ((int)(((byte)(34)))));
-            this.btnGhiXML.FlatAppearance.BorderSize = 0;
-            this.btnGhiXML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGhiXML.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnGhiXML.ForeColor = System.Drawing.Color.White;
-            this.btnGhiXML.Location = new System.Drawing.Point(1150, 32);
-            this.btnGhiXML.Name = "btnGhiXML";
-            this.btnGhiXML.Size = new System.Drawing.Size(90, 27);
-            this.btnGhiXML.TabIndex = 6;
-            this.btnGhiXML.Text = "Ghi XML";
-            this.btnGhiXML.UseVisualStyleBackColor = false;
-            // 
-            // btnDocXML
-            // 
-            this.btnDocXML.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
-            this.btnDocXML.FlatAppearance.BorderSize = 0;
-            this.btnDocXML.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDocXML.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.btnDocXML.ForeColor = System.Drawing.Color.White;
-            this.btnDocXML.Location = new System.Drawing.Point(1050, 32);
-            this.btnDocXML.Name = "btnDocXML";
-            this.btnDocXML.Size = new System.Drawing.Size(90, 27);
-            this.btnDocXML.TabIndex = 5;
-            this.btnDocXML.Text = "Đọc XML";
-            this.btnDocXML.UseVisualStyleBackColor = false;
-            // 
-            // btnChonFile
-            // 
-            this.btnChonFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.btnChonFile.FlatAppearance.BorderSize = 0;
-            this.btnChonFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChonFile.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnChonFile.ForeColor = System.Drawing.Color.White;
-            this.btnChonFile.Location = new System.Drawing.Point(1000, 32);
-            this.btnChonFile.Name = "btnChonFile";
-            this.btnChonFile.Size = new System.Drawing.Size(40, 27);
-            this.btnChonFile.TabIndex = 4;
-            this.btnChonFile.Text = "...";
-            this.btnChonFile.UseVisualStyleBackColor = false;
-            // 
-            // txtFilePath
-            // 
-            this.txtFilePath.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtFilePath.Location = new System.Drawing.Point(490, 32);
-            this.txtFilePath.Name = "txtFilePath";
-            this.txtFilePath.Size = new System.Drawing.Size(500, 27);
-            this.txtFilePath.TabIndex = 3;
-            // 
-            // lblFile
-            // 
-            this.lblFile.AutoSize = true;
-            this.lblFile.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblFile.Location = new System.Drawing.Point(380, 35);
-            this.lblFile.Name = "lblFile";
-            this.lblFile.Size = new System.Drawing.Size(89, 20);
-            this.lblFile.TabIndex = 2;
-            this.lblFile.Text = "Đường Dẫn:";
+            this.btnSyncAll.BorderRadius = 8;
+            this.btnSyncAll.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSyncAll.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSyncAll.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSyncAll.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSyncAll.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(126)))), ((int)(((byte)(34)))));
+            this.btnSyncAll.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSyncAll.ForeColor = System.Drawing.Color.White;
+            this.btnSyncAll.Location = new System.Drawing.Point(424, 22);
+            this.btnSyncAll.Name = "btnSyncAll";
+            this.btnSyncAll.Size = new System.Drawing.Size(299, 40);
+            this.btnSyncAll.TabIndex = 2;
+            this.btnSyncAll.Text = "⚡ Đồng Bộ SQL → XML";
+            this.btnSyncAll.Click += new System.EventHandler(this.btnSyncAll_Click);
             // 
             // cboLoaiDuLieu
             // 
+            this.cboLoaiDuLieu.BackColor = System.Drawing.Color.Transparent;
+            this.cboLoaiDuLieu.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(195)))), ((int)(((byte)(199)))));
+            this.cboLoaiDuLieu.BorderRadius = 8;
+            this.cboLoaiDuLieu.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboLoaiDuLieu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLoaiDuLieu.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.cboLoaiDuLieu.FormattingEnabled = true;
+            this.cboLoaiDuLieu.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.cboLoaiDuLieu.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.cboLoaiDuLieu.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboLoaiDuLieu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.cboLoaiDuLieu.ItemHeight = 30;
             this.cboLoaiDuLieu.Items.AddRange(new object[] {
             "Khóa Học",
             "Học Viên",
-            "Đăng Ký",
-            "Tất cả dữ liệu"});
-            this.cboLoaiDuLieu.Location = new System.Drawing.Point(130, 32);
+            "Giảng Viên",
+            "Tất Cả"});
+            this.cboLoaiDuLieu.Location = new System.Drawing.Point(134, 22);
             this.cboLoaiDuLieu.Name = "cboLoaiDuLieu";
-            this.cboLoaiDuLieu.Size = new System.Drawing.Size(200, 28);
+            this.cboLoaiDuLieu.Size = new System.Drawing.Size(220, 36);
             this.cboLoaiDuLieu.TabIndex = 1;
             // 
-            // lblLoai
+            // lblLoaiDuLieu
             // 
-            this.lblLoai.AutoSize = true;
-            this.lblLoai.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblLoai.Location = new System.Drawing.Point(20, 35);
-            this.lblLoai.Name = "lblLoai";
-            this.lblLoai.Size = new System.Drawing.Size(95, 20);
-            this.lblLoai.TabIndex = 0;
-            this.lblLoai.Text = "Loại Dữ Liệu:";
+            this.lblLoaiDuLieu.AutoSize = true;
+            this.lblLoaiDuLieu.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.lblLoaiDuLieu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.lblLoaiDuLieu.Location = new System.Drawing.Point(18, 28);
+            this.lblLoaiDuLieu.Name = "lblLoaiDuLieu";
+            this.lblLoaiDuLieu.Size = new System.Drawing.Size(101, 23);
+            this.lblLoaiDuLieu.TabIndex = 0;
+            this.lblLoaiDuLieu.Text = "Đối Tượng:";
+            // 
+            // panelContent
+            // 
+            this.panelContent.BackColor = System.Drawing.Color.Transparent;
+            this.panelContent.Controls.Add(this.splitContainer);
+            this.panelContent.Location = new System.Drawing.Point(20, 175);
+            this.panelContent.Name = "panelContent";
+            this.panelContent.Size = new System.Drawing.Size(1280, 550);
+            this.panelContent.TabIndex = 2;
+            // 
+            // splitContainer
+            // 
+            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Name = "splitContainer";
+            // 
+            // splitContainer.Panel1
+            // 
+            this.splitContainer.Panel1.Controls.Add(this.grpTree);
+            // 
+            // splitContainer.Panel2
+            // 
+            this.splitContainer.Panel2.Controls.Add(this.grpContent);
+            this.splitContainer.Size = new System.Drawing.Size(1280, 550);
+            this.splitContainer.SplitterDistance = 420;
+            this.splitContainer.TabIndex = 0;
+            // 
+            // grpTree
+            // 
+            this.grpTree.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.grpTree.BorderRadius = 10;
+            this.grpTree.Controls.Add(this.treeXML);
+            this.grpTree.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.grpTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpTree.Font = new System.Drawing.Font("Segoe UI Emoji", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpTree.ForeColor = System.Drawing.Color.White;
+            this.grpTree.Location = new System.Drawing.Point(0, 0);
+            this.grpTree.Name = "grpTree";
+            this.grpTree.Size = new System.Drawing.Size(420, 550);
+            this.grpTree.TabIndex = 0;
+            this.grpTree.Text = "📁 Cấu Trúc XML";
+            this.grpTree.TextOffset = new System.Drawing.Point(10, 0);
+            // 
+            // treeXML
+            // 
+            this.treeXML.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeXML.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.treeXML.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.treeXML.Font = new System.Drawing.Font("Segoe UI", 9.5F);
+            this.treeXML.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.treeXML.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(195)))), ((int)(((byte)(199)))));
+            this.treeXML.Location = new System.Drawing.Point(15, 55);
+            this.treeXML.Name = "treeXML";
+            this.treeXML.Size = new System.Drawing.Size(390, 480);
+            this.treeXML.TabIndex = 0;
+            // 
+            // grpContent
+            // 
+            this.grpContent.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.grpContent.BorderRadius = 10;
+            this.grpContent.Controls.Add(this.txtXMLContent);
+            this.grpContent.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(128)))), ((int)(((byte)(185)))));
+            this.grpContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpContent.Font = new System.Drawing.Font("Segoe UI Emoji", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpContent.ForeColor = System.Drawing.Color.White;
+            this.grpContent.Location = new System.Drawing.Point(0, 0);
+            this.grpContent.Name = "grpContent";
+            this.grpContent.Size = new System.Drawing.Size(856, 550);
+            this.grpContent.TabIndex = 0;
+            this.grpContent.Text = "📄 Nội Dung XML";
+            this.grpContent.TextOffset = new System.Drawing.Point(10, 0);
+            // 
+            // txtXMLContent
+            // 
+            this.txtXMLContent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtXMLContent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.txtXMLContent.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtXMLContent.Font = new System.Drawing.Font("Consolas", 10F);
+            this.txtXMLContent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(62)))), ((int)(((byte)(80)))));
+            this.txtXMLContent.Location = new System.Drawing.Point(15, 55);
+            this.txtXMLContent.Multiline = true;
+            this.txtXMLContent.Name = "txtXMLContent";
+            this.txtXMLContent.ReadOnly = true;
+            this.txtXMLContent.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtXMLContent.Size = new System.Drawing.Size(826, 480);
+            this.txtXMLContent.TabIndex = 0;
+            this.txtXMLContent.WordWrap = false;
+            // 
+            // elipseBorder
+            // 
+            this.elipseBorder.BorderRadius = 15;
+            this.elipseBorder.TargetControl = this;
             // 
             // frmXMLData
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1273, 697);
-            this.Controls.Add(this.grpChucNang);
-            this.Controls.Add(this.grpContent);
-            this.Controls.Add(this.grpTree);
-            this.Controls.Add(this.grpFile);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
+            this.ClientSize = new System.Drawing.Size(1320, 750);
+            this.Controls.Add(this.panelContent);
+            this.Controls.Add(this.panelControls);
+            this.Controls.Add(this.panelTop);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmXMLData";
-            this.Text = "Form1";
-            this.grpChucNang.ResumeLayout(false);
-            this.grpChucNang.PerformLayout();
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Quản Lý XML";
+            this.panelTop.ResumeLayout(false);
+            this.panelTop.PerformLayout();
+            this.panelControls.ResumeLayout(false);
+            this.panelControls.PerformLayout();
+            this.panelContent.ResumeLayout(false);
+            this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
+            this.splitContainer.ResumeLayout(false);
+            this.grpTree.ResumeLayout(false);
             this.grpContent.ResumeLayout(false);
             this.grpContent.PerformLayout();
-            this.grpTree.ResumeLayout(false);
-            this.grpFile.ResumeLayout(false);
-            this.grpFile.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox grpChucNang;
-        private System.Windows.Forms.Button btnLamMoi;
-        private System.Windows.Forms.Button btnXSLT;
-        private System.Windows.Forms.Button btnXPath;
-        private System.Windows.Forms.Button btnValidate;
-        private System.Windows.Forms.Button btnXoaNode;
-        private System.Windows.Forms.Button btnSuaNode;
-        private System.Windows.Forms.Button btnThemNode;
-        private System.Windows.Forms.Label lblNote;
-        private System.Windows.Forms.GroupBox grpContent;
-        private System.Windows.Forms.TextBox txtXMLContent;
-        private System.Windows.Forms.GroupBox grpTree;
-        private System.Windows.Forms.TreeView treeXML;
-        private System.Windows.Forms.GroupBox grpFile;
-        private System.Windows.Forms.Button btnGhiXML;
-        private System.Windows.Forms.Button btnDocXML;
-        private System.Windows.Forms.Button btnChonFile;
-        private System.Windows.Forms.TextBox txtFilePath;
-        private System.Windows.Forms.Label lblFile;
-        private System.Windows.Forms.ComboBox cboLoaiDuLieu;
-        private System.Windows.Forms.Label lblLoai;
+        private Guna2Panel panelTop;
+        private Label lblTitle;
+        private Guna2Button btnClose;
+        private Guna2Panel panelControls;
+        private Label lblLoaiDuLieu;
+        private Guna2ComboBox cboLoaiDuLieu;
+        private Guna2Button btnSyncAll;
+        private Guna2Button btnSyncSelected;
+        private Guna2Button btnReadXml;
+        private Guna2Panel panelContent;
+        private SplitContainer splitContainer;
+        private Guna2GroupBox grpTree;
+        private TreeView treeXML;
+        private Guna2GroupBox grpContent;
+        private TextBox txtXMLContent;
+        private Guna2Elipse elipseBorder;
     }
 }
-

@@ -95,7 +95,12 @@ namespace QLKhoaHocONL.Helpers
                     TenAnh = x.Element("TenAnh")?.Value,
                     MauBatDau = x.Element("MauBatDau")?.Value,
                     MauKetThuc = x.Element("MauKetThuc")?.Value,
-                    DemoLink = x.Element("DemoLink")?.Value ?? "https://www.youtube.com/watch?v=3Cg3smqsOmk"
+                    DemoLink = x.Element("DemoLink")?.Value ?? "https://www.youtube.com/watch?v=3Cg3smqsOmk",
+
+                    // --- MỚI THÊM: Đọc ID Giảng Viên từ XML ---
+                    InstructorId = int.TryParse(x.Element("MaGiangVien")?.Value, out var iId) && iId > 0 ? iId : (int?)null
+                    // ------------------------------------------
+
                 }).OrderBy(c => c.Id).ToList();
             }
             catch (Exception ex)
@@ -119,7 +124,11 @@ namespace QLKhoaHocONL.Helpers
                         new XElement("TenAnh", c.TenAnh),
                         new XElement("MauBatDau", c.MauBatDau),
                         new XElement("MauKetThuc", c.MauKetThuc),
-                        new XElement("DemoLink", c.DemoLink)
+                        new XElement("DemoLink", c.DemoLink),
+
+                        // --- MỚI THÊM: Ghi ID Giảng Viên vào XML ---
+                        new XElement("MaGiangVien", c.InstructorId ?? 0)
+                    // ------------------------------------------
                     ))
                 ));
             doc.Save(CoursesPath);

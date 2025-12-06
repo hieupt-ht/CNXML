@@ -1,3 +1,4 @@
+﻿// ============= FILE: frmCourseBuyers.cs =============
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -5,47 +6,43 @@ using QLKhoaHocONL.Models;
 
 namespace QLKhoaHocONL.GUI
 {
-    internal class frmCourseBuyers : Form
+    internal partial class frmCourseBuyers : Form
     {
+        private readonly string _courseName;
+        private readonly List<CourseBuyer> _buyers;
+
         public frmCourseBuyers(string courseName, List<CourseBuyer> buyers)
         {
-            Text = $"Hoc vien mua: {courseName}";
-            StartPosition = FormStartPosition.CenterParent;
-            Width = 760;
-            Height = 420;
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            MaximizeBox = false;
+            InitializeComponent();
 
-            var grid = new DataGridView
-            {
-                Dock = DockStyle.Fill,
-                ReadOnly = true,
-                AllowUserToAddRows = false,
-                AllowUserToDeleteRows = false,
-                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
-                RowHeadersVisible = false
-            };
+            _courseName = courseName;
+            _buyers = buyers;
 
-            grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "STT", Width = 60, FillWeight = 40 });
-            grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Ho ten/Username" });
-            grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Email" });
-            grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Phone", FillWeight = 80 });
-            grid.Columns.Add(new DataGridViewTextBoxColumn { HeaderText = "Ngay mua", FillWeight = 90 });
+            this.Text = $"Học viên mua: {courseName}";
+
+            // Load data
+            LoadBuyersData();
+        }
+
+        private void LoadBuyersData()
+        {
+            gridBuyers.Rows.Clear();
 
             int stt = 1;
-            foreach (var b in buyers)
+            foreach (var buyer in _buyers)
             {
-                string displayName = string.IsNullOrWhiteSpace(b.FullName) ? b.Username : b.FullName;
-                grid.Rows.Add(
+                string displayName = string.IsNullOrWhiteSpace(buyer.FullName)
+                    ? buyer.Username
+                    : buyer.FullName;
+
+                gridBuyers.Rows.Add(
                     stt++,
                     displayName,
-                    b.Email ?? string.Empty,
-                    b.Phone ?? string.Empty,
-                    b.PurchasedAt.ToString("dd/MM/yyyy HH:mm")
+                    buyer.Email ?? string.Empty,
+                    buyer.Phone ?? string.Empty,
+                    buyer.PurchasedAt.ToString("dd/MM/yyyy HH:mm")
                 );
             }
-
-            Controls.Add(grid);
         }
     }
 }

@@ -1,7 +1,9 @@
+using QLKhoaHocONL.Models;
 using System;
 using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Windows.Forms;
-using QLKhoaHocONL.Models;
 
 namespace QLKhoaHocONL.vwUC
 {
@@ -26,33 +28,43 @@ namespace QLKhoaHocONL.vwUC
         {
             Data = course;
             lblTenKhoaHoc.Text = course.TenKhoaHoc;
-            lblGiaGoc.Text = course.GiaGoc;
-            lblGiaGiam.Text = course.GiaGiam;
+            lblGiaGoc.Text = FormatMoney(course.GiaGoc);
+            lblGiaGiam.Text = FormatMoney(course.GiaGiam);
 
-            
-            // Fallback m?u m?c ??nh ?? tr?nh n?n tr?ng.
+
             string fallbackStart = "#7E57C2";
             string fallbackEnd = "#5C6BC0";
 
             try
             {
-                string tenResource = System.IO.Path.GetFileNameWithoutExtension(course.TenAnh);
-                object obj = Properties.Resources.ResourceManager.GetObject(tenResource);
+                string imagePath = System.IO.Path.Combine(Application.StartupPath, "Images", course.TenAnh);
 
-                if (obj != null)
+                if (System.IO.File.Exists(imagePath))
                 {
-                    picAnhBia.Image = (Image)obj;
+                    using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+                    {
+                        picAnhBia.Image = Image.FromStream(fs);
+                    }
                 }
                 else
                 {
-                    picAnhBia.Image = null;
-                    picAnhBia.FillColor = Color.WhiteSmoke;
+                    string tenResource = System.IO.Path.GetFileNameWithoutExtension(course.TenAnh);
+                    object obj = Properties.Resources.ResourceManager.GetObject(tenResource);
+
+                    if (obj != null)
+                    {
+                        picAnhBia.Image = (Image)obj;
+                    }
+                    else
+                    {
+                        picAnhBia.Image = null;
+                        picAnhBia.FillColor = Color.WhiteSmoke;
+                    }
                 }
             }
             catch
             {
                 picAnhBia.Image = null;
-                picAnhBia.FillColor = Color.WhiteSmoke;
             }
 
             try
@@ -68,8 +80,23 @@ namespace QLKhoaHocONL.vwUC
                 guna2PanelNen.FillColor2 = ColorTranslator.FromHtml(fallbackEnd);
             }
         }
-        
 
+        private string FormatMoney(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return "0đ";
+
+            // Lọc chỉ lấy các ký tự số
+            string cleanNumber = new string(input.Where(char.IsDigit).ToArray());
+
+            // Chuyển sang số và format lại theo chuẩn
+            if (decimal.TryParse(cleanNumber, out decimal value))
+            {
+                // vi-VN sẽ dùng dấu chấm (.) phân cách hàng nghìn
+                return string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"), "{0:N0}đ", value);
+            }
+
+            return input;
+        }
         private void UC_ItemKhoaHoc_Click(object sender, EventArgs e)
         {
             if (Data == null) return;
