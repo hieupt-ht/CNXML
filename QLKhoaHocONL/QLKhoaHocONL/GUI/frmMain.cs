@@ -17,11 +17,9 @@ using QLKhoaHocONL.vwUC;
 namespace QLKhoaHocONL
 
 {
-
     public partial class frmMain : Form
 
     {
-
         private readonly ContextMenuStrip _adminMenu = new ContextMenuStrip();
 
         private readonly UcCourses _homeCourses = new UcCourses();
@@ -52,33 +50,18 @@ namespace QLKhoaHocONL
 
         }
 
-
-
         private void AppState_UserChanged()
-
         {
-
             UpdateUserStateUI();
-
         }
-
-
-
-        // HAM DUNG CHUNG (Public để các form con gọi được)
 
         public void ChuyenManHinh(UserControl uc)
 
         {
-
             pnlContent.Controls.Clear();
-
             uc.Dock = DockStyle.Fill;
-
             pnlContent.Controls.Add(uc);
-
         }
-
-
 
         private void btnCourses_Click(object sender, EventArgs e)
 
@@ -95,19 +78,13 @@ namespace QLKhoaHocONL
 
 
         private void btnHome_Click(object sender, EventArgs e)
-
         {
-
             ResetMauNut();
-
             btnHome.BackColor = Color.White;
-
             txtSearch.Text = string.Empty;
-
-            _homeCourses.RefreshData(resetSearch: true);
-
+            _homeCourses.SetSearch(null);
+            _homeCourses.RefreshData();
             ChuyenManHinh(_homeCourses);
-
         }
 
 
@@ -206,7 +183,6 @@ namespace QLKhoaHocONL
         private void btnAdmin_Click(object sender, EventArgs e)
 
         {
-
             if (!EnsureLogin()) return;
 
             if (!AppState.IsAdmin)
@@ -218,15 +194,8 @@ namespace QLKhoaHocONL
                 return;
 
             }
-
-
-
             _adminMenu.Show(btnAdmin, 0, btnAdmin.Height);
-
         }
-
-
-
 
         private void btnNotifications_Click(object sender, EventArgs e)
         {
@@ -278,9 +247,7 @@ namespace QLKhoaHocONL
             using (var frm = new frmLogin())
 
             {
-
                 return frm.ShowDialog() == DialogResult.OK;
-
             }
 
         }
@@ -299,6 +266,8 @@ namespace QLKhoaHocONL
 
             btnLogin.Visible = btnSignup.Visible = !logged;
 
+            btnCloseFrm.Visible = !logged;
+
             btnLogout.Visible = logged;
 
             btnAdmin.Visible = isAdmin;
@@ -316,7 +285,7 @@ namespace QLKhoaHocONL
 
             if (isAdmin) RefreshNotificationBadge();
 
-            else { btnNotifications.Text = "Th?ng b?o"; btnSyncData.Visible = false; }
+            else { btnNotifications.Text = "Thông báo"; btnSyncData.Visible = false; }
 
 
 
@@ -332,15 +301,15 @@ namespace QLKhoaHocONL
 
         {
 
-            // Dùng glyph Segoe MDL2 Assets để tạo icon phẳng
+            btnHome.Image = CreateGlyphIcon("\uE80F", Color.FromArgb(64, 64, 64));       
 
-            btnHome.Image = CreateGlyphIcon("\uE80F", Color.FromArgb(64, 64, 64));           // home
+            btnCourses.Image = CreateGlyphIcon("\uE816", Color.FromArgb(64, 64, 64));        
 
-            btnCourses.Image = CreateGlyphIcon("\uE816", Color.FromArgb(64, 64, 64));        // route/map
+            btnRoadmap.Image = CreateGlyphIcon("\uE8A5", Color.FromArgb(64, 64, 64));
 
-            btnRoadmap.Image = CreateGlyphIcon("\uE8A5", Color.FromArgb(64, 64, 64));        // article/list
+            btnSyncData.Image = CreateGlyphIcon("\uE895", Color.FromArgb(64, 64, 64));
 
-            btnNotifications.Image = CreateGlyphIcon("\uEA8F", Color.FromArgb(64, 64, 64));  // bell/alert
+            btnNotifications.Image = CreateGlyphIcon("\uEA8F", Color.FromArgb(64, 64, 64));  
 
 
 
@@ -349,6 +318,8 @@ namespace QLKhoaHocONL
             btnCourses.TextImageRelation = TextImageRelation.ImageAboveText;
 
             btnRoadmap.TextImageRelation = TextImageRelation.ImageAboveText;
+
+            btnSyncData.TextImageRelation = TextImageRelation.ImageAboveText;
 
             btnNotifications.TextImageRelation = TextImageRelation.ImageAboveText;
 
@@ -462,11 +433,11 @@ namespace QLKhoaHocONL
             try
             {
                 int unread = DbHelper.CountUnreadNotifications();
-                btnNotifications.Text = unread > 0 ? $"Th?ng b?o ({unread})" : "Th?ng b?o";
+                btnNotifications.Text = unread > 0 ? $"Thông báo ({unread})" : "Thông báo";
             }
             catch
             {
-                btnNotifications.Text = "Th?ng b?o";
+                btnNotifications.Text = "Thông báo";
             }
         }
 
@@ -500,6 +471,9 @@ namespace QLKhoaHocONL
 
         }
 
+        private void btnCloseFrm_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
-
 }

@@ -34,14 +34,14 @@ namespace QLKhoaHocONL
             this.sidebar = new System.Windows.Forms.Panel();
             this.lblSidebarTitle = new System.Windows.Forms.Label();
             this.flowTopics = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnTopic1 = new System.Windows.Forms.Button();
-            this.btnTopic2 = new System.Windows.Forms.Button();
-            this.btnTopic3 = new System.Windows.Forms.Button();
-            this.btnTopic4 = new System.Windows.Forms.Button();
             this.promoPanel = new System.Windows.Forms.Panel();
             this.lblPromoTitle = new System.Windows.Forms.Label();
             this.lblPromoList = new System.Windows.Forms.Label();
             this.btnPromo = new System.Windows.Forms.Button();
+            this.btnTopic1 = new System.Windows.Forms.Button();
+            this.btnTopic2 = new System.Windows.Forms.Button();
+            this.btnTopic3 = new System.Windows.Forms.Button();
+            this.btnTopic4 = new System.Windows.Forms.Button();
             this.mainLayout.SuspendLayout();
             this.sidebar.SuspendLayout();
             this.promoPanel.SuspendLayout();
@@ -75,10 +75,10 @@ namespace QLKhoaHocONL
             this.lblSubtitle.Location = new System.Drawing.Point(15, 60);
             this.lblSubtitle.Margin = new System.Windows.Forms.Padding(15, 0, 0, 0);
             this.lblSubtitle.Name = "lblSubtitle";
-            this.lblSubtitle.Size = new System.Drawing.Size(741, 40);
+            this.lblSubtitle.Size = new System.Drawing.Size(746, 40);
             this.lblSubtitle.TabIndex = 2;
-            this.lblSubtitle.Text = "Tổng hợp các bài viết chia sẻ kinh nghiệm tự học lập trình online và các kỹ năng" +
-    " nghề nghiệp.";
+            this.lblSubtitle.Text = "Tổng hợp các bài viết chia sẻ kinh nghiệm tự học lập trình online và các kỹ năng " +
+    "nghề nghiệp.";
             this.lblSubtitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblTitle
@@ -89,7 +89,7 @@ namespace QLKhoaHocONL
             this.lblTitle.Location = new System.Drawing.Point(15, 0);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(15, 0, 0, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(741, 60);
+            this.lblTitle.Size = new System.Drawing.Size(746, 60);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Bài viết nổi bật";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -122,9 +122,9 @@ namespace QLKhoaHocONL
             // 
             this.lblSidebarTitle.AutoSize = true;
             this.lblSidebarTitle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.lblSidebarTitle.Location = new System.Drawing.Point(13, 10);
+            this.lblSidebarTitle.Location = new System.Drawing.Point(13, 20);
             this.lblSidebarTitle.Name = "lblSidebarTitle";
-            this.lblSidebarTitle.Size = new System.Drawing.Size(193, 23);
+            this.lblSidebarTitle.Size = new System.Drawing.Size(210, 23);
             this.lblSidebarTitle.TabIndex = 0;
             this.lblSidebarTitle.Text = "Xem bài viết theo chủ đề";
             // 
@@ -137,6 +137,57 @@ namespace QLKhoaHocONL
             this.flowTopics.Name = "flowTopics";
             this.flowTopics.Size = new System.Drawing.Size(327, 0);
             this.flowTopics.TabIndex = 1;
+            // 
+            // promoPanel
+            // 
+            this.promoPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.promoPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(243)))), ((int)(((byte)(234)))));
+            this.promoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.promoPanel.Controls.Add(this.lblPromoTitle);
+            this.promoPanel.Controls.Add(this.lblPromoList);
+            this.promoPanel.Controls.Add(this.btnPromo);
+            this.promoPanel.Location = new System.Drawing.Point(10, 286);
+            this.promoPanel.Name = "promoPanel";
+            this.promoPanel.Padding = new System.Windows.Forms.Padding(12);
+            this.promoPanel.Size = new System.Drawing.Size(327, 228);
+            this.promoPanel.TabIndex = 2;
+            // 
+            // lblPromoTitle
+            // 
+            this.lblPromoTitle.AutoSize = true;
+            this.lblPromoTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblPromoTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(115)))), ((int)(((byte)(29)))));
+            this.lblPromoTitle.Location = new System.Drawing.Point(12, 12);
+            this.lblPromoTitle.Name = "lblPromoTitle";
+            this.lblPromoTitle.Size = new System.Drawing.Size(180, 28);
+            this.lblPromoTitle.TabIndex = 0;
+            this.lblPromoTitle.Text = "HTML CSS Pro ✨";
+            // 
+            // lblPromoList
+            // 
+            this.lblPromoList.AutoSize = true;
+            this.lblPromoList.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblPromoList.Location = new System.Drawing.Point(14, 50);
+            this.lblPromoList.Name = "lblPromoList";
+            this.lblPromoList.Size = new System.Drawing.Size(207, 100);
+            this.lblPromoList.TabIndex = 1;
+            this.lblPromoList.Text = "✔ Thực hành 8 dự án\r\n✔ Hơn 300 bài tập thử thách\r\n✔ Flashcards và checklist UI\r\n✔" +
+    " Games luyện HTML/CSS\r\n✔ Thiết kế sẵn trên Figma";
+            // 
+            // btnPromo
+            // 
+            this.btnPromo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(115)))), ((int)(((byte)(29)))));
+            this.btnPromo.FlatAppearance.BorderSize = 0;
+            this.btnPromo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPromo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnPromo.ForeColor = System.Drawing.Color.White;
+            this.btnPromo.Location = new System.Drawing.Point(17, 162);
+            this.btnPromo.Name = "btnPromo";
+            this.btnPromo.Size = new System.Drawing.Size(140, 44);
+            this.btnPromo.TabIndex = 2;
+            this.btnPromo.Text = "Tìm hiểu thêm";
+            this.btnPromo.UseVisualStyleBackColor = false;
             // 
             // btnTopic1
             // 
@@ -197,57 +248,6 @@ namespace QLKhoaHocONL
             this.btnTopic4.TabIndex = 3;
             this.btnTopic4.Text = "Others";
             this.btnTopic4.UseVisualStyleBackColor = false;
-            // 
-            // promoPanel
-            // 
-            this.promoPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.promoPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(243)))), ((int)(((byte)(234)))));
-            this.promoPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.promoPanel.Controls.Add(this.lblPromoTitle);
-            this.promoPanel.Controls.Add(this.lblPromoList);
-            this.promoPanel.Controls.Add(this.btnPromo);
-            this.promoPanel.Location = new System.Drawing.Point(10, 320);
-            this.promoPanel.Name = "promoPanel";
-            this.promoPanel.Padding = new System.Windows.Forms.Padding(12);
-            this.promoPanel.Size = new System.Drawing.Size(327, 194);
-            this.promoPanel.TabIndex = 2;
-            // 
-            // lblPromoTitle
-            // 
-            this.lblPromoTitle.AutoSize = true;
-            this.lblPromoTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblPromoTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(115)))), ((int)(((byte)(29)))));
-            this.lblPromoTitle.Location = new System.Drawing.Point(12, 12);
-            this.lblPromoTitle.Name = "lblPromoTitle";
-            this.lblPromoTitle.Size = new System.Drawing.Size(172, 28);
-            this.lblPromoTitle.TabIndex = 0;
-            this.lblPromoTitle.Text = "HTML CSS Pro ✨";
-            // 
-            // lblPromoList
-            // 
-            this.lblPromoList.AutoSize = true;
-            this.lblPromoList.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lblPromoList.Location = new System.Drawing.Point(14, 50);
-            this.lblPromoList.Name = "lblPromoList";
-            this.lblPromoList.Size = new System.Drawing.Size(256, 75);
-            this.lblPromoList.TabIndex = 1;
-            this.lblPromoList.Text = "✔ Thực hành 8 dự án\r\n✔ Hơn 300 bài tập thử thách\r\n✔ Flashcards và checklist UI\r\n✔" +
-    " Games luyện HTML/CSS\r\n✔ Thiết kế sẵn trên Figma";
-            // 
-            // btnPromo
-            // 
-            this.btnPromo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(115)))), ((int)(((byte)(29)))));
-            this.btnPromo.FlatAppearance.BorderSize = 0;
-            this.btnPromo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPromo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnPromo.ForeColor = System.Drawing.Color.White;
-            this.btnPromo.Location = new System.Drawing.Point(17, 142);
-            this.btnPromo.Name = "btnPromo";
-            this.btnPromo.Size = new System.Drawing.Size(140, 32);
-            this.btnPromo.TabIndex = 2;
-            this.btnPromo.Text = "Tìm hiểu thêm";
-            this.btnPromo.UseVisualStyleBackColor = false;
             // 
             // UcBlog
             // 

@@ -3,9 +3,10 @@
     "",
     "\\QLKhoaHocONL",
     "\\QLKhoaHocONL\\QLKhoaHocONL",
-    "\\QLKhoaHocONL\\QLKhoaHocONL\\GUI",
-    "\\QLKhoaHocONL\\QLKhoaHocONL\\vwUC"
+    "\\QLKhoaHocONL\\QLKhoaHocONL\\bin",
+    "\\QLKhoaHocONL\\QLKhoaHocONL\\bin\\Debug",
+    "\\QLKhoaHocONL\\QLKhoaHocONL\\bin\\Debug\\Data"
   ],
-  "SelectedNode": "\\QLKhoaHocONL\\QLKhoaHocONL\\GUI\\frmMain.cs",
+  "SelectedNode": "\\QLKhoaHocONL\\QLKhoaHocONL.sln",
   "PreviewInSolutionExplorer": false
 }

@@ -1,10 +1,13 @@
+using Guna.UI2.WinForms;
+using QLKhoaHocONL.GUI;
+using QLKhoaHocONL.Helpers;
+using QLKhoaHocONL.Models;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using QLKhoaHocONL.Helpers;
-using QLKhoaHocONL.Models;
 
 namespace QLKhoaHocONL.vwUC
 {
@@ -15,14 +18,34 @@ namespace QLKhoaHocONL.vwUC
         private string _searchQuery = string.Empty;
         private readonly Timer _bannerTimer = new Timer { Interval = 3000 };
 
-        private readonly (string title, string desc, string action, string link, Color c1, Color c2)[] _banners =
+        private readonly (string title, string desc, string action, string link, Color c1, Color c2, Image img)[] _banners =
         {
-            ("F8 trên Youtube", "F8 được nhắc tới ở mọi nơi, mở rộng cơ hội việc làm cho người yêu lập trình.", "Đăng ký kênh", "https://www.youtube.com/c/F8VNOfficial",
-                Color.FromArgb(255, 94, 0), Color.FromArgb(255, 166, 0)),
-            ("Học React nhanh", "Lộ trình ReactJS Master cho frontend developer muốn lên tầm cao mới.", "Xem lộ trình", "https://fullstack.edu.vn/learning/reactjs",
-                Color.FromArgb(0, 198, 255), Color.FromArgb(0, 114, 255)),
-            ("Việc làm IT", "Học xong là thực chiến - chuẩn bị hồ sơ, phỏng vấn và nhận offer.", "Xem khóa", "https://fullstack.edu.vn/learning/html-css",
-                Color.FromArgb(17, 153, 142), Color.FromArgb(56, 239, 125))
+            // Banner 1: Youtube
+            ("F8 trên Youtube",
+             "F8 được nhắc tới ở mọi nơi, mở rộng cơ hội việc làm cho người yêu lập trình.",
+             "Đăng ký kênh",
+             "https://www.youtube.com/c/F8VNOfficial",
+             Color.FromArgb(255, 94, 0),
+             Color.FromArgb(255, 166, 0),
+             Properties.Resources.banner_youtube), 
+
+            // Banner 2: ReactJS
+            ("Học React nhanh",
+             "Lộ trình ReactJS Master cho frontend developer muốn lên tầm cao mới.",
+             "Xem lộ trình",
+             "https://fullstack.edu.vn/learning/reactjs",
+             Color.FromArgb(0, 198, 255),
+             Color.FromArgb(0, 114, 255),
+             Properties.Resources.banner_react),   
+
+            // Banner 3: Việc làm IT
+            ("Việc làm IT",
+             "Học xong là thực chiến - chuẩn bị hồ sơ, phỏng vấn và nhận offer.",
+             "Xem khóa",
+             "https://fullstack.edu.vn/learning/html-css",
+             Color.FromArgb(17, 153, 142),
+             Color.FromArgb(56, 239, 125),
+             Properties.Resources.banner_it)     
         };
 
         public UcCourses(bool onlyOwned = false)
@@ -35,7 +58,7 @@ namespace QLKhoaHocONL.vwUC
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            lblTitle.Text = _onlyOwned ? "Khoa hoc cua toi" : "Khoa hoc noi bat";
+            lblTitle.Text = _onlyOwned ? "Khóa học của tôi" : "Khóa học nổi bật";
             UpdateBanner();
             _bannerTimer.Start();
             DocXML();
@@ -80,14 +103,14 @@ namespace QLKhoaHocONL.vwUC
                         AutoSize = true,
                         Font = new System.Drawing.Font("Segoe UI", 11F),
                         Text = _onlyOwned
-                            ? "Ban chua mua khoa hoc nao, quay lai Trang chu de dang ky nhe!"
-                            : "Chua co du lieu khoa hoc."
+                            ? "Bạn chưa mua khóa học nào, quay lại Trang chủ để đăng ký nhé!"
+                            : "Chưa có dữ liệu khóa học."
                     });
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Loi: " + ex.Message);
+                MessageBox.Show("Lỗi: " + ex.Message);
             }
         }
 
@@ -106,6 +129,11 @@ namespace QLKhoaHocONL.vwUC
             btnBannerAction.Tag = b.link;
             bannerPanel.FillColor = b.c1;
             bannerPanel.FillColor2 = b.c2;
+
+            if (b.img != null)
+            {
+                heroImage.Image = b.img;
+            }
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -139,8 +167,92 @@ namespace QLKhoaHocONL.vwUC
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Khong mo duoc link: " + ex.Message);
+                    MessageBox.Show("Không mở được link: " + ex.Message);
                 }
+            }
+        }
+
+        public void LoadDataHybrid(string username)
+        {
+            try
+            {
+                flowLayoutPanelKhoaHoc.Controls.Clear();
+
+                var list = XmlRepository.GetCourses();
+
+                if (!string.IsNullOrWhiteSpace(_searchQuery))
+                {
+                    var key = _searchQuery.ToLowerInvariant();
+                    list = list.Where(c => (c.TenKhoaHoc ?? string.Empty).ToLowerInvariant().Contains(key)).ToList();
+                }
+
+                if (_onlyOwned)
+                {
+                    if (string.IsNullOrEmpty(username))
+                    {
+                        list.Clear();
+                    }
+                    else
+                    {
+                        var ownedIds = DbHelper.LoadUserCourseIds(username);
+
+                        list = list.Where(c => ownedIds.Contains(c.Id)).ToList();
+                    }
+                }
+
+                foreach (var item in list)
+                {
+                    var uc = new UC_ItemKhoaHoc();
+
+                    uc.NapDuLieu(item);
+
+                    flowLayoutPanelKhoaHoc.Controls.Add(uc);
+                }
+
+                if (!list.Any())
+                {
+                    flowLayoutPanelKhoaHoc.Controls.Add(new Label
+                    {
+                        AutoSize = true,
+                        Font = new Font("Segoe UI", 11F),
+                        Text = _onlyOwned
+                            ? "Bạn chưa mua khóa học nào, quay lại Trang chủ để đăng ký nhé!"
+                            : "Không tìm thấy khóa học nào phù hợp."
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
+            }
+        }
+
+        private void XuLyMuaKhoaHoc(Course c)
+        {
+            if (!AppState.IsLoggedIn)
+            {
+                if (MessageBox.Show("Bạn cần đăng nhập để mua khóa học. Đăng nhập ngay?", "Yêu cầu", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    using (var frm = new frmLogin())
+                    {
+                        if (frm.ShowDialog() == DialogResult.OK)
+                        {
+                            LoadDataHybrid(AppState.CurrentUser.Username);
+                        }
+                    }
+                }
+                return;
+            }
+
+            if (DbHelper.AddUserCourse(AppState.CurrentUser.Username, c.Id))
+            {
+                MessageBox.Show("Đăng ký khóa học thành công!", "Chúc mừng", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LoadDataHybrid(AppState.CurrentUser.Username);
+            }
+            else
+            {
+                MessageBox.Show("Có lỗi hoặc bạn đã sở hữu khóa học này.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

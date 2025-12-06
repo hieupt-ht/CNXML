@@ -45,17 +45,15 @@ namespace QLKhoaHocONL
                     Tag = "React Native",
                     TimeAgo = "3 tháng trước",
                     ReadTime = "2 phút đọc",
-                    Accent = Color.FromArgb(243, 114, 44)
                 },
                 new Post
                 {
                     Author = "Hoàng Tuấn 12A1 40.Võ",
                     Title = "Giới thiệu về ngành Công Nghệ Thông Tin và những kiến thức cơ bản bắt buộc phải học",
                     Excerpt = "Ngành CNTT đóng vai trò quan trọng trong hầu hết mọi lĩnh vực; đây là những kỹ năng cốt lõi bạn nên nắm.",
-                    Tag = "học-lập-trình",
+                    Tag = "Học-lập-trình",
                     TimeAgo = "3 tháng trước",
                     ReadTime = "4 phút đọc",
-                    Accent = Color.FromArgb(76, 110, 245)
                 }
             };
 
@@ -121,7 +119,7 @@ namespace QLKhoaHocONL
                 Font = new Font("Segoe UI", 9F),
                 ForeColor = Color.Gray,
                 Text = $"{p.TimeAgo}  ·  {p.ReadTime}",
-                Location = new Point(16, 140)
+                Location = new Point(16, 150)
             };
 
             var tag = new Label
@@ -129,7 +127,7 @@ namespace QLKhoaHocONL
                 AutoSize = true,
                 Font = new Font("Segoe UI", 9F, FontStyle.Bold),
                 ForeColor = Color.FromArgb(255, 115, 29),
-                Location = new Point(lblMeta.Right + 8, 140),
+                Location = new Point(16, 168),
                 Text = p.Tag
             };
 

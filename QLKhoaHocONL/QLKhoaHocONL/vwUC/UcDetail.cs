@@ -71,11 +71,11 @@ namespace QLKhoaHocONL.vwUC
             var added = DbHelper.AddUserCourse(AppState.CurrentUser.Username, _course.Id);
             if (!added)
             {
-                MessageBox.Show("Ban da mua khoa hoc nay truoc do.");
+                MessageBox.Show("Bạn đã mua khóa học này trước đó.");
                 return;
             }
 
-            MessageBox.Show("Da them khoa hoc vao tai khoan cua ban!");
+            MessageBox.Show("Đã thêm khóa học vào tài khoản của bạn!");
             UpdateOwnershipUI(true);
             LoadVideos();
         }
@@ -174,7 +174,7 @@ namespace QLKhoaHocONL.vwUC
             if (AppState.IsAdmin)
             {
                 btnMuaNgay.Visible = true;
-                btnMuaNgay.Text = "Xem hoc vien";
+                btnMuaNgay.Text = "Xem học viên";
                 btnDemo.Enabled = true;
                 return;
             }
@@ -188,7 +188,7 @@ namespace QLKhoaHocONL.vwUC
             var buyers = DbHelper.LoadCourseBuyers(_course.Id);
             if (!buyers.Any())
             {
-                MessageBox.Show("Chua co hoc vien mua khoa hoc nay.");
+                MessageBox.Show("Chưa có học viên mua khóa học này.");
                 return;
             }
 

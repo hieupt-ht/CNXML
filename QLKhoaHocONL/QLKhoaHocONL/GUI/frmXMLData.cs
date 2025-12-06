@@ -1,164 +1,396 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 using QLKhoaHocONL.Helpers;
 
 namespace QLKhoaHocONL
 {
     public partial class frmXMLData : Form
     {
-        private enum DataKind { Courses, Students, Instructors }
-
-        private readonly DataGridView _grid = new DataGridView();
-        private readonly ComboBox _cboType = new ComboBox();
+        private enum DataKind { Courses, Students, Instructors, All }
         private DataKind _current = DataKind.Courses;
 
         public frmXMLData()
         {
             InitializeComponent();
-            BuildUI();
+            InitializeEvents();
+            LoadInitialData();
         }
 
-        private void BuildUI()
+        private void InitializeEvents()
         {
-            Text = "Đồng bộ SQL ↔ XML";
-            Width = 900;
-            Height = 560;
-            StartPosition = FormStartPosition.CenterParent;
+            cboLoaiDuLieu.SelectedIndexChanged += cboLoaiDuLieu_SelectedIndexChanged;
 
-            _cboType.DropDownStyle = ComboBoxStyle.DropDownList;
-            _cboType.Items.AddRange(new object[] { "Khóa học", "Học viên", "Giảng viên" });
-            _cboType.SelectedIndex = 0;
-            _cboType.SelectedIndexChanged += (_, __) =>
-            {
-                _current = _cboType.SelectedIndex switch
-                {
-                    0 => DataKind.Courses,
-                    1 => DataKind.Students,
-                    _ => DataKind.Instructors
-                };
-                _grid.DataSource = null;
-            };
+            treeXML.AfterSelect += treeXML_AfterSelect;
 
-            var btnLoadDb = new Button { Text = "Lấy dữ liệu SQL", Width = 140 };
-            var btnExportXml = new Button { Text = "Xuất ra XML", Width = 140 };
-            var btnImportXml = new Button { Text = "Nhập XML → SQL", Width = 160 };
-
-            btnLoadDb.Click += (_, __) => LoadFromDb();
-            btnExportXml.Click += (_, __) => ExportToXml();
-            btnImportXml.Click += (_, __) => ImportFromXml();
-
-            var topPanel = new FlowLayoutPanel
-            {
-                Dock = DockStyle.Top,
-                Height = 50,
-                Padding = new Padding(8),
-                FlowDirection = FlowDirection.LeftToRight
-            };
-            topPanel.Controls.AddRange(new Control[] { new Label { Text = "Đối tượng:", AutoSize = true, Padding = new Padding(0, 8, 8, 0) }, _cboType, btnLoadDb, btnExportXml, btnImportXml });
-
-            _grid.Dock = DockStyle.Fill;
-            _grid.ReadOnly = true;
-            _grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            _grid.MultiSelect = false;
-            _grid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            Controls.Add(_grid);
-            Controls.Add(topPanel);
+            panelTop.MouseDown += PanelTop_MouseDown;
+            panelTop.MouseMove += PanelTop_MouseMove;
+            panelTop.MouseUp += PanelTop_MouseUp;
         }
 
-        private void LoadFromDb()
+        private bool _isDragging = false;
+        private System.Drawing.Point _dragStartPoint;
+
+        private void PanelTop_MouseDown(object sender, MouseEventArgs e)
         {
-            switch (_current)
+            if (e.Button == MouseButtons.Left)
             {
-                case DataKind.Courses:
-                    _grid.DataSource = DbHelper.LoadCourses().Select(c => new
-                    {
-                        c.Id,
-                        c.TenKhoaHoc,
-                        c.GiaGoc,
-                        c.GiaGiam,
-                        c.SoHocVien,
-                        c.ThoiLuong,
-                        c.TenAnh,
-                        c.MauBatDau,
-                        c.MauKetThuc,
-                        c.DemoLink,
-                        c.InstructorName
-                    }).ToList();
-                    break;
-                case DataKind.Students:
-                    _grid.DataSource = DbHelper.LoadStudents().Select(s => new
-                    {
-                        s.StudentId,
-                        s.FullName,
-                        s.Email,
-                        s.Phone,
-                        s.Address
-                    }).ToList();
-                    break;
-                case DataKind.Instructors:
-                    _grid.DataSource = DbHelper.LoadInstructors().Select(i => new
-                    {
-                        i.InstructorId,
-                        i.FullName,
-                        i.Email,
-                        i.Phone,
-                        i.Expertise
-                    }).ToList();
-                    break;
+                _isDragging = true;
+                _dragStartPoint = e.Location;
             }
         }
 
-        private void ExportToXml()
+        private void PanelTop_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_isDragging)
+            {
+                System.Drawing.Point newLocation = this.Location;
+                newLocation.X += e.X - _dragStartPoint.X;
+                newLocation.Y += e.Y - _dragStartPoint.Y;
+                this.Location = newLocation;
+            }
+        }
+
+        private void PanelTop_MouseUp(object sender, MouseEventArgs e)
+        {
+            _isDragging = false;
+        }
+
+        private void LoadInitialData()
+        {
+            cboLoaiDuLieu.SelectedIndex = 0;
+            RefreshCurrentData();
+        }
+
+        private void cboLoaiDuLieu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _current = cboLoaiDuLieu.SelectedIndex switch
+            {
+                0 => DataKind.Courses,
+                1 => DataKind.Students,
+                2 => DataKind.Instructors,
+                _ => DataKind.All
+            };
+
+            RefreshCurrentData();
+        }
+
+        private void btnSyncAll_Click(object sender, EventArgs e)
         {
             try
             {
-                switch (_current)
+                if (MessageBox.Show(
+                    "Bạn có chắc muốn đồng bộ TẤT CẢ dữ liệu từ SQL sang XML?\n\n" +
+                    "- Khóa Học\n- Học Viên\n- Giảng Viên\n\n",
+                    "Xác Nhận Đồng Bộ",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    case DataKind.Courses:
-                        XMLHelper.SaveCourses(DbHelper.LoadCourses());
-                        break;
-                    case DataKind.Students:
-                        XMLHelper.SaveStudentsToXml(DbHelper.LoadStudents());
-                        break;
-                    case DataKind.Instructors:
-                        XMLHelper.SaveInstructorsToXml(DbHelper.LoadInstructors());
-                        break;
+                    int totalRecords = 0;
+
+                    var courses = DbHelper.LoadCourses();
+                    XMLHelper.SaveCourses(courses);
+                    totalRecords += courses.Count;
+
+                    var students = DbHelper.LoadStudents();
+                    XMLHelper.SaveStudentsToXml(students);
+                    totalRecords += students.Count;
+
+                    var instructors = DbHelper.LoadInstructors();
+                    XMLHelper.SaveInstructorsToXml(instructors);
+                    totalRecords += instructors.Count;
+
+                    LoadTreeAndContent();
+
+                    MessageBox.Show(
+                        $"✅ Đã đồng bộ thành công TẤT CẢ dữ liệu từ SQL → XML!\n\n" +
+                        $"📊 Tổng số bản ghi: {totalRecords}\n" +
+                        $"   • Khóa học: {courses.Count}\n" +
+                        $"   • Học viên: {students.Count}\n" +
+                        $"   • Giảng viên: {instructors.Count}",
+                        "Thành Công",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
                 }
-                MessageBox.Show("Đã xuất ra thư mục Data/ thành công.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi xuất XML: " + ex.Message);
+                MessageBox.Show($"❌ Lỗi đồng bộ SQL → XML:\n{ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void ImportFromXml()
+        private void btnSyncSelected_Click(object sender, EventArgs e)
         {
             try
             {
-                switch (_current)
+                string dataType = _current switch
                 {
-                    case DataKind.Courses:
-                        var courses = XMLHelper.LoadCourses();
-                        DbHelper.ReplaceCourses(courses);
-                        break;
-                    case DataKind.Students:
-                        var students = XMLHelper.LoadStudentsFromXml();
-                        DbHelper.ReplaceStudents(students);
-                        break;
-                    case DataKind.Instructors:
+                    DataKind.Courses => "Khóa Học",
+                    DataKind.Students => "Học Viên",
+                    DataKind.Instructors => "Giảng Viên",
+                    DataKind.All => "TẤT CẢ (Giảng viên, Khóa học, Học viên)",
+                    _ => throw new NotImplementedException()
+                };
+
+                if (MessageBox.Show(
+                    $"Bạn có chắc muốn đồng bộ dữ liệu '{dataType}' từ XML sang SQL?\n\n" +
+                    "⚠️ Dữ liệu trong SQL sẽ được thay thế bởi dữ liệu từ file XML!",
+                    "Xác Nhận Đồng Bộ",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    int recordCount = 0;
+
+                    if (_current == DataKind.All)
+                    {
+                       
+
+                        // Giảng viên trước
                         var instructors = XMLHelper.LoadInstructorsFromXml();
                         DbHelper.ReplaceInstructors(instructors);
-                        break;
+                        int countInstr = instructors.Count;
+
+                        // Khóa học
+                        var courses = XMLHelper.LoadCourses();
+                        DbHelper.ReplaceCourses(courses);
+                        int countCourses = courses.Count;
+
+                        // Học viên
+                        var students = XMLHelper.LoadStudentsFromXml();
+                        DbHelper.ReplaceStudents(students);
+                        int countStudents = students.Count;
+
+                        recordCount = countInstr + countCourses + countStudents;
+
+                        MessageBox.Show(
+                            $"✅ Đã đồng bộ TOÀN BỘ từ XML → SQL thành công!\n\n" +
+                            $"📊 Tổng số: {recordCount}\n" +
+                            $"   • Giảng viên: {countInstr}\n" +
+                            $"   • Khóa học: {countCourses}\n" +
+                            $"   • Học viên: {countStudents}",
+                            "Thành Công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        switch (_current)
+                        {
+                            case DataKind.Courses:
+                                var courses = XMLHelper.LoadCourses();
+                                DbHelper.ReplaceCourses(courses);
+                                recordCount = courses.Count;
+                                break;
+                            case DataKind.Students:
+                                var students = XMLHelper.LoadStudentsFromXml();
+                                DbHelper.ReplaceStudents(students);
+                                recordCount = students.Count;
+                                break;
+                            case DataKind.Instructors:
+                                var instructors = XMLHelper.LoadInstructorsFromXml();
+                                DbHelper.ReplaceInstructors(instructors);
+                                recordCount = instructors.Count;
+                                break;
+                        }
+
+                        MessageBox.Show(
+                            $"✅ Đã đồng bộ '{dataType}' từ XML → SQL thành công!\n\n" +
+                            $"📊 Số bản ghi: {recordCount}",
+                            "Thành Công",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
                 }
-                LoadFromDb();
-                MessageBox.Show("Đã nhập dữ liệu từ XML vào SQL.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi nhập XML: " + ex.Message);
+                MessageBox.Show($"❌ Lỗi đồng bộ XML → SQL:\n{ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnReadXml_Click(object sender, EventArgs e)
+        {
+            RefreshCurrentData(showMessage: true);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void treeXML_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node != null && e.Node.Tag != null)
+            {
+                txtXMLContent.Text = e.Node.Tag.ToString();
+            }
+        }
+
+        private void RefreshCurrentData(bool showMessage = false)
+        {
+            try
+            {
+                if (_current == DataKind.All)
+                {
+                    treeXML.Nodes.Clear();
+                    txtXMLContent.Text = "ℹ️ Chế độ 'Tất Cả' được chọn.\n\n" +
+                                         "- Sử dụng nút 'Đồng Bộ XML → SQL' để đẩy toàn bộ dữ liệu lên Database.\n" +
+                                         "- Sử dụng nút 'Đồng Bộ SQL → XML' để sao lưu toàn bộ Database về XML.\n\n" +
+                                         "Vui lòng chọn từng loại cụ thể (Khóa Học, Giảng Viên...) để xem chi tiết nội dung.";
+                    if (showMessage)
+                    {
+                        MessageBox.Show("Đang ở chế độ chọn Tất Cả. Vui lòng thao tác đồng bộ trực tiếp.", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    return;
+                }
+
+                string dataType = _current switch
+                {
+                    DataKind.Courses => "Khóa Học",
+                    DataKind.Students => "Học Viên",
+                    _ => "Giảng Viên"
+                };
+
+                LoadTreeAndContent();
+
+                int recordCount = 0;
+                string xmlPath = GetXmlPath();
+
+                if (File.Exists(xmlPath))
+                {
+                    XDocument doc = XDocument.Load(xmlPath);
+                    if (doc.Root != null)
+                    {
+                        recordCount = doc.Root.Elements().Count();
+                    }
+                }
+
+                if (showMessage)
+                {
+                    MessageBox.Show(
+                        $"✅ Đã tải lại dữ liệu '{dataType}' từ file XML!\n\n" +
+                        $"📊 Tổng số bản ghi tìm thấy: {recordCount}\n",
+                        "Làm Mới Thành Công",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"❌ Lỗi làm mới dữ liệu:\n{ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadTreeAndContent()
+        {
+            try
+            {
+                if (_current == DataKind.All) return;
+
+                string xmlPath = GetXmlPath();
+
+                if (!File.Exists(xmlPath))
+                {
+                    txtXMLContent.Text = $"⚠️ File XML chưa tồn tại: {xmlPath}\n\n" +
+                                        "Vui lòng sử dụng nút 'Đồng Bộ SQL → XML' để tạo file.";
+                    treeXML.Nodes.Clear();
+                    return;
+                }
+
+                string xmlContent = File.ReadAllText(xmlPath);
+                txtXMLContent.Text = FormatXml(xmlContent);
+
+                LoadXmlTree(xmlPath);
+            }
+            catch (Exception ex)
+            {
+                txtXMLContent.Text = $"❌ Lỗi đọc file XML:\n{ex.Message}";
+                treeXML.Nodes.Clear();
+            }
+        }
+
+        private string GetXmlPath()
+        {
+            string dataFolder = Path.Combine(Application.StartupPath, "Data");
+            if (!Directory.Exists(dataFolder))
+            {
+                Directory.CreateDirectory(dataFolder);
+            }
+
+            return _current switch
+            {
+                DataKind.Courses => Path.Combine(dataFolder, "KhoaHoc.xml"),
+                DataKind.Students => Path.Combine(dataFolder, "HocVien.xml"),
+                _ => Path.Combine(dataFolder, "GiangVien.xml")
+            };
+        }
+
+        private void LoadXmlTree(string xmlPath)
+        {
+            try
+            {
+                treeXML.Nodes.Clear();
+
+                XDocument xdoc = XDocument.Load(xmlPath);
+                if (xdoc.Root == null) return;
+
+                TreeNode rootNode = new TreeNode(xdoc.Root.Name.LocalName)
+                {
+                    Tag = xdoc.Root.ToString()
+                };
+
+                LoadXmlNode(xdoc.Root, rootNode);
+                treeXML.Nodes.Add(rootNode);
+                treeXML.ExpandAll();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi tải cây XML: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadXmlNode(XElement element, TreeNode treeNode)
+        {
+            foreach (var child in element.Elements())
+            {
+                TreeNode childNode = new TreeNode(child.Name.LocalName)
+                {
+                    Tag = child.ToString()
+                };
+
+                if (child.HasAttributes)
+                {
+                    foreach (var attr in child.Attributes())
+                    {
+                        TreeNode attrNode = new TreeNode($"@{attr.Name.LocalName} = \"{attr.Value}\"");
+                        childNode.Nodes.Add(attrNode);
+                    }
+                }
+
+                if (!child.HasElements && !string.IsNullOrWhiteSpace(child.Value))
+                {
+                    TreeNode textNode = new TreeNode($"= {child.Value}");
+                    childNode.Nodes.Add(textNode);
+                }
+
+                LoadXmlNode(child, childNode);
+                treeNode.Nodes.Add(childNode);
+            }
+        }
+
+        private string FormatXml(string xml)
+        {
+            try
+            {
+                XDocument doc = XDocument.Parse(xml);
+                return doc.ToString();
+            }
+            catch
+            {
+                return xml;
             }
         }
     }

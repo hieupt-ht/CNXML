@@ -8,7 +8,7 @@ using QLKhoaHocONL.Models;
 namespace QLKhoaHocONL.Helpers
 {
     /// <summary>
-    /// Truy cập dữ liệu SQL Server cho tài khoản, khóa học, giảng viên, học viên.
+    /// Truy cập dữ liệu SQL Server (Mapping: C# English -> SQL Vietnamese)
     /// </summary>
     internal static class DbHelper
     {
@@ -22,11 +22,13 @@ namespace QLKhoaHocONL.Helpers
             return conn;
         }
 
-        #region Accounts
+        #region Accounts (TaiKhoan)
         public static Account Authenticate(string username, string password)
         {
-            const string sql = @"SELECT AccountId, Username, Password, FullName, Role
-                                 FROM Account WHERE Username = @u AND Password = @p";
+            // Mapping: MaTaiKhoan, TenDangNhap, MatKhau, HoTen, VaiTro
+            const string sql = @"SELECT MaTaiKhoan, TenDangNhap, MatKhau, HoTen, VaiTro
+                                 FROM TaiKhoan 
+                                 WHERE TenDangNhap = @u AND MatKhau = @p";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@u", username);
@@ -49,9 +51,9 @@ namespace QLKhoaHocONL.Helpers
         public static bool AddAccount(Account account, out string error)
         {
             error = string.Empty;
-            const string checkSql = "SELECT 1 FROM Account WHERE Username = @u";
-            const string insertSql = @"INSERT INTO Account(Username, Password, FullName, Role)
-                                       OUTPUT INSERTED.AccountId
+            const string checkSql = "SELECT 1 FROM TaiKhoan WHERE TenDangNhap = @u";
+            const string insertSql = @"INSERT INTO TaiKhoan(TenDangNhap, MatKhau, HoTen, VaiTro)
+                                       OUTPUT INSERTED.MaTaiKhoan
                                        VALUES(@u, @p, @f, @r)";
             using var conn = OpenConnection();
             using (var checkCmd = new SqlCommand(checkSql, conn))
@@ -76,20 +78,25 @@ namespace QLKhoaHocONL.Helpers
         }
         #endregion
 
-        #region Courses
+        #region Courses (KhoaHoc)
         public static List<Course> LoadCourses(bool onlyOwned = false, string username = null)
         {
             var list = new List<Course>();
             using var conn = OpenConnection();
-            string sql = @"SELECT c.CourseId, c.TenKhoaHoc, c.GiaGoc, c.GiaGiam, c.SoHocVien, c.ThoiLuong,
-                                  c.TenAnh, c.MauBatDau, c.MauKetThuc, c.DemoLink,
-                                  c.InstructorId, i.FullName AS InstructorName
-                           FROM Course c
-                           LEFT JOIN Instructor i ON c.InstructorId = i.InstructorId";
+            
+            // Mapping: MaKhoaHoc, LinkDemo, MaGiangVien...
+            string sql = @"SELECT k.MaKhoaHoc, k.TenKhoaHoc, k.GiaGoc, k.GiaGiam, k.SoHocVien, k.ThoiLuong,
+                                  k.TenAnh, k.MauBatDau, k.MauKetThuc, k.LinkDemo,
+                                  k.MaGiangVien, gv.HoTen AS TenGiangVien
+                           FROM KhoaHoc k
+                           LEFT JOIN GiangVien gv ON k.MaGiangVien = gv.MaGiangVien";
 
+            // Nếu chỉ load khóa học đã mua (JOIN qua bang TaiKhoan_KhoaHoc va TaiKhoan)
             if (onlyOwned && !string.IsNullOrWhiteSpace(username))
             {
-                sql += " INNER JOIN Account a ON a.Username = @user INNER JOIN AccountCourse ac ON ac.AccountId = a.AccountId AND ac.CourseId = c.CourseId";
+                sql += @" INNER JOIN TaiKhoan_KhoaHoc tkkh ON tkkh.MaKhoaHoc = k.MaKhoaHoc
+                          INNER JOIN TaiKhoan tk ON tk.MaTaiKhoan = tkkh.MaTaiKhoan
+                          WHERE tk.TenDangNhap = @user";
             }
 
             using var cmd = new SqlCommand(sql, conn);
@@ -112,52 +119,19 @@ namespace QLKhoaHocONL.Helpers
                     TenAnh = rd.IsDBNull(6) ? null : rd.GetString(6),
                     MauBatDau = rd.IsDBNull(7) ? null : rd.GetString(7),
                     MauKetThuc = rd.IsDBNull(8) ? null : rd.GetString(8),
-                    DemoLink = rd.IsDBNull(9) ? null : rd.GetString(9),
-                    InstructorId = rd.IsDBNull(10) ? (int?)null : rd.GetInt32(10),
+                    DemoLink = rd.IsDBNull(9) ? null : rd.GetString(9), 
+                    InstructorId = rd.IsDBNull(10) ? (int?)null : rd.GetInt32(10), 
                     InstructorName = rd.IsDBNull(11) ? null : rd.GetString(11)
                 });
             }
             return list;
         }
 
-        public static Course GetCourse(int id)
-        {
-            const string sql = @"SELECT c.CourseId, c.TenKhoaHoc, c.GiaGoc, c.GiaGiam, c.SoHocVien, c.ThoiLuong,
-                                        c.TenAnh, c.MauBatDau, c.MauKetThuc, c.DemoLink,
-                                        c.InstructorId, i.FullName AS InstructorName
-                                 FROM Course c
-                                 LEFT JOIN Instructor i ON c.InstructorId = i.InstructorId
-                                 WHERE c.CourseId = @id";
-            using var conn = OpenConnection();
-            using var cmd = new SqlCommand(sql, conn);
-            cmd.Parameters.AddWithValue("@id", id);
-            using var rd = cmd.ExecuteReader();
-            if (rd.Read())
-            {
-                return new Course
-                {
-                    Id = rd.GetInt32(0),
-                    TenKhoaHoc = rd.GetString(1),
-                    GiaGoc = rd.IsDBNull(2) ? null : rd.GetString(2),
-                    GiaGiam = rd.IsDBNull(3) ? null : rd.GetString(3),
-                    SoHocVien = rd.GetInt32(4),
-                    ThoiLuong = rd.IsDBNull(5) ? null : rd.GetString(5),
-                    TenAnh = rd.IsDBNull(6) ? null : rd.GetString(6),
-                    MauBatDau = rd.IsDBNull(7) ? null : rd.GetString(7),
-                    MauKetThuc = rd.IsDBNull(8) ? null : rd.GetString(8),
-                    DemoLink = rd.IsDBNull(9) ? null : rd.GetString(9),
-                    InstructorId = rd.IsDBNull(10) ? (int?)null : rd.GetInt32(10),
-                    InstructorName = rd.IsDBNull(11) ? null : rd.GetString(11)
-                };
-            }
-            return null;
-        }
-
         public static int AddCourse(Course c)
         {
-            const string sql = @"INSERT INTO Course(TenKhoaHoc, GiaGoc, GiaGiam, SoHocVien, ThoiLuong,
-                                                   TenAnh, MauBatDau, MauKetThuc, DemoLink, InstructorId)
-                                 OUTPUT INSERTED.CourseId
+            const string sql = @"INSERT INTO KhoaHoc(TenKhoaHoc, GiaGoc, GiaGiam, SoHocVien, ThoiLuong,
+                                                     TenAnh, MauBatDau, MauKetThuc, LinkDemo, MaGiangVien)
+                                 OUTPUT INSERTED.MaKhoaHoc
                                  VALUES(@ten, @giaGoc, @giaGiam, @soHv, @thoiLuong, @anh, @mau1, @mau2, @demo, @instructor)";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
@@ -167,7 +141,7 @@ namespace QLKhoaHocONL.Helpers
 
         public static void UpdateCourse(Course c)
         {
-            const string sql = @"UPDATE Course SET
+            const string sql = @"UPDATE KhoaHoc SET
                                     TenKhoaHoc = @ten,
                                     GiaGoc = @giaGoc,
                                     GiaGiam = @giaGiam,
@@ -176,9 +150,9 @@ namespace QLKhoaHocONL.Helpers
                                     TenAnh = @anh,
                                     MauBatDau = @mau1,
                                     MauKetThuc = @mau2,
-                                    DemoLink = @demo,
-                                    InstructorId = @instructor
-                                 WHERE CourseId = @id";
+                                    LinkDemo = @demo,
+                                    MaGiangVien = @instructor
+                                 WHERE MaKhoaHoc = @id";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
             FillCourseParameters(cmd, c);
@@ -189,7 +163,7 @@ namespace QLKhoaHocONL.Helpers
         public static void DeleteCourse(int id)
         {
             using var conn = OpenConnection();
-            using var cmd = new SqlCommand("DELETE FROM Course WHERE CourseId = @id", conn);
+            using var cmd = new SqlCommand("DELETE FROM KhoaHoc WHERE MaKhoaHoc = @id", conn);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }
@@ -200,33 +174,40 @@ namespace QLKhoaHocONL.Helpers
             using var tran = conn.BeginTransaction();
             try
             {
-                // Clean dependencies first
-                using (var delVid = new SqlCommand("DELETE FROM Video", conn, tran))
-                {
-                    delVid.ExecuteNonQuery();
-                }
-                using (var delAcc = new SqlCommand("DELETE FROM AccountCourse", conn, tran))
-                {
-                    delAcc.ExecuteNonQuery();
-                }
-                using (var delCourse = new SqlCommand("DELETE FROM Course", conn, tran))
-                {
-                    delCourse.ExecuteNonQuery();
-                }
-                using (var reseed = new SqlCommand("DBCC CHECKIDENT('Course', RESEED, 0)", conn, tran))
-                {
-                    reseed.ExecuteNonQuery();
-                }
+                new SqlCommand("SET IDENTITY_INSERT KhoaHoc ON", conn, tran).ExecuteNonQuery();
 
                 foreach (var c in courses)
                 {
-                    const string sql = @"INSERT INTO Course(TenKhoaHoc, GiaGoc, GiaGiam, SoHocVien, ThoiLuong,
-                                                   TenAnh, MauBatDau, MauKetThuc, DemoLink, InstructorId)
-                                 VALUES(@ten, @giaGoc, @giaGiam, @soHv, @thoiLuong, @anh, @mau1, @mau2, @demo, @instructor)";
-                    using var cmd = new SqlCommand(sql, conn, tran);
-                    FillCourseParameters(cmd, c);
-                    cmd.ExecuteNonQuery();
+                    // Update dòng 
+                    string updateSql = @"UPDATE KhoaHoc SET
+                                            TenKhoaHoc=@ten, GiaGoc=@giaGoc, GiaGiam=@giaGiam,
+                                            SoHocVien=@soHv, ThoiLuong=@thoiLuong, TenAnh=@anh,
+                                            MauBatDau=@mau1, MauKetThuc=@mau2, LinkDemo=@demo,
+                                            MaGiangVien=@instId
+                                         WHERE MaKhoaHoc=@id";
+
+                    using (var cmdUpdate = new SqlCommand(updateSql, conn, tran))
+                    {
+                        FillCourseParameters(cmdUpdate, c);
+                        cmdUpdate.Parameters.AddWithValue("@id", c.Id);
+
+                        int rowsAffected = cmdUpdate.ExecuteNonQuery();
+
+                        // Nếu Update không được -> ID này chưa có trong SQL -> Thì Insert mới
+                        if (rowsAffected == 0)
+                        {
+                            string insertSql = @"INSERT INTO KhoaHoc(MaKhoaHoc, TenKhoaHoc, GiaGoc, GiaGiam, SoHocVien, ThoiLuong,
+                                                                     TenAnh, MauBatDau, MauKetThuc, LinkDemo, MaGiangVien)
+                                                 VALUES(@id, @ten, @giaGoc, @giaGiam, @soHv, @thoiLuong, @anh, @mau1, @mau2, @demo, @instId)";
+                            using var cmdInsert = new SqlCommand(insertSql, conn, tran);
+                            FillCourseParameters(cmdInsert, c);
+                            cmdInsert.Parameters.AddWithValue("@id", c.Id);
+                            cmdInsert.ExecuteNonQuery();
+                        }
+                    }
                 }
+
+                new SqlCommand("SET IDENTITY_INSERT KhoaHoc OFF", conn, tran).ExecuteNonQuery();
 
                 tran.Commit();
             }
@@ -249,15 +230,20 @@ namespace QLKhoaHocONL.Helpers
             cmd.Parameters.AddWithValue("@mau2", (object)c.MauKetThuc ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@demo", (object)c.DemoLink ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@instructor", (object)c.InstructorId ?? DBNull.Value);
+
+            if (c.InstructorId != null && c.InstructorId > 0)
+                cmd.Parameters.AddWithValue("@instId", c.InstructorId);
+            else
+                cmd.Parameters.AddWithValue("@instId", DBNull.Value);
         }
         #endregion
 
-        #region Instructors
+        #region Instructors (GiangVien)
         public static List<Instructor> LoadInstructors()
         {
             var list = new List<Instructor>();
             using var conn = OpenConnection();
-            using var cmd = new SqlCommand("SELECT InstructorId, FullName, Email, Phone, Expertise FROM Instructor", conn);
+            using var cmd = new SqlCommand("SELECT MaGiangVien, HoTen, Email, DienThoai, ChuyenMon FROM GiangVien", conn);
             using var rd = cmd.ExecuteReader();
             while (rd.Read())
             {
@@ -275,8 +261,8 @@ namespace QLKhoaHocONL.Helpers
 
         public static int AddInstructor(Instructor i)
         {
-            const string sql = @"INSERT INTO Instructor(FullName, Email, Phone, Expertise)
-                                 OUTPUT INSERTED.InstructorId
+            const string sql = @"INSERT INTO GiangVien(HoTen, Email, DienThoai, ChuyenMon)
+                                 OUTPUT INSERTED.MaGiangVien
                                  VALUES(@name, @mail, @phone, @exp)";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
@@ -289,8 +275,8 @@ namespace QLKhoaHocONL.Helpers
 
         public static void UpdateInstructor(Instructor i)
         {
-            const string sql = @"UPDATE Instructor SET FullName=@name, Email=@mail, Phone=@phone, Expertise=@exp
-                                 WHERE InstructorId=@id";
+            const string sql = @"UPDATE GiangVien SET HoTen=@name, Email=@mail, DienThoai=@phone, ChuyenMon=@exp
+                                 WHERE MaGiangVien=@id";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@name", i.FullName);
@@ -304,7 +290,7 @@ namespace QLKhoaHocONL.Helpers
         public static void DeleteInstructor(int id)
         {
             using var conn = OpenConnection();
-            using var cmd = new SqlCommand("DELETE FROM Instructor WHERE InstructorId=@id", conn);
+            using var cmd = new SqlCommand("DELETE FROM GiangVien WHERE MaGiangVien=@id", conn);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }
@@ -315,26 +301,33 @@ namespace QLKhoaHocONL.Helpers
             using var tran = conn.BeginTransaction();
             try
             {
-                using (var del = new SqlCommand("DELETE FROM Instructor", conn, tran))
-                {
-                    del.ExecuteNonQuery();
-                }
+                // Set MaGiangVien bên bảng KhoaHoc về NULL
+                // để tránh lỗi FK_KhoaHoc_GiangVien.
+                new SqlCommand("UPDATE KhoaHoc SET MaGiangVien = NULL", conn, tran).ExecuteNonQuery();
 
-                using (var reseed = new SqlCommand("DBCC CHECKIDENT('Instructor', RESEED, 0)", conn, tran))
-                {
-                    reseed.ExecuteNonQuery();
-                }
+                // Bây giờ mới được phép xóa Giảng viên
+                new SqlCommand("DELETE FROM GiangVien", conn, tran).ExecuteNonQuery();
 
+                // Reset ID về 0 (để khi insert bắt đầu từ 1)
+                new SqlCommand("DBCC CHECKIDENT('GiangVien', RESEED, 0)", conn, tran).ExecuteNonQuery();
+
+                // Thêm lại Giảng viên từ XML vào
                 foreach (var i in instructors)
                 {
-                    using var ins = new SqlCommand(@"INSERT INTO Instructor(FullName, Email, Phone, Expertise) VALUES(@n,@e,@p,@x)", conn, tran);
-                    ins.Parameters.AddWithValue("@n", (object)i.FullName ?? DBNull.Value);
-                    ins.Parameters.AddWithValue("@e", (object)i.Email ?? DBNull.Value);
-                    ins.Parameters.AddWithValue("@p", (object)i.Phone ?? DBNull.Value);
-                    ins.Parameters.AddWithValue("@x", (object)i.Expertise ?? DBNull.Value);
-                    ins.ExecuteNonQuery();
-                }
+                    var sql = @"INSERT INTO GiangVien(HoTen, Email, DienThoai, ChuyenMon) VALUES(@n,@e,@p,@x)";
+                    using var cmd = new SqlCommand(sql, conn, tran);
+                    cmd.Parameters.AddWithValue("@n", (object)i.FullName ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@e", (object)i.Email ?? DBNull.Value);
 
+                    // Xử lý sđt null chuẩn xác
+                    if (string.IsNullOrEmpty(i.Phone))
+                        cmd.Parameters.AddWithValue("@p", DBNull.Value);
+                    else
+                        cmd.Parameters.AddWithValue("@p", i.Phone);
+
+                    cmd.Parameters.AddWithValue("@x", (object)i.Expertise ?? DBNull.Value);
+                    cmd.ExecuteNonQuery();
+                }
                 tran.Commit();
             }
             catch
@@ -345,12 +338,14 @@ namespace QLKhoaHocONL.Helpers
         }
         #endregion
 
-        #region Students & Ownership
+        #region Students (HocVien)
         public static List<Student> LoadStudents()
         {
             var list = new List<Student>();
             using var conn = OpenConnection();
-            using var cmd = new SqlCommand("SELECT StudentId, FullName, Email, Phone, Address FROM Student", conn);
+
+            const string sql = "SELECT MaHocVien, HoTen, Email, DienThoai, DiaChi, MaTaiKhoan FROM HocVien";
+            using var cmd = new SqlCommand(sql, conn);
             using var rd = cmd.ExecuteReader();
             while (rd.Read())
             {
@@ -360,7 +355,8 @@ namespace QLKhoaHocONL.Helpers
                     FullName = rd.GetString(1),
                     Email = rd.IsDBNull(2) ? null : rd.GetString(2),
                     Phone = rd.IsDBNull(3) ? null : rd.GetString(3),
-                    Address = rd.IsDBNull(4) ? null : rd.GetString(4)
+                    Address = rd.IsDBNull(4) ? null : rd.GetString(4),
+                    AccountId = rd.IsDBNull(5) ? (int?)null : rd.GetInt32(5)
                 });
             }
             return list;
@@ -368,28 +364,30 @@ namespace QLKhoaHocONL.Helpers
 
         public static int AddStudent(Student s)
         {
-            const string sql = @"INSERT INTO Student(FullName, Email, Phone, Address)
-                                 OUTPUT INSERTED.StudentId
-                                 VALUES(@name, @mail, @phone, @addr)";
+            const string sql = @"INSERT INTO HocVien(HoTen, Email, DienThoai, DiaChi, MaTaiKhoan)
+                                 OUTPUT INSERTED.MaHocVien
+                                 VALUES(@name, @mail, @phone, @addr, @accId)";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@name", s.FullName);
             cmd.Parameters.AddWithValue("@mail", (object)s.Email ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@phone", (object)s.Phone ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@addr", (object)s.Address ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@accId", (object)s.AccountId ?? DBNull.Value);
             return (int)cmd.ExecuteScalar();
         }
 
         public static void UpdateStudent(Student s)
         {
-            const string sql = @"UPDATE Student SET FullName=@name, Email=@mail, Phone=@phone, Address=@addr
-                                 WHERE StudentId=@id";
+            const string sql = @"UPDATE HocVien SET HoTen=@name, Email=@mail, DienThoai=@phone, DiaChi=@addr, MaTaiKhoan=@accId
+                                 WHERE MaHocVien=@id";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@name", s.FullName);
             cmd.Parameters.AddWithValue("@mail", (object)s.Email ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@phone", (object)s.Phone ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@addr", (object)s.Address ?? DBNull.Value);
+            cmd.Parameters.AddWithValue("@accId", (object)s.AccountId ?? DBNull.Value);
             cmd.Parameters.AddWithValue("@id", s.StudentId);
             cmd.ExecuteNonQuery();
         }
@@ -397,7 +395,7 @@ namespace QLKhoaHocONL.Helpers
         public static void DeleteStudent(int id)
         {
             using var conn = OpenConnection();
-            using var cmd = new SqlCommand("DELETE FROM Student WHERE StudentId=@id", conn);
+            using var cmd = new SqlCommand("DELETE FROM HocVien WHERE MaHocVien=@id", conn);
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }
@@ -408,43 +406,35 @@ namespace QLKhoaHocONL.Helpers
             using var tran = conn.BeginTransaction();
             try
             {
-                using (var del = new SqlCommand("DELETE FROM Student", conn, tran))
-                {
-                    del.ExecuteNonQuery();
-                }
-
-                using (var reseed = new SqlCommand("DBCC CHECKIDENT('Student', RESEED, 0)", conn, tran))
-                {
-                    reseed.ExecuteNonQuery();
-                }
+                new SqlCommand("DELETE FROM HocVien", conn, tran).ExecuteNonQuery();
+                new SqlCommand("DBCC CHECKIDENT('HocVien', RESEED, 0)", conn, tran).ExecuteNonQuery();
 
                 foreach (var s in students)
                 {
-                    using var ins = new SqlCommand(@"INSERT INTO Student(FullName, Email, Phone, Address) VALUES(@n,@e,@p,@a)", conn, tran);
-                    ins.Parameters.AddWithValue("@n", (object)s.FullName ?? DBNull.Value);
-                    ins.Parameters.AddWithValue("@e", (object)s.Email ?? DBNull.Value);
-                    ins.Parameters.AddWithValue("@p", (object)s.Phone ?? DBNull.Value);
-                    ins.Parameters.AddWithValue("@a", (object)s.Address ?? DBNull.Value);
-                    ins.ExecuteNonQuery();
+                    var sql = @"INSERT INTO HocVien(HoTen, Email, DienThoai, DiaChi) VALUES(@n,@e,@p,@a)";
+                    using var cmd = new SqlCommand(sql, conn, tran);
+                    cmd.Parameters.AddWithValue("@n", (object)s.FullName ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@e", (object)s.Email ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@p", (object)s.Phone ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@a", (object)s.Address ?? DBNull.Value);
+                    cmd.ExecuteNonQuery();
                 }
-
                 tran.Commit();
             }
-            catch
-            {
-                tran.Rollback();
-                throw;
-            }
+            catch { tran.Rollback(); throw; }
         }
+        #endregion
 
+        #region Buying Logic (TaiKhoan_KhoaHoc)
         public static bool AddUserCourse(string username, int courseId)
         {
             if (string.IsNullOrWhiteSpace(username)) return false;
 
             using var conn = OpenConnection();
 
+            // Lấy MaTaiKhoan
             int? accId = null;
-            using (var cmdAcc = new SqlCommand("SELECT AccountId FROM Account WHERE Username=@u", conn))
+            using (var cmdAcc = new SqlCommand("SELECT MaTaiKhoan FROM TaiKhoan WHERE TenDangNhap=@u", conn))
             {
                 cmdAcc.Parameters.AddWithValue("@u", username);
                 var obj = cmdAcc.ExecuteScalar();
@@ -453,14 +443,16 @@ namespace QLKhoaHocONL.Helpers
 
             if (accId == null) return false;
 
-            using (var cmdCheck = new SqlCommand("SELECT 1 FROM AccountCourse WHERE AccountId=@a AND CourseId=@c", conn))
+            // Check đã mua chưa
+            using (var cmdCheck = new SqlCommand("SELECT 1 FROM TaiKhoan_KhoaHoc WHERE MaTaiKhoan=@a AND MaKhoaHoc=@c", conn))
             {
                 cmdCheck.Parameters.AddWithValue("@a", accId.Value);
                 cmdCheck.Parameters.AddWithValue("@c", courseId);
                 if (cmdCheck.ExecuteScalar() != null) return false;
             }
 
-            using (var cmdInsert = new SqlCommand("INSERT INTO AccountCourse(AccountId, CourseId) VALUES(@a, @c);", conn))
+            // Mua (Insert)
+            using (var cmdInsert = new SqlCommand("INSERT INTO TaiKhoan_KhoaHoc(MaTaiKhoan, MaKhoaHoc) VALUES(@a, @c)", conn))
             {
                 cmdInsert.Parameters.AddWithValue("@a", accId.Value);
                 cmdInsert.Parameters.AddWithValue("@c", courseId);
@@ -474,10 +466,10 @@ namespace QLKhoaHocONL.Helpers
         public static List<int> LoadUserCourseIds(string username)
         {
             var ids = new List<int>();
-            const string sql = @"SELECT ac.CourseId
-                                 FROM AccountCourse ac
-                                 INNER JOIN Account a ON ac.AccountId = a.AccountId
-                                 WHERE a.Username = @u";
+            const string sql = @"SELECT tkkh.MaKhoaHoc
+                                 FROM TaiKhoan_KhoaHoc tkkh
+                                 INNER JOIN TaiKhoan tk ON tkkh.MaTaiKhoan = tk.MaTaiKhoan
+                                 WHERE tk.TenDangNhap = @u";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@u", username);
@@ -492,12 +484,14 @@ namespace QLKhoaHocONL.Helpers
         public static List<CourseBuyer> LoadCourseBuyers(int courseId)
         {
             var list = new List<CourseBuyer>();
-            const string sql = @"SELECT a.AccountId, a.Username, a.FullName, s.Email, s.Phone, ac.PurchasedAt
-                                 FROM AccountCourse ac
-                                 INNER JOIN Account a ON ac.AccountId = a.AccountId
-                                 LEFT JOIN Student s ON s.AccountId = a.AccountId
-                                 WHERE ac.CourseId = @c
-                                 ORDER BY ac.PurchasedAt DESC";
+            // JOIN 3 bang: TaiKhoan_KhoaHoc -> TaiKhoan -> HocVien
+            const string sql = @"SELECT tk.MaTaiKhoan, tk.TenDangNhap, tk.HoTen, 
+                                        hv.Email, hv.DienThoai, tkkh.NgayMua
+                                 FROM TaiKhoan_KhoaHoc tkkh
+                                 INNER JOIN TaiKhoan tk ON tkkh.MaTaiKhoan = tk.MaTaiKhoan
+                                 LEFT JOIN HocVien hv ON hv.MaTaiKhoan = tk.MaTaiKhoan
+                                 WHERE tkkh.MaKhoaHoc = @c
+                                 ORDER BY tkkh.NgayMua DESC";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@c", courseId);
@@ -516,14 +510,16 @@ namespace QLKhoaHocONL.Helpers
             }
             return list;
         }
+        #endregion
 
+        #region Notifications (ThongBao)
         public static List<NotificationItem> LoadNotifications(bool includeRead = true)
         {
             var list = new List<NotificationItem>();
-            const string sql = @"SELECT NotificationId, Title, Content, CreatedAt, IsRead
-                                 FROM Notification
-                                 WHERE (@all = 1 OR IsRead = 0)
-                                 ORDER BY CreatedAt DESC";
+            const string sql = @"SELECT MaThongBao, TieuDe, NoiDung, NgayTao, DaDoc
+                                 FROM ThongBao
+                                 WHERE (@all = 1 OR DaDoc = 0)
+                                 ORDER BY NgayTao DESC";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@all", includeRead ? 1 : 0);
@@ -545,7 +541,7 @@ namespace QLKhoaHocONL.Helpers
         public static int CountUnreadNotifications()
         {
             using var conn = OpenConnection();
-            using var cmd = new SqlCommand("SELECT COUNT(*) FROM Notification WHERE IsRead = 0", conn);
+            using var cmd = new SqlCommand("SELECT COUNT(*) FROM ThongBao WHERE DaDoc = 0", conn);
             return Convert.ToInt32(cmd.ExecuteScalar() ?? 0);
         }
 
@@ -566,22 +562,22 @@ namespace QLKhoaHocONL.Helpers
                 cmd.Parameters.AddWithValue(pName, list[i]);
             }
 
-            cmd.CommandText = $"UPDATE Notification SET IsRead = 1 WHERE NotificationId IN ({string.Join(",", paramNames)})";
+            cmd.CommandText = $"UPDATE ThongBao SET DaDoc = 1 WHERE MaThongBao IN ({string.Join(",", paramNames)})";
             cmd.ExecuteNonQuery();
         }
 
         public static void MarkAllNotificationsAsRead()
         {
             using var conn = OpenConnection();
-            using var cmd = new SqlCommand("UPDATE Notification SET IsRead = 1 WHERE IsRead = 0", conn);
+            using var cmd = new SqlCommand("UPDATE ThongBao SET DaDoc = 1 WHERE DaDoc = 0", conn);
             cmd.ExecuteNonQuery();
         }
-        #endregion
 
         private static void AddPurchaseNotification(SqlConnection conn, int accountId, int courseId, string username)
         {
             string courseName = null;
-            using (var cmdCourse = new SqlCommand("SELECT TenKhoaHoc FROM Course WHERE CourseId = @id", conn))
+            // Lay TenKhoaHoc
+            using (var cmdCourse = new SqlCommand("SELECT TenKhoaHoc FROM KhoaHoc WHERE MaKhoaHoc = @id", conn))
             {
                 cmdCourse.Parameters.AddWithValue("@id", courseId);
                 var obj = cmdCourse.ExecuteScalar();
@@ -589,7 +585,8 @@ namespace QLKhoaHocONL.Helpers
             }
 
             string fullName = null;
-            using (var cmdAcc = new SqlCommand("SELECT FullName FROM Account WHERE AccountId = @id", conn))
+            // Lay HoTen TaiKhoan
+            using (var cmdAcc = new SqlCommand("SELECT HoTen FROM TaiKhoan WHERE MaTaiKhoan = @id", conn))
             {
                 cmdAcc.Parameters.AddWithValue("@id", accountId);
                 var obj = cmdAcc.ExecuteScalar();
@@ -601,20 +598,24 @@ namespace QLKhoaHocONL.Helpers
             string content = $"{displayName} đã mua khóa {(courseName ?? courseId.ToString())}";
 
             using var cmd = new SqlCommand(
-                "INSERT INTO Notification(Title, Content, CourseId, AccountId) VALUES(@t, @ct, @courseId, @accId)", conn);
+                "INSERT INTO ThongBao(TieuDe, NoiDung, MaKhoaHoc, MaTaiKhoan) VALUES(@t, @ct, @courseId, @accId)", conn);
             cmd.Parameters.AddWithValue("@t", title);
             cmd.Parameters.AddWithValue("@ct", content);
             cmd.Parameters.AddWithValue("@courseId", courseId);
             cmd.Parameters.AddWithValue("@accId", accountId);
             cmd.ExecuteNonQuery();
         }
+        #endregion
 
-        #region Videos
+        #region Videos (VideoBaiGiang)
         public static List<Video> LoadVideos(int courseId)
         {
             var list = new List<Video>();
-            const string sql = @"SELECT VideoId, CourseId, Title, Url, [Order]
-                                 FROM Video WHERE CourseId = @c ORDER BY [Order]";
+            // Mapping: MaVideo, MaKhoaHoc, TieuDe, Link, ThuTu
+            const string sql = @"SELECT MaVideo, MaKhoaHoc, TieuDe, Link, ThuTu
+                                 FROM VideoBaiGiang 
+                                 WHERE MaKhoaHoc = @c 
+                                 ORDER BY ThuTu";
             using var conn = OpenConnection();
             using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@c", courseId);

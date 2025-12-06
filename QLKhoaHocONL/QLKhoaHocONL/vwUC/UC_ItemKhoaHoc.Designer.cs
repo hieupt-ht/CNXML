@@ -43,9 +43,9 @@ namespace QLKhoaHocONL.vwUC
             this.lblGiaGiam.BackColor = System.Drawing.Color.Transparent;
             this.lblGiaGiam.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblGiaGiam.ForeColor = System.Drawing.Color.White;
-            this.lblGiaGiam.Location = new System.Drawing.Point(15, 330);
+            this.lblGiaGiam.Location = new System.Drawing.Point(15, 312);
             this.lblGiaGiam.Name = "lblGiaGiam";
-            this.lblGiaGiam.Size = new System.Drawing.Size(119, 28);
+            this.lblGiaGiam.Size = new System.Drawing.Size(118, 28);
             this.lblGiaGiam.TabIndex = 3;
             this.lblGiaGiam.Text = "1.299.000d";
             // 
@@ -55,7 +55,7 @@ namespace QLKhoaHocONL.vwUC
             this.lblGiaGoc.BackColor = System.Drawing.Color.Transparent;
             this.lblGiaGoc.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Strikeout);
             this.lblGiaGoc.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.lblGiaGoc.Location = new System.Drawing.Point(16, 300);
+            this.lblGiaGoc.Location = new System.Drawing.Point(16, 282);
             this.lblGiaGoc.Name = "lblGiaGoc";
             this.lblGiaGoc.Size = new System.Drawing.Size(91, 23);
             this.lblGiaGoc.TabIndex = 2;
@@ -66,9 +66,9 @@ namespace QLKhoaHocONL.vwUC
             this.lblTenKhoaHoc.BackColor = System.Drawing.Color.Transparent;
             this.lblTenKhoaHoc.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
             this.lblTenKhoaHoc.ForeColor = System.Drawing.Color.Black;
-            this.lblTenKhoaHoc.Location = new System.Drawing.Point(14, 230);
+            this.lblTenKhoaHoc.Location = new System.Drawing.Point(14, 226);
             this.lblTenKhoaHoc.Name = "lblTenKhoaHoc";
-            this.lblTenKhoaHoc.Size = new System.Drawing.Size(270, 60);
+            this.lblTenKhoaHoc.Size = new System.Drawing.Size(270, 42);
             this.lblTenKhoaHoc.TabIndex = 1;
             this.lblTenKhoaHoc.Text = "Tên Khóa Học";
             // 

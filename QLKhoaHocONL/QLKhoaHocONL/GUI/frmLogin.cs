@@ -38,33 +38,12 @@ namespace QLKhoaHocONL.GUI
 
         private void BtnRegister_Click(object sender, EventArgs e)
         {
-            var user = _txtUser.Text.Trim();
-            var pass = _txtPass.Text.Trim();
+            using (var frm = new frmRegister())
 
-            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
             {
-                _lblStatus.Text = "Tài khoản và mật khẩu không được trống.";
-                return;
+                frm.ShowDialog();
+                this.Hide();
             }
-
-            var account = new Account
-            {
-                Username = user,
-                Password = pass,
-                FullName = user,
-                Role = "User"
-            };
-
-            if (!DbHelper.AddAccount(account, out var error))
-            {
-                _lblStatus.Text = error;
-                return;
-            }
-
-            AppState.SetUser(account);
-            MessageBox.Show("Đăng ký thành công, bạn đã được đăng nhập.");
-            DialogResult = DialogResult.OK;
-            Close();
         }
     }
 }
