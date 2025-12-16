@@ -9,6 +9,8 @@ namespace QLKhoaHocONL.GUI
 {
     public partial class frmLogin : Form
     {
+        private bool _isPassVisible = false;
+
         public frmLogin()
         {
             InitializeComponent();
@@ -39,11 +41,34 @@ namespace QLKhoaHocONL.GUI
         private void BtnRegister_Click(object sender, EventArgs e)
         {
             using (var frm = new frmRegister())
-
             {
-                frm.ShowDialog();
-                this.Hide();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    // Đăng ký thành công, hiển thị lại form đăng nhập
+                    this.Show();
+                    this.BringToFront();
+                    this.Activate();
+                }
             }
+        }
+
+        private void _txtPass_Enter(object sender, EventArgs e)
+        {
+            picEyePass.Visible = true;
+        }
+
+        private void _txtPass_Leave(object sender, EventArgs e)
+        {
+            picEyePass.Visible = false;
+        }
+
+        private void picEyePass_Click(object sender, EventArgs e)
+        {
+            _isPassVisible = !_isPassVisible;
+            _txtPass.PasswordChar = _isPassVisible ? '\0' : '•';
+            picEyePass.Image = _isPassVisible 
+                ? Properties.Resources.ic_hienMK 
+                : Properties.Resources.ic_anMK;
         }
     }
 }

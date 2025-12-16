@@ -36,6 +36,8 @@
             this.btnLogin = new Guna.UI2.WinForms.Guna2Button();
             this.btnRegister = new Guna.UI2.WinForms.Guna2Button();
             this._lblStatus = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.picEyePass = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picEyePass)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -114,6 +116,8 @@
             this._txtPass.SelectedText = "";
             this._txtPass.Size = new System.Drawing.Size(493, 49);
             this._txtPass.TabIndex = 4;
+            this._txtPass.Enter += new System.EventHandler(this._txtPass_Enter);
+            this._txtPass.Leave += new System.EventHandler(this._txtPass_Leave);
             // 
             // btnLogin
             // 
@@ -165,12 +169,28 @@
             this._lblStatus.TabIndex = 11;
             this._lblStatus.Text = null;
             // 
+            // picEyePass
+            // 
+            this.picEyePass.BackColor = System.Drawing.Color.Transparent;
+            this.picEyePass.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picEyePass.Image = global::QLKhoaHocONL.Properties.Resources.ic_anMK;
+            this.picEyePass.Location = new System.Drawing.Point(510, 216);
+            this.picEyePass.Margin = new System.Windows.Forms.Padding(4);
+            this.picEyePass.Name = "picEyePass";
+            this.picEyePass.Size = new System.Drawing.Size(24, 24);
+            this.picEyePass.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picEyePass.TabIndex = 12;
+            this.picEyePass.TabStop = false;
+            this.picEyePass.Visible = false;
+            this.picEyePass.Click += new System.EventHandler(this.picEyePass_Click);
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(609, 381);
+            this.Controls.Add(this.picEyePass);
             this.Controls.Add(this._lblStatus);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.btnLogin);
@@ -184,6 +204,7 @@
             this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Đăng nhập / Đăng ký";
+            ((System.ComponentModel.ISupportInitialize)(this.picEyePass)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,5 +220,6 @@
         private Guna.UI2.WinForms.Guna2Button btnLogin;
         private Guna.UI2.WinForms.Guna2Button btnRegister;
         private Guna.UI2.WinForms.Guna2HtmlLabel _lblStatus;
+        private System.Windows.Forms.PictureBox picEyePass;
     }
 }

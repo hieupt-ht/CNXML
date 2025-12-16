@@ -133,6 +133,16 @@ namespace QLKhoaHocONL.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ic_anMK {
+            get {
+                object obj = ResourceManager.GetObject("ic_anMK", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ic_close {
             get {
                 object obj = ResourceManager.GetObject("ic_close", resourceCulture);
@@ -156,6 +166,16 @@ namespace QLKhoaHocONL.Properties {
         internal static System.Drawing.Bitmap ic_edit {
             get {
                 object obj = ResourceManager.GetObject("ic_edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ic_hienMK {
+            get {
+                object obj = ResourceManager.GetObject("ic_hienMK", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

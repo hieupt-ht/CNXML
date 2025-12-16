@@ -38,7 +38,7 @@ GO
 CREATE TABLE HocVien (
     MaHocVien INT IDENTITY PRIMARY KEY,
     HoTen NVARCHAR(100) NOT NULL,
-    Email VARCHAR(100) NOT NULL UNIQUE,
+    Email VARCHAR(100) NULL,
     DienThoai VARCHAR(10) NULL,
     DiaChi NVARCHAR(255) NULL,
     NgayDK DATETIME NOT NULL CONSTRAINT DF_HocVien_NgayDK DEFAULT (GETDATE()),
@@ -46,7 +46,8 @@ CREATE TABLE HocVien (
     CONSTRAINT CK_HocVien_DienThoai CHECK (
         DienThoai IS NULL OR 
         (LEN(DienThoai) = 10 AND DienThoai NOT LIKE '%[^0-9]%')
-    )
+    ),
+    CONSTRAINT UQ_HocVien_Email UNIQUE (Email)
 );
 GO
 
@@ -105,8 +106,7 @@ FOREIGN KEY (MaTaiKhoan) REFERENCES TaiKhoan(MaTaiKhoan);
 GO
 
 INSERT INTO TaiKhoan (TenDangNhap, MatKhau, HoTen, VaiTro) VALUES
-('admin', 'admin123', N'Quản trị viên', 'Admin'),
-('hocvien', '123456', N'Học viên F8', 'User');
+('admin', 'admin123', N'Quản trị viên', 'Admin')
 GO
 
 INSERT INTO GiangVien (HoTen, Email, DienThoai, ChuyenMon) VALUES
@@ -119,10 +119,7 @@ GO
 
 INSERT INTO HocVien (HoTen, Email, DienThoai, DiaChi) VALUES
 (N'Nguyễn Tuấn Anh','anhnt@student.com','0911111111',N'Hà Nội'),
-(N'Phạm Thị Hoa','hoapt@student.com','0922222222',N'Đà Nẵng'),
-(N'Lê Minh Đức','duclm@student.com','0933333333',N'Hồ Chí Minh'),
-(N'Hòai Thu','thuh@student.com','0944444444',N'Cần Thơ'),
-(N'Trần Quang Hưng','hungtq@student.com','0955555555',N'Huế');
+(N'Phạm Thị Hoa','hoapt@student.com','0922222222',N'Đà Nẵng');
 GO
 
 INSERT INTO KhoaHoc (TenKhoaHoc, GiaGoc, GiaGiam, SoHocVien, ThoiLuong, TenAnh, MauBatDau, MauKetThuc, LinkDemo, MaGiangVien) VALUES
@@ -141,15 +138,6 @@ INSERT INTO VideoBaiGiang (MaKhoaHoc, TieuDe, Link, ThuTu) VALUES
 (3,N'ReactJS - Component và Props','https://www.youtube.com/watch?v=Ke90Tje7VS0',1);
 GO
 
-INSERT INTO ThongBao (TieuDe, NoiDung, MaKhoaHoc, MaTaiKhoan, DaDoc)
-VALUES (N'Thông báo demo', N'Học viên demo đã mua khóa HTML/CSS Pro', 1, 2, 0);
-GO
-
-SELECT * FROM TaiKhoan;
 SELECT * FROM GiangVien;
 SELECT * FROM KhoaHoc;
 SELECT * FROM HocVien;
-SELECT * FROM VideoBaiGiang;
-SELECT * FROM ThongBao;
-SELECT * FROM TaiKhoan_KhoaHoc;
-GO

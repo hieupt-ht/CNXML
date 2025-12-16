@@ -10,7 +10,6 @@ namespace QLKhoaHocONL.GUI
     public partial class frmStudent : Form
     {
         private Student _selected;
-
         public frmStudent()
         {
             InitializeComponent();
@@ -18,54 +17,43 @@ namespace QLKhoaHocONL.GUI
 
             txtPhone.KeyPress += TxtPhone_KeyPress;
         }
-
         private void TxtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
-
             if (txtPhone.Text.Length >= 10 && !char.IsControl(e.KeyChar) && txtPhone.SelectionLength == 0)
             {
                 e.Handled = true;
             }
         }
-
         private void frmStudent_Load(object sender, EventArgs e)
         {
             LoadData();
         }
-
         private void ApplyVietnameseFonts()
         {
             var font = new Font("Times New Roman", 10, FontStyle.Regular);
             var fontBold = new Font("Times New Roman", 10, FontStyle.Bold);
-
             this.Font = font;
-
             foreach (var lbl in panelForm.Controls.OfType<Label>())
             {
                 lbl.Font = font;
             }
-
             foreach (var txt in panelForm.Controls.OfType<Guna.UI2.WinForms.Guna2TextBox>())
             {
                 txt.Font = font;
             }
-
             foreach (var btn in panelForm.Controls.OfType<Guna.UI2.WinForms.Guna2Button>())
             {
                 btn.Font = fontBold;
             }
-
             dgvStudents.ColumnHeadersDefaultCellStyle.Font = fontBold;
             dgvStudents.DefaultCellStyle.Font = font;
         }
-
         private void LoadData()
         {
-           
             var list = XmlRepository.GetStudents();
 
             dgvStudents.DataSource = list.Select(s => new
@@ -82,7 +70,6 @@ namespace QLKhoaHocONL.GUI
             ClearInputs();
             LocalizeGridHeaders();
         }
-
         private void LocalizeGridHeaders()
         {
             void SetHeader(string name, string text)
@@ -90,14 +77,12 @@ namespace QLKhoaHocONL.GUI
                 if (dgvStudents.Columns.Contains(name))
                     dgvStudents.Columns[name].HeaderText = text;
             }
-
             SetHeader("StudentId", "ID");
             SetHeader("FullName", "Họ tên");
             SetHeader("Email", "Email");
             SetHeader("Phone", "Số điện thoại");
             SetHeader("Address", "Địa chỉ");
         }
-
         private void dgvStudents_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvStudents.SelectedRows.Count == 0) return;
@@ -118,7 +103,6 @@ namespace QLKhoaHocONL.GUI
             txtPhone.Text = _selected.Phone;
             txtAddress.Text = _selected.Address;
         }
-
         private Student ReadForm()
         {
             // Kiểm tra Tên
@@ -128,7 +112,6 @@ namespace QLKhoaHocONL.GUI
                 txtName.Focus();
                 return null;
             }
-
             // Kiểm tra Email
             string email = txtEmail.Text.Trim();
             if (string.IsNullOrWhiteSpace(email))
@@ -152,7 +135,6 @@ namespace QLKhoaHocONL.GUI
                 txtEmail.Focus();
                 return null;
             }
-
             // Kiểm tra Số điện thoại (10 số hoặc Null)
             string phone = txtPhone.Text.Trim();
             if (string.IsNullOrEmpty(phone))
@@ -168,7 +150,6 @@ namespace QLKhoaHocONL.GUI
                     return null;
                 }
             }
-
             return new Student
             {
                 FullName = txtName.Text.Trim(),
@@ -177,7 +158,6 @@ namespace QLKhoaHocONL.GUI
                 Address = txtAddress.Text.Trim()
             };
         }
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var student = ReadForm();
@@ -187,7 +167,6 @@ namespace QLKhoaHocONL.GUI
             LoadData(); // Load lại từ XML -> Thấy ngay dữ liệu mới
             MessageBox.Show("Đã thêm học viên thành công vào XML!");
         }
-
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             if (_selected == null)
@@ -195,7 +174,6 @@ namespace QLKhoaHocONL.GUI
                 MessageBox.Show("Chọn học viên để sửa.");
                 return;
             }
-
             var student = ReadForm();
             if (student == null) return;
 
@@ -204,7 +182,6 @@ namespace QLKhoaHocONL.GUI
             LoadData();
             MessageBox.Show("Đã cập nhật thành công vào XML!");
         }
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (_selected == null)
@@ -220,18 +197,15 @@ namespace QLKhoaHocONL.GUI
                 MessageBox.Show("Đã xóa thành công khỏi XML!");
             }
         }
-
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             ClearInputs();
             LoadData();
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void ClearInputs()
         {
             txtId.Text = string.Empty;

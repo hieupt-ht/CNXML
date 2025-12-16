@@ -163,6 +163,8 @@
     <None Include="Resources\banner_react.png" />
     <None Include="Resources\banner_youtube.png" />
     <None Include="Resources\heroimg.png" />
+    <None Include="Resources\ic_hienMK.png" />
+    <None Include="Resources\ic_anMK.png" />
     <Content Include="Resources\left.png" />
     <Content Include="Resources\right.png" />
     <None Include="Resources\sass.png" />
@@ -243,9 +245,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Class\" />
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
