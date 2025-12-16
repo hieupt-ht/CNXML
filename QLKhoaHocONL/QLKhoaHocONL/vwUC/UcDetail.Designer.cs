@@ -23,14 +23,15 @@ namespace QLKhoaHocONL.vwUC
             // btnBack
             // 
             this.btnBack.BorderRadius = 10;
-            this.btnBack.FillColor = System.Drawing.Color.Gray;
+            this.btnBack.FillColor = System.Drawing.Color.Gainsboro;
             this.btnBack.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnBack.ForeColor = System.Drawing.Color.White;
+            this.btnBack.ForeColor = System.Drawing.Color.DimGray;
+            this.btnBack.Image = global::QLKhoaHocONL.Properties.Resources.ic_left;
             this.btnBack.Location = new System.Drawing.Point(20, 20);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(110, 35);
             this.btnBack.TabIndex = 0;
-            this.btnBack.Text = "< Quay lại";
+            this.btnBack.Text = "Quay lại";
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // lblTenKhoaHoc

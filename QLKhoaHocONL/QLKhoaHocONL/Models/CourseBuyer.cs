@@ -2,9 +2,6 @@ using System;
 
 namespace QLKhoaHocONL.Models
 {
-    /// <summary>
-    /// Buyer information for a course (used by admin view).
-    /// </summary>
     internal class CourseBuyer
     {
         public int AccountId { get; set; }

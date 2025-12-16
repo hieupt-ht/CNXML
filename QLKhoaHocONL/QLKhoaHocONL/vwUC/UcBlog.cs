@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using QLKhoaHocONL.Properties;
 
 namespace QLKhoaHocONL
 {
@@ -16,6 +17,7 @@ namespace QLKhoaHocONL
             public string TimeAgo { get; set; }
             public string ReadTime { get; set; }
             public Color Accent { get; set; }
+            public string ImageName { get; set; }
         }
 
         public UcBlog()
@@ -45,6 +47,8 @@ namespace QLKhoaHocONL
                     Tag = "React Native",
                     TimeAgo = "3 tháng trước",
                     ReadTime = "2 phút đọc",
+                    Accent = Color.FromArgb(70, 70, 70),
+                    ImageName = "reactjs"
                 },
                 new Post
                 {
@@ -54,6 +58,8 @@ namespace QLKhoaHocONL
                     Tag = "Học-lập-trình",
                     TimeAgo = "3 tháng trước",
                     ReadTime = "4 phút đọc",
+                    Accent = Color.FromArgb(70, 70, 70),
+                    ImageName = "heroimg"
                 }
             };
 
@@ -131,23 +137,39 @@ namespace QLKhoaHocONL
                 Text = p.Tag
             };
 
-            var thumb = new Panel
+            Control thumb;
+            var img = LoadImageFromResources(p.ImageName);
+            if (img != null)
             {
-                BackColor = p.Accent,
-                Size = new Size(170, 120),
-                Location = new Point(card.Width - 200, 35),
-                Margin = new Padding(0)
-            };
-            thumb.Paint += (s, e) =>
-            {
-                using (var brush = new SolidBrush(Color.FromArgb(200, Color.Black)))
+                thumb = new PictureBox
                 {
-                    e.Graphics.FillRectangle(brush, thumb.ClientRectangle);
-                }
-                TextRenderer.DrawText(e.Graphics, p.Title.Split(' ')[0], new Font("Segoe UI", 10F, FontStyle.Bold),
-                    new Rectangle(8, 8, thumb.Width - 16, thumb.Height - 16), Color.White);
-            };
-
+                    Size = new Size(170, 120),
+                    Location = new Point(card.Width - 200, 35),
+                    Margin = new Padding(0),
+                    Image = img,
+                    SizeMode = PictureBoxSizeMode.StretchImage
+                };
+            }
+            else
+            {
+                var pn = new Panel
+                {
+                    BackColor = p.Accent,
+                    Size = new Size(170, 120),
+                    Location = new Point(card.Width - 200, 35),
+                    Margin = new Padding(0)
+                };
+                pn.Paint += (s, e) =>
+                {
+                    using (var brush = new SolidBrush(Color.FromArgb(200, Color.Black)))
+                    {
+                        e.Graphics.FillRectangle(brush, pn.ClientRectangle);
+                    }
+                    TextRenderer.DrawText(e.Graphics, p.Title.Split(' ')[0], new Font("Segoe UI", 10F, FontStyle.Bold),
+                        new Rectangle(8, 8, pn.Width - 16, pn.Height - 16), Color.White);
+                };
+                thumb = pn;
+            }
             card.Controls.Add(lblAuthor);
             card.Controls.Add(lblTitle);
             card.Controls.Add(lblExcerpt);
@@ -155,6 +177,20 @@ namespace QLKhoaHocONL
             card.Controls.Add(tag);
             card.Controls.Add(thumb);
             return card;
+        }
+
+        private Image LoadImageFromResources(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return null;
+            try
+            {
+                var obj = Properties.Resources.ResourceManager.GetObject(name);
+                return obj as Image;
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

@@ -8,9 +8,6 @@ using QLKhoaHocONL.Models;
 
 namespace QLKhoaHocONL.Helpers
 {
-    /// <summary>
-    /// Trợ giúp đọc/ghi dữ liệu XML cho khóa học, tài khoản, đơn mua.
-    /// </summary>
     internal static class XMLHelper
     {
         private static string DataDir => Path.Combine(Application.StartupPath, "Data");
@@ -144,7 +141,9 @@ namespace QLKhoaHocONL.Helpers
                 FullName = x.Element("FullName")?.Value,
                 Email = x.Element("Email")?.Value,
                 Phone = x.Element("Phone")?.Value,
-                Address = x.Element("Address")?.Value
+                Address = x.Element("Address")?.Value,
+                EnrollmentDate = DateTime.TryParse(x.Element("EnrollmentDate")?.Value, out var date) ? date : DateTime.Now,
+                AccountId = int.TryParse(x.Element("AccountId")?.Value, out var accId) && accId > 0 ? accId : (int?)null
             }).ToList();
         }
 
@@ -155,10 +154,12 @@ namespace QLKhoaHocONL.Helpers
                 new XElement("Students",
                     students.Select(s => new XElement("Student",
                         new XElement("StudentId", s.StudentId),
-                        new XElement("FullName", s.FullName),
-                        new XElement("Email", s.Email),
-                        new XElement("Phone", s.Phone),
-                        new XElement("Address", s.Address)
+                        new XElement("FullName", s.FullName ?? ""),
+                        new XElement("Email", s.Email ?? ""),
+                        new XElement("Phone", s.Phone ?? ""),
+                        new XElement("Address", s.Address ?? ""),
+                        new XElement("EnrollmentDate", s.EnrollmentDate.ToString("yyyy-MM-dd HH:mm:ss")),
+                        new XElement("AccountId", s.AccountId ?? 0)
                     ))));
             doc.Save(StudentsPath);
         }

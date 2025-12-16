@@ -76,7 +76,20 @@ namespace QLKhoaHocONL.vwUC
             {
                 flowLayoutPanelKhoaHoc.Controls.Clear();
 
-                var list = DbHelper.LoadCourses();
+                // Load từ XML, nếu chưa có thì tự động load từ SQL (chỉ cho UcCourses)
+                var list = XMLHelper.LoadCourses();
+                
+                // Tự động fallback từ SQL nếu XML chưa có dữ liệu
+                if (!list.Any())
+                {
+                    list = DbHelper.LoadCourses();
+                    // Tự động đồng bộ SQL -> XML nếu có dữ liệu từ SQL
+                    if (list.Any())
+                    {
+                        XMLHelper.SaveCourses(list);
+                    }
+                }
+
                 if (_onlyOwned && AppState.IsLoggedIn)
                 {
                     var ownedIds = DbHelper.LoadUserCourseIds(AppState.CurrentUser.Username);
@@ -98,13 +111,15 @@ namespace QLKhoaHocONL.vwUC
 
                 if (!list.Any())
                 {
+                    var message = _onlyOwned
+                        ? "Bạn chưa mua khóa học nào, quay lại Trang chủ để đăng ký nhé!"
+                        : "Chưa có dữ liệu khóa học.";
+                    
                     flowLayoutPanelKhoaHoc.Controls.Add(new Label
                     {
                         AutoSize = true,
                         Font = new System.Drawing.Font("Segoe UI", 11F),
-                        Text = _onlyOwned
-                            ? "Bạn chưa mua khóa học nào, quay lại Trang chủ để đăng ký nhé!"
-                            : "Chưa có dữ liệu khóa học."
+                        Text = message
                     });
                 }
             }

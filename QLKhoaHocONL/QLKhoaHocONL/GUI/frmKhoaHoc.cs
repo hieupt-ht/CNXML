@@ -209,7 +209,7 @@ namespace QLKhoaHocONL
 
                 XMLHelper.SaveCourses(_courses);
                 ReloadData();
-                MessageBox.Show("Đã cập nhật file XML!");
+                MessageBox.Show("Đã cập nhật thành công!");
             }
         }
 

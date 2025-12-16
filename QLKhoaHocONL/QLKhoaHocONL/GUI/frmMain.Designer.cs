@@ -306,7 +306,7 @@ namespace QLKhoaHocONL
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Học lập trình trực tuyến";
             this.lblTitle.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
+            //this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // txtSearch
             // 

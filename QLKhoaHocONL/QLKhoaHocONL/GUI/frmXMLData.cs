@@ -19,7 +19,6 @@ namespace QLKhoaHocONL
             InitializeEvents();
             LoadInitialData();
         }
-
         private void InitializeEvents()
         {
             cboLoaiDuLieu.SelectedIndexChanged += cboLoaiDuLieu_SelectedIndexChanged;
@@ -33,7 +32,6 @@ namespace QLKhoaHocONL
 
         private bool _isDragging = false;
         private System.Drawing.Point _dragStartPoint;
-
         private void PanelTop_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -42,7 +40,6 @@ namespace QLKhoaHocONL
                 _dragStartPoint = e.Location;
             }
         }
-
         private void PanelTop_MouseMove(object sender, MouseEventArgs e)
         {
             if (_isDragging)
@@ -53,18 +50,15 @@ namespace QLKhoaHocONL
                 this.Location = newLocation;
             }
         }
-
         private void PanelTop_MouseUp(object sender, MouseEventArgs e)
         {
             _isDragging = false;
         }
-
         private void LoadInitialData()
         {
             cboLoaiDuLieu.SelectedIndex = 0;
             RefreshCurrentData();
         }
-
         private void cboLoaiDuLieu_SelectedIndexChanged(object sender, EventArgs e)
         {
             _current = cboLoaiDuLieu.SelectedIndex switch
@@ -74,10 +68,8 @@ namespace QLKhoaHocONL
                 2 => DataKind.Instructors,
                 _ => DataKind.All
             };
-
             RefreshCurrentData();
         }
-
         private void btnSyncAll_Click(object sender, EventArgs e)
         {
             try
@@ -118,7 +110,7 @@ namespace QLKhoaHocONL
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"❌ Lỗi đồng bộ SQL → XML:\n{ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi đồng bộ SQL → XML:\n{ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -137,7 +129,7 @@ namespace QLKhoaHocONL
 
                 if (MessageBox.Show(
                     $"Bạn có chắc muốn đồng bộ dữ liệu '{dataType}' từ XML sang SQL?\n\n" +
-                    "⚠️ Dữ liệu trong SQL sẽ được thay thế bởi dữ liệu từ file XML!",
+                    "Dữ liệu trong SQL sẽ được thay thế bởi dữ liệu từ file XML!",
                     "Xác Nhận Đồng Bộ",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.Yes)
@@ -146,8 +138,6 @@ namespace QLKhoaHocONL
 
                     if (_current == DataKind.All)
                     {
-                       
-
                         // Giảng viên trước
                         var instructors = XMLHelper.LoadInstructorsFromXml();
                         DbHelper.ReplaceInstructors(instructors);
@@ -164,7 +154,6 @@ namespace QLKhoaHocONL
                         int countStudents = students.Count;
 
                         recordCount = countInstr + countCourses + countStudents;
-
                         MessageBox.Show(
                             $"✅ Đã đồng bộ TOÀN BỘ từ XML → SQL thành công!\n\n" +
                             $"📊 Tổng số: {recordCount}\n" +
@@ -207,20 +196,17 @@ namespace QLKhoaHocONL
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"❌ Lỗi đồng bộ XML → SQL:\n{ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi đồng bộ XML → SQL:\n{ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void btnReadXml_Click(object sender, EventArgs e)
         {
             RefreshCurrentData(showMessage: true);
         }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void treeXML_AfterSelect(object sender, TreeViewEventArgs e)
         {
             if (e.Node != null && e.Node.Tag != null)
@@ -228,7 +214,6 @@ namespace QLKhoaHocONL
                 txtXMLContent.Text = e.Node.Tag.ToString();
             }
         }
-
         private void RefreshCurrentData(bool showMessage = false)
         {
             try
@@ -236,7 +221,7 @@ namespace QLKhoaHocONL
                 if (_current == DataKind.All)
                 {
                     treeXML.Nodes.Clear();
-                    txtXMLContent.Text = "ℹ️ Chế độ 'Tất Cả' được chọn.\n\n" +
+                    txtXMLContent.Text = "Chế độ 'Tất Cả' được chọn.\n\n" +
                                          "- Sử dụng nút 'Đồng Bộ XML → SQL' để đẩy toàn bộ dữ liệu lên Database.\n" +
                                          "- Sử dụng nút 'Đồng Bộ SQL → XML' để sao lưu toàn bộ Database về XML.\n\n" +
                                          "Vui lòng chọn từng loại cụ thể (Khóa Học, Giảng Viên...) để xem chi tiết nội dung.";
@@ -280,7 +265,7 @@ namespace QLKhoaHocONL
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"❌ Lỗi làm mới dữ liệu:\n{ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi làm mới dữ liệu:\n{ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -294,7 +279,7 @@ namespace QLKhoaHocONL
 
                 if (!File.Exists(xmlPath))
                 {
-                    txtXMLContent.Text = $"⚠️ File XML chưa tồn tại: {xmlPath}\n\n" +
+                    txtXMLContent.Text = $"File XML chưa tồn tại: {xmlPath}\n\n" +
                                         "Vui lòng sử dụng nút 'Đồng Bộ SQL → XML' để tạo file.";
                     treeXML.Nodes.Clear();
                     return;
@@ -307,7 +292,7 @@ namespace QLKhoaHocONL
             }
             catch (Exception ex)
             {
-                txtXMLContent.Text = $"❌ Lỗi đọc file XML:\n{ex.Message}";
+                txtXMLContent.Text = $"Lỗi đọc file XML:\n{ex.Message}";
                 treeXML.Nodes.Clear();
             }
         }
@@ -327,7 +312,6 @@ namespace QLKhoaHocONL
                 _ => Path.Combine(dataFolder, "GiangVien.xml")
             };
         }
-
         private void LoadXmlTree(string xmlPath)
         {
             try
@@ -380,7 +364,6 @@ namespace QLKhoaHocONL
                 treeNode.Nodes.Add(childNode);
             }
         }
-
         private string FormatXml(string xml)
         {
             try

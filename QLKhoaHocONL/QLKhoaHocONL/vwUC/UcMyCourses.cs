@@ -32,16 +32,35 @@ namespace QLKhoaHocONL.vwUC
             }
 
             var ids = DbHelper.LoadUserCourseIds(AppState.CurrentUser.Username);
-            var courses = DbHelper.LoadCourses().Where(c => ids.Contains(c.Id)).ToList();
+            
+            // Load từ XML, nếu chưa có thì tự động load từ SQL (chỉ cho UcMyCourses)
+            var courses = XMLHelper.LoadCourses();
+            
+            // Tự động fallback từ SQL nếu XML chưa có dữ liệu
+            if (!courses.Any())
+            {
+                courses = DbHelper.LoadCourses();
+                // Tự động đồng bộ SQL -> XML nếu có dữ liệu từ SQL
+                if (courses.Any())
+                {
+                    XMLHelper.SaveCourses(courses);
+                }
+            }
+            
+            courses = courses.Where(c => ids.Contains(c.Id)).ToList();
 
             lblTitle.Text = $"Khóa học của {AppState.CurrentUser.FullName ?? AppState.CurrentUser.Username}";
 
             if (!courses.Any())
             {
+                var message = ids.Any()
+                    ? "Chưa có khóa học nào. Thử mua một khóa học ở trang Lộ trình nhé!"
+                    : "Chưa có dữ liệu khóa học.";
+                
                 flowOwned.Controls.Add(new Label
                 {
                     AutoSize = true,
-                    Text = "Chưa có khóa học nào. Thử mua một khóa học ở trang Lộ trình nhé!",
+                    Text = message,
                     Font = new System.Drawing.Font("Segoe UI", 11F)
                 });
                 return;
